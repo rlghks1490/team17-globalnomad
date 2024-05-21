@@ -15,7 +15,7 @@ interface InputProps {
   state?: 'user' | 'default';
 }
 
-const Input: React.FC<InputProps> = ({ label, placeholder, name, type, state = 'default' }) => {
+const Input = ({ label, placeholder, name, type, state = 'default' }: InputProps) => {
   const [value, setValue] = useState('');
   const [error, setError] = useState<string | null>(null);
 
