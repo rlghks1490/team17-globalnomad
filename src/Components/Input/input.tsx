@@ -12,10 +12,9 @@ interface InputProps {
   placeholder: string;
   name: string;
   type: 'text' | 'email' | 'password';
-  state?: 'user' | 'default';
 }
 
-const Input = ({ label, placeholder, name, type, state = 'default' }: InputProps) => {
+const Input = ({ label, placeholder, name, type }: InputProps) => {
   const [value, setValue] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -51,7 +50,7 @@ const Input = ({ label, placeholder, name, type, state = 'default' }: InputProps
   };
 
   return (
-    <div className={`${state === 'default' ? 'mb-4' : 'mb-6'} w-full`}>
+    <div className="'mb-4' w-full">
       <label className="block text-sm font-medium text-gray-700" htmlFor={name}>
         {label}
       </label>
