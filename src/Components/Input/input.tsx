@@ -1,34 +1,73 @@
-// import React from "react";
+import React, { useState } from 'react';
+import {
+  EMAIL_STANDARD,
+  ERROR_EMAIL_CHECK,
+  ERROR_EMAIL_EMPTY,
+  ERROR_PASSWORD_EMPTY,
+  ERROR_PASSWORD_VALIDATION,
+} from '@/constants/user';
 
-// type InputTypeAttribute = Extract<
-//   HTMLInputTypeAttribute,
-//   "text" | "email" | "number" | "password" | "tel" | "url"
-// >;
+interface InputProps {
+  label: string;
+  placeholder: string;
+  name: string;
+  type: 'text' | 'email' | 'password';
+  state?: 'user' | 'default';
+}
 
-// type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-//   type?: InputTypeAttribute;
-//   label?: string;
-// };
+const Input: React.FC<InputProps> = ({ label, placeholder, name, type, state = 'default' }) => {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
-// const Input = ({ label, placeholder, id, className, ...rest }: InputProps) => {
-//   return (
-//     <div>
-//       <input
-//         id={id}
-//         placeholder={placeholder || " "}
-//         className="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-//         {...rest}
-//       />
-//       {label ? (
-//         <label
-//           className="absolute left-3 -top-2.5 bg-white px-1 text-gray-500 text-sm transition-transform duration-300 transform -translate-y-2"
-//           htmlFor={id}
-//         >
-//           {label}
-//         </label>
-//       ) : null}
-//     </div>
-//   );
-// };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    validate(e.target.value);
+  };
 
-// export default Input;
+  const handleBlur = () => {
+    validate(value);
+  };
+
+  const validate = (value: string) => {
+    let error = null;
+    if (type === 'email') {
+      if (!value) {
+        error = ERROR_EMAIL_EMPTY;
+      } else if (EMAIL_STANDARD.test(value)) {
+        error = ERROR_EMAIL_CHECK;
+      }
+    } else if (type === 'password') {
+      if (!value) {
+        error = ERROR_PASSWORD_EMPTY;
+      } else if (value.length < 8) {
+        error = ERROR_PASSWORD_VALIDATION;
+      }
+    } else {
+      if (!value) {
+        error = '';
+      }
+    }
+    setError(error);
+  };
+
+  return (
+    <div className={`${state === 'default' ? 'mb-4' : 'mb-6'} w-full`}>
+      <label className="block text-sm font-medium text-gray-700" htmlFor={name}>
+        {label}
+      </label>
+      <input
+        className={`mt-1 block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+        placeholder={placeholder}
+        type={type}
+        id={name}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      {error && <div className="mt-1 text-sm text-red-500">{error}</div>}
+    </div>
+  );
+};
+
+export default Input;
