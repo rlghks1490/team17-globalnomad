@@ -1,7 +1,7 @@
+import GuestHeader from "@/Components/GuestHeader/GuestHeader";
+
 const index = () => {
-  return (
-    <h1 className="bg-gnBlue text-3xl font-bold underline">index페이지</h1>
-  );
+  return <div>index 페이지</div>;
 };
 
 export default index;
