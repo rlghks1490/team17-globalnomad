@@ -4,6 +4,7 @@ import { FormValues, auth } from "@/apis/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface ErrorMessage {
   message: string;
@@ -57,11 +58,16 @@ const login = () => {
   const isFormValid = isEmailValid && isPasswordValid;
 
   return (
-    <div className="flex w-full flex-col items-center gap-10 pt-24">
+    <div className="flex w-full flex-col items-center pt-24">
       <div>
-        <img src="/icons/logo.svg" alt="글로벌노마드 로고 이미지" />
+        <Link href="/">
+          <img src="/icons/logo.svg" alt="글로벌노마드 로고 이미지" />
+        </Link>
       </div>
-      <form onSubmit={handleSubmit} className="flex w-loginForm flex-col gap-7">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-10 flex w-loginForm flex-col gap-7"
+      >
         <LoginInput
           name={"email"}
           label={"이메일"}
@@ -84,6 +90,15 @@ const login = () => {
           로그인 하기
         </button>
       </form>
+      <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
+        <p>회원이 아니신가요?</p>
+        <Link
+          href="/signup"
+          className="text-base font-normal text-gnDarkGreen underline"
+        >
+          회원가입
+        </Link>
+      </div>
     </div>
   );
 };

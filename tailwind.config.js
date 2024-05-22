@@ -39,7 +39,7 @@ module.exports = {
         sans: ["Pretendard", "ui-sans-serif", "system-ui"],
       },
       width: {
-        'loginForm':'40rem' 
+        loginForm: "40rem",
       },
     },
   },

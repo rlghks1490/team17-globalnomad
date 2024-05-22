@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   EMAIL_STANDARD,
   ERROR_EMAIL_CHECK,
@@ -26,17 +26,12 @@ const LoginInput = ({
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
 
-  useEffect(() => {
-    validate(value);
-  }, [value]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     if (touched) {
       validate(e.target.value);
     }
   };
-
   const handleBlur = () => {
     setTouched(true);
     validate(value);
