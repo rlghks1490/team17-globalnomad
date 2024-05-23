@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import LoginInput from "@/Components/Input/LoginInput";
-import { FormValues, auth } from "@/apis/auth";
+import { auth } from "@/apis/auth/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { FormValues } from "@/apis/auth/auth.type";
 
 interface ErrorMessage {
   message: string;
