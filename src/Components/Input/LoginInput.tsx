@@ -7,7 +7,7 @@ interface InputProps {
   label: string;
   placeholder: string;
   name: string;
-  type: "email" | "password" | "nickname";
+  type: "email" | "password" | "text";
   isError?: boolean;
   errorMessage?: string;
 }
