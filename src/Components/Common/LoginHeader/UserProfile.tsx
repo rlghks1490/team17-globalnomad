@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchUserProfile from "@/apis/user/user";
+import LoginHeaderDropdown from "./LoginHeaderDropdown";
 
 interface UserProfileType {
   id: number;
@@ -39,6 +40,7 @@ const UserProfile: React.FC = ({}) => {
         <img src="/icons/alarmIcon.svg" alt="alarmIcon.svg" />
       </button>
       <div className="mx-4 h-6 w-px bg-gnGray300"></div>
+      <LoginHeaderDropdown />
       <button className="flex items-center justify-between gap-3">
         <img src={UserProfile.profileImageUrl} alt="Profile Picture" />
         {UserProfile.nickname}
