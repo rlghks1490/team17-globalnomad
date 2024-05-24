@@ -31,25 +31,23 @@ const rules = {
   },
 };
 
-const Login = () => {
+const SignUp = () => {
   const router = useRouter();
   const { formState, register, handleSubmit } = useForm<FormValues>({
     mode: "onBlur",
   });
 
-  const signInMutation = useMutation({
-    mutationFn: (data: FormValues) => auth.signIn(data),
-    mutationKey: ["signIn"],
-    onSuccess: (data) => {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      if (data.accessToken) {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        router.push("/");
-      }
+  const signUpMutation = useMutation({
+    mutationFn: (data: FormValues) => auth.signUp(data),
+    mutationKey: ["signUp"],
+    onSuccess: () => {
+      router.push("/signIn");
     },
     onError: (error: AxiosError<ErrorMessage>) => {
+      if (error.response && error.response.status >= 400) {
+        console.log("AxiosError");
+        return;
+      }
       console.error("AxiosError", error);
     },
   });
@@ -57,7 +55,7 @@ const Login = () => {
   const { isValid, errors } = formState;
 
   const onSubmit = (data: FormValues) => {
-    signInMutation.mutate(data);
+    signUpMutation.mutate(data);
   };
 
   return (
@@ -108,4 +106,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
