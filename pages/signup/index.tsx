@@ -130,12 +130,12 @@ const SignUp = () => {
         </button>
       </form>
       <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
-        <p>로그인하기</p>
+        <p>회원이신가요?</p>
         <Link
-          href="/signIn"
+          href="/login"
           className="text-base font-normal text-gnDarkGreen underline"
         >
-          회원가입
+          로그인하기
         </Link>
       </div>
     </div>
