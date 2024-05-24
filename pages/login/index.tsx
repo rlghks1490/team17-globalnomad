@@ -24,6 +24,10 @@ const rules = {
   },
   passwordRules: {
     required: password.errorMessage.empty,
+    pattern: {
+      value: password.regex,
+      message: password.errorMessage.invalid,
+    },
     minLength: {
       value: 8,
       message: password.errorMessage.minLength,
