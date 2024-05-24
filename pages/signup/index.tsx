@@ -52,7 +52,7 @@ const SignUp = () => {
     mutationFn: (data: FormValues) => auth.signUp(data),
     mutationKey: ["signUp"],
     onSuccess: () => {
-      router.push("/logIn");
+      router.push("/login");
     },
     onError: (error: AxiosError<ErrorMessage>) => {
       if (error.response && error.response.status >= 400) {
