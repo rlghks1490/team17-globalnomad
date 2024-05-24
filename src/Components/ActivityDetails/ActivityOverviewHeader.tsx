@@ -1,6 +1,6 @@
 import ActivitySummary from "./ActivitySummary";
 import KebabOptions from "./KebabOptions";
-import Kebab from "./kebab";
+import Kebab from "./Kebab";
 
 const ActivityOverviewHeader = () => {
   return (
