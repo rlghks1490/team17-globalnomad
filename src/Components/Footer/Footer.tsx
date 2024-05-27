@@ -26,8 +26,8 @@ const snsSection = [
 
 const Footer = () => {
   return (
-    <footer className="mobile:px-0 bottom-0 flex h-24 w-full min-w-[400px] items-center justify-between whitespace-nowrap border-none bg-gnLightBlack p-0 px-20 text-white">
-      <div className="mobile:flex-col flex w-full items-center justify-between justify-items-center">
+    <footer className="bottom-0 flex h-24 w-full min-w-[400px] items-center justify-between whitespace-nowrap border-none bg-gnLightBlack p-0 px-20 text-white mobile:px-0">
+      <div className="flex w-full items-center justify-between justify-items-center pb-6 mobile:flex-col">
         <div className="flex w-3/5 justify-between gap-4">
           <div> @codeit - 2024 </div>
           <div className="flex gap-5 whitespace-nowrap">
