@@ -8,7 +8,6 @@ const ActivityDetails = () => {
     <>
     <ActivityContent />
     <Review />
-    <Pagenation />
     </>
   )
 }

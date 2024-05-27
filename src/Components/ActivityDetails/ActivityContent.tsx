@@ -4,21 +4,35 @@ import ActivityOverview from "./ActivityOverview";
 import ReservationBox from "./ReservationBox";
 import { useQuery } from "@tanstack/react-query";
 import { getDatas } from "@/apis/activityDetails/activityDetails";
+import { DataType } from "@/apis/activityDetails/activityDetails.type";
 
 
 const ActivityContent = () => {
 
-  const result = useQuery({queryKey: ['datas'], queryFn: getDatas });
-  console.log(result);
-  console.log(result.data.id);
-
+  const { data } = useQuery<DataType>({queryKey: ['datas'], queryFn: getDatas });
+  
   return (
     <div className="flex flex-col items-center">
-      <ActivityOverview />
-      <div className="flex items-center gap-6">
-        <ActivityInfo />
-        <ReservationBox />
-      </div>
+      {data && (
+        <>
+          <ActivityOverview
+            title={data.title}
+            category={data.category}
+            address={data.address}
+            rating={data.rating}
+            reviewCount={data.reviewCount}
+            bannerImageUrl={data.bannerImageUrl}
+            subImages={data.subImages}
+          />
+          <div className="flex items-center gap-6">
+            <ActivityInfo 
+              description={data.description}
+              address={data.address}
+            />
+            <ReservationBox price={data.price} schedule={data.schedules}/>
+          </div>
+        </>
+      )}
     </div>
   )
 }
