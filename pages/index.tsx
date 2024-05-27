@@ -1,7 +1,7 @@
-import GuestHeader from "@/Components/GuestHeader/GuestHeader";
+import Footer from "@/Components/Footer/Footer";
 
 const index = () => {
-  return <div>index 페이지</div>;
+  return <Footer />;
 };
 
 export default index;
