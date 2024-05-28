@@ -6,7 +6,7 @@ import ReservationCalendar2 from "./ResevationCalendar2";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AvailableSchedule } from "@/apis/activityDetails/activityDetails.type";
-import { getAvaulableSchedule } from "@/apis/activityDetails/activityDetails";
+import { getSchedule } from "@/apis/activityDetails/activityDetails";
 
 interface Schedule {
   id: number;
@@ -24,34 +24,40 @@ interface ReservationBoxProps {
 }
 
 const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
-  // const { data } = useQuery<AvailableSchedule>({
-  //   queryKey: ["datas"],
-  //   queryFn: getAvaulableSchedule,
-  // });
-
   const [counter, setCounter] = useState<number>(1);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedTime, setSelectedTime] = useState<number | null>(null);
 
-  const formatDate = (date: Date) => {
-    return date.toISOString().split("T")[0];
-  };
+  const getStringYear = selectedDate.getFullYear().toString();
+  const getStringMonth = (selectedDate.getMonth() + 1)
+    .toString()
+    .padStart(2, "0");
 
-  const getAvailableTime = () => {
-    return schedule.filter(
-      (schedule) => schedule.date === selectedDate?.toISOString().split("T")[0],
+  const { data, isError } = useQuery<AvailableSchedule[]>({
+    queryKey: ["availableSchedules", selectedDate],
+    queryFn: () => getSchedule(getStringYear, getStringMonth, 915),
+    enabled: !!selectedDate,
+  });
+
+  if (isError) return console.log("에러가 발생했습니다.");
+
+  const koreanSelectedDate = new Date(
+    selectedDate.getTime() + 9 * 60 * 60 * 1000,
+  );
+
+  const getAvailableTime = data?.filter(
+    (schedule) =>
+      schedule.date === koreanSelectedDate?.toISOString().split("T")[0],
+  );
+
+  const handleTimeSelect = (timeId: number) => {
+    setSelectedTime((prevSelectedTime) =>
+      prevSelectedTime === timeId ? null : timeId,
     );
   };
 
-  const availableTimes = getAvailableTime() || [];
-
-  console.log(schedule[1]);
-  console.log(selectedDate?.toISOString().split("T")[0]);
-  console.log(schedule[1].date);
-  console.log(typeof schedule[1].date);
-  console.log(getAvailableTime());
-
   return (
-    <div className="flex flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6">
+    <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6">
       <div className="border-b border-gnGray300 pb-4 text-[28px] font-bold">
         ￦ {price} / 인
       </div>
@@ -73,25 +79,18 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
             <div className="border-b border-gnGray300">
               <div className="flex flex-col gap-3.5 pb-4 ">
                 <p className="text-lg font-bold">예약 가능한 시간</p>
-                <div className="flex flex-row gap-3">
-                  {/* <button className="rounded-md border border-[#112111] px-3 py-2.5 text-base font-medium">
-                    {schedule[1].times[1]} ~ {schedule[1].times[2]}
-                  </button> */}
-                  {/* <button className="rounded-md border border-[#112111] px-3 py-2.5 text-base font-medium">
-                    15:00 ~ 16:00
-                  </button> */}
-                  {/* {availableTimes.length > 0 ? (
-                    availableTimes.map((time) => (
+                <div className="flex flex-row flex-wrap gap-3">
+                  {getAvailableTime &&
+                    getAvailableTime[0].times.map((time) => (
                       <button
                         key={time.id}
-                        className="rounded-md border border-[#112111] px-3 py-2.5 text-base font-medium"
+                        onClick={() => handleTimeSelect(time.id)}
+                        className={`whitespace-nowrap rounded-md border border-[#112111] px-3 py-2.5 text-base font-medium
+                        ${selectedTime === time.id ? "bg-[#112211] text-white" : ""}`}
                       >
                         {time.startTime} ~ {time.endTime}
                       </button>
-                    ))
-                  ) : (
-                    <p>예약 가능한 시간이 없습니다.</p>
-                  )} */}
+                    ))}
                 </div>
               </div>
             </div>
@@ -123,7 +122,10 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
           </div>
 
           <div>
-            <button className="w-full rounded border bg-[#112211] px-10 py-2 text-base font-bold text-white">
+            <button
+              className={`w-full rounded border bg-[#112211] px-10 py-2 text-base font-bold text-white ${selectedTime === null ? "bg-gnGray600 text-white" : ""}`}
+              disabled={selectedTime === null}
+            >
               예약하기
             </button>
           </div>

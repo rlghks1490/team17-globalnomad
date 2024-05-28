@@ -1,16 +1,16 @@
-import { privateDecrypt } from "crypto";
-import ActivityInfo from "./ActivityInfo"
+import ActivityInfo from "./ActivityInfo";
 import ActivityOverview from "./ActivityOverview";
 import ReservationBox from "./ReservationBox";
 import { useQuery } from "@tanstack/react-query";
 import { getDatas } from "@/apis/activityDetails/activityDetails";
 import { DataType } from "@/apis/activityDetails/activityDetails.type";
 
-
 const ActivityContent = () => {
+  const { data } = useQuery<DataType>({
+    queryKey: ["datas"],
+    queryFn: getDatas,
+  });
 
-  const { data } = useQuery<DataType>({queryKey: ['datas'], queryFn: getDatas });
-  
   return (
     <div className="flex flex-col items-center">
       {data && (
@@ -25,16 +25,16 @@ const ActivityContent = () => {
             subImages={data.subImages}
           />
           <div className="flex items-center gap-6">
-            <ActivityInfo 
+            <ActivityInfo
               description={data.description}
               address={data.address}
             />
-            <ReservationBox price={data.price} schedule={data.schedules}/>
+            <ReservationBox price={data.price} schedule={data.schedules} />
           </div>
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ActivityContent
+export default ActivityContent;

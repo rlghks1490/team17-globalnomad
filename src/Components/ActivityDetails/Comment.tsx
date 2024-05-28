@@ -14,9 +14,10 @@ const Comment = ({
   createdAt,
 }: CommnetProps) => {
   return (
-    <div className="flex flex-row gap-4">
-      <div>
+    <div className="flex w-[1200px] flex-row gap-4">
+      <div className="h-[45px] w-[45px]">
         <Image
+          className="h-[45px] w-[45px] rounded-full"
           src={`${profileImageUrl}`}
           alt="profileImage"
           width={15}
@@ -27,9 +28,11 @@ const Comment = ({
         <div className="flex flex-row gap-2">
           <div className="text-base font-bold">{nickname}</div>
           <div>|</div>
-          <div className="text-base font-normal">{createdAt}</div>
+          <div className="text-base font-normal text-gnGray600">
+            {createdAt}
+          </div>
         </div>
-        <div className="text-base font-normal">{content}</div>
+        <div className="w-[729px] text-base font-normal">{content}</div>
       </div>
     </div>
   );

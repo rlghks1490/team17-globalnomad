@@ -10,8 +10,8 @@ export default function Document() {
           rel="stylesheet"
         />
         <Script
-          type='text/javascript'
-          src='//dapi.kakao.com/v2/maps/sdk.js?appkey=9cc2180d1a6fff2ed649d23c22fe9e83&autoload=false'
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9cc2180d1a6fff2ed649d23c22fe9e83&autoload=false"
         />
       </Head>
       <body>

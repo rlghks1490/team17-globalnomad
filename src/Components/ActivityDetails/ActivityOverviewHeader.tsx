@@ -10,10 +10,16 @@ interface ActivityOverviewHeaderProops {
   reviewCount: number;
 }
 
-const ActivityOverviewHeader = ({ title, category, address, rating, reviewCount} : ActivityOverviewHeaderProops) => {
+const ActivityOverviewHeader = ({
+  title,
+  category,
+  address,
+  rating,
+  reviewCount,
+}: ActivityOverviewHeaderProops) => {
   return (
-    <div className="flex justify-between items-center my-10">
-      <ActivitySummary 
+    <div className="my-10 flex items-center justify-between">
+      <ActivitySummary
         title={title}
         category={category}
         address={address}
@@ -21,9 +27,8 @@ const ActivityOverviewHeader = ({ title, category, address, rating, reviewCount}
         reviewCount={reviewCount}
       />
       <Kebab />
-      <KebabOptions />
     </div>
-  )
-}
+  );
+};
 
 export default ActivityOverviewHeader;

@@ -15,8 +15,8 @@ interface Schedule {
 
 interface ReservationCalendarProps {
   schedule: Schedule[];
-  selectedDate: Date | null;
-  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedDate: Date;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 const ReservationCalendar = ({
@@ -24,6 +24,9 @@ const ReservationCalendar = ({
   selectedDate,
   setSelectedDate,
 }: ReservationCalendarProps) => {
+  const dates = schedule.map((item) => new Date(item.date));
+  const uniqueDates = Array.from(new Set(dates));
+
   return (
     <div>
       <DatePicker
@@ -32,11 +35,11 @@ const ReservationCalendar = ({
         showIcon
         toggleCalendarOnIconClick
         shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-        minDate={new Date()} // minDate 이전 날짜 선택 불가
+        // minDate={new Date(schedule[1].date)} // minDate 이전 날짜 선택 불가
         selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
+        onChange={(date) => setSelectedDate(date!)}
         locale={ko}
-        includeDates={[new Date(schedule[1].date)]}
+        includeDates={uniqueDates}
       />
     </div>
   );

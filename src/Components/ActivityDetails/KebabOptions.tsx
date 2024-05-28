@@ -1,12 +1,18 @@
-
+import Link from "next/link";
 
 const KebabOptions = () => {
   return (
-    <div className="flex flex-col justify-center items-center absolute right-0 border rounded-md border-gnGray300 divide-y" >
-      <button className="font-medium text-lg px-11 py-4">수정하기</button>
-      <button className="font-medium text-lg px-11 py-4">삭제하기</button>
+    <div>
+      <div className="absolute right-0 z-50 flex flex-col items-center justify-center divide-y rounded-md border border-gnGray300 bg-white shadow-[0_4px_16px_0_#112211]">
+        <button className="whitespace-nowrap  px-11 py-4 text-lg font-medium">
+          수정하기
+        </button>
+        <button className="whitespace-nowrap px-11 py-4 text-lg font-medium">
+          삭제하기
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default KebabOptions;

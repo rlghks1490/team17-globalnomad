@@ -1,6 +1,10 @@
-//체험 데이터
+import { ReactNode } from "react";
+
+//체험 상세 데이터
 export interface Schedule {
   id: number;
+  startTime?: ReactNode;
+  endTime?: ReactNode;
   date: string;
   times: {
     id: number;

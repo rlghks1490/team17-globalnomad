@@ -61,7 +61,7 @@ const Review = () => {
           </div>
         </div>
       </div>
-      {/* {data?.reviews.map((review) => (
+      {data?.reviews.map((review) => (
         <Comment
           key={review.id}
           profileImageUrl={review.user.profileImageUrl}
@@ -69,8 +69,8 @@ const Review = () => {
           content={review.content}
           createdAt={review.createdAt}
         />
-      ))} */}
-      <TempComment />
+      ))}
+      {/* <TempComment /> */}
       <Pagenation
         currentPage={currentPage}
         totalPages={totalPages}
