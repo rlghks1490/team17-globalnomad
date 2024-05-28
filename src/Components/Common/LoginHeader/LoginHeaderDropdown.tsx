@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchUserProfile from "@/apis/user/user";
 import Link from "next/link";
+import { auth } from "@/apis/auth/auth";
 
 interface UserProfileType {
   id: number;
@@ -21,7 +22,7 @@ const LoginHeaderDropdown: React.FC = () => {
     isError,
   } = useQuery<UserProfileType>({
     queryKey: ["userProfile"],
-    queryFn: () => fetchUserProfile(),
+    queryFn: () => auth.getUser(),
   });
 
   const toggleDropdown = () => {

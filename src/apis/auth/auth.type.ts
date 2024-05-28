@@ -13,3 +13,39 @@ export interface FormValues {
   password: string;
   passwordConfirm?: string;
 }
+
+/**
+ * @param PostAuthLoginRes /{
+  user: {
+    id: number;
+    nickname: string;
+    email: string;
+    profileImageUrl: string;
+  };
+  accessToken: string;
+  refreshToken: string;
+}
+ */
+
+export interface PostAuthLoginRes {
+  user: {
+    id: number;
+    nickname: string;
+    email: string;
+    profileImageUrl: string;
+  };
+  accessToken: string;
+  refreshToken: string;
+}
+
+/**
+ * @param PostAuthLoginReq /{
+  email: string;
+  password: string;
+}
+ */
+
+export interface PostAuthLoginReq {
+  email: string;
+  password: string;
+}

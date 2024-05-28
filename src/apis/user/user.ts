@@ -1,3 +1,6 @@
+import { instance } from "../apis";
+import { PostSignupReq } from "./user.type";
+
 const fetchUserProfile = async () => {
   const response = await fetch(
     `https://sp-globalnomad-api.vercel.app/4-17/users/me`,
@@ -19,3 +22,11 @@ const fetchUserProfile = async () => {
 };
 
 export default fetchUserProfile;
+
+export const postSignup = async (userData: PostSignupReq) => {
+  await instance.post(`/users`, userData);
+  return {
+    email: userData.email,
+    password: userData.password,
+  };
+};
