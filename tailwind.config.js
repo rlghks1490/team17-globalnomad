@@ -5,10 +5,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      tablet: { max: "1200px" },
+      mobile: { max: "768px" },
+    },
     extend: {
       colors: {
         gnDarkBlack: "#1B1B1B",
-        gnLightBlack: "#333236",
+        gnLightBlack: "#112211",
 
         gnGray100: "#FAFAFA",
         gnGray200: "#EEEEEE",
