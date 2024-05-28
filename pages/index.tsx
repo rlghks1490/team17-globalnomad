@@ -1,7 +1,5 @@
-import Footer from "@/Components/Footer/Footer";
-
 const index = () => {
-  return <Footer />;
+  return <div>안녕하세요</div>;
 };
 
 export default index;
