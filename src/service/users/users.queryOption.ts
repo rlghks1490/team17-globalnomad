@@ -1,4 +1,4 @@
-import usersService from "./Users.service";
+import usersService from "./users.service";
 
 const queryOptions = {
   usersSignup: {
