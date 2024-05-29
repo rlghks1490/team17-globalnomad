@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import queryOptions from "./activies.queryOption";
+import queryOptions from "./activities.queryOption";
 
 export const useActivitiesCheck = () => {
   return useQuery(queryOptions.activitiesCheck);

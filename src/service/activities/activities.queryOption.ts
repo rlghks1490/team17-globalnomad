@@ -1,4 +1,4 @@
-import ActivitiesService from "./activies.service";
+import ActivitiesService from "./activities.service";
 
 const queryOptions = {
   activitiesCheck: {

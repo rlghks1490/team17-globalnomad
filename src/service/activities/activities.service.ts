@@ -7,7 +7,7 @@ import {
   ActivitiesReservationCheck,
   ActivitiesReservationRequest,
   ActivitiesReviewCheck,
-} from "./activies.type";
+} from "./activities.type";
 
 class ActivitiesService {
   getActivitiesCheck() {
