@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (data.accessToken) {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
+        document.cookie = `accessToken=${localStorage.getItem("accessToken")}`;
         setUser(data);
         router.push("/");
       }
