@@ -10,12 +10,12 @@ const queryOptions = {
     queryFn: () => usersService.getUsersCheckMyInformation(),
   },
   usersEditMyInformation: {
-    queryKey: ["usersEditMyInformation"],
-    queryFn: () => usersService.patchUsersEditMyInformation(),
+    mutationKey: ["usersEditMyInformation"],
+    mutationFn: () => usersService.patchUsersEditMyInformation(),
   },
   usersProfileImageUrl: {
-    queryKey: ["usersProfileImageUrl"],
-    queryFn: () => usersService.postUsersProfileImageUrl(),
+    mutationKey: ["usersProfileImageUrl"],
+    mutationFn: () => usersService.postUsersProfileImageUrl(),
   },
 };
 

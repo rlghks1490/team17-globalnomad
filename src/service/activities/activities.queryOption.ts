@@ -6,8 +6,8 @@ const queryOptions = {
     queryFn: () => ActivitiesService.getActivitiesCheck(),
   },
   activitiesRegistration: {
-    queryKey: ["ActivitiesRegistration"],
-    queryFn: () => ActivitiesService.postActivitiesRegistration(),
+    mutationKey: ["ActivitiesRegistration"],
+    mutationFn: () => ActivitiesService.postActivitiesRegistration(),
   },
   activitiesDetailCheck: (activityId: number) => ({
     queryKey: ["activitiesDetailCheck,activityId"],
@@ -22,13 +22,13 @@ const queryOptions = {
     queryFn: () => ActivitiesService.getActivitiesReviewCheck(activityId),
   }),
   activitiesReservationRequest: (activityId: number) => ({
-    queryKey: ["activitiesReservationRequest"],
-    queryFn: () =>
+    mutationKey: ["activitiesReservationRequest"],
+    mutationFn: () =>
       ActivitiesService.postActivitiesReservationRequest(activityId),
   }),
   activitiesImageUrl: {
-    queryKey: ["activitiesImageUrl"],
-    queryFn: () => ActivitiesService.postActivitiesImageUrl(),
+    mutationKey: ["activitiesImageUrl"],
+    mutationFn: () => ActivitiesService.postActivitiesImageUrl(),
   },
 };
 

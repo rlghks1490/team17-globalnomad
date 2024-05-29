@@ -2,12 +2,12 @@ import AuthService from "./auth.service";
 
 const queryOptions = {
   authLogin: {
-    queryKey: ["authLogin"],
-    queryFn: () => AuthService.postAuthLogin(),
+    mutationKey: ["authLogin"],
+    mutationFn: () => AuthService.postAuthLogin(),
   },
   authTokens: {
-    queryKey: ["authTokens"],
-    queryFn: () => AuthService.postAuthTokens(),
+    mutationKey: ["authTokens"],
+    mutationFn: () => AuthService.postAuthTokens(),
   },
 };
 

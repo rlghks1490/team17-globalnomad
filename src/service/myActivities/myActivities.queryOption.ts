@@ -24,20 +24,22 @@ const queryOptions = {
     activityId: number,
     reservationId: number,
   ) => ({
-    queryKey: ["myActivitiesUpdateReservationStatus,activityId,reservationId"],
-    queryFn: () =>
+    mutationKey: [
+      "myActivitiesUpdateReservationStatus,activityId,reservationId",
+    ],
+    mutationFn: () =>
       myActivitiesService.patchMyActivitiesUpdateReservationStatus(
         activityId,
         reservationId,
       ),
   }),
   deleteMyActivities: (activityId: number) => ({
-    queryKey: ["deleteMyActivities,activityId"],
-    queryFn: () => myActivitiesService.deleteMyActivities(activityId),
+    mutationKey: ["deleteMyActivities,activityId"],
+    mutationFn: () => myActivitiesService.deleteMyActivities(activityId),
   }),
   patchMyActivities: (activityId: number) => ({
-    queryKey: ["patchMyActivities,activityId"],
-    queryFn: () => myActivitiesService.patchMyActivities(activityId),
+    mutationKey: ["patchMyActivities,activityId"],
+    mutationFn: () => myActivitiesService.patchMyActivities(activityId),
   }),
 };
 
