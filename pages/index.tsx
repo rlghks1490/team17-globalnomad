@@ -1,6 +1,7 @@
 import GuestHeader from "@/Components/Common/GuestHeader/GuestHeader";
 import LoginHeader from "@/Components/Common/LoginHeader/LoginHeader";
 import { useAuth } from "@/context/Authcontext";
+import Link from "next/link";
 
 const IndexPage = () => {
   const { user } = useAuth();
@@ -11,6 +12,7 @@ const IndexPage = () => {
       <>
         <LoginHeader />
         <div>안녕하세요!! {user.user.nickname}님!!</div>
+        <Link href="/test">tet로 이동</Link>
       </>
     );
   } else {
