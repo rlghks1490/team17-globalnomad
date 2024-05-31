@@ -30,7 +30,7 @@ export async function getAvailableSchedule(
 export const getSchedule = async (
   year: string,
   month: string,
-  activityId: number = 907,
+  activityId: number = 915,
 ): Promise<AvailableSchedule[]> => {
   const response = await instance.get(
     `/activities/${activityId}/available-schedule`,
@@ -52,8 +52,14 @@ export async function getReviews(): Promise<ReviewData> {
 }
 
 //체험 예약 신청
-export const ReservationRequest = async (activityId: number = 915) => {
-  const response = await instance.post(`activities/${activityId}/reservation`);
+export const ReservationRequest = async (
+  data: { scheduleId: number; headCount: number },
+  activityId: number = 915,
+) => {
+  const response = await instance.post(
+    `activities/${activityId}/reservations`,
+    data,
+  );
   const result = response.data;
   return result;
 };

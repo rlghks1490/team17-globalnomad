@@ -68,3 +68,9 @@ export interface AvailableSchedule {
     endTime: string;
   }[];
 }
+
+//체험 예약 신청 데이터
+export interface ResevationRequestData {
+  scheduleId: number;
+  headCount: number;
+}

@@ -4,9 +4,16 @@ import DecreaseButton from "../../../public/icons/DecreaseButton.svg";
 import ReservationCalendar from "./ReservationCalendar";
 import ReservationCalendar2 from "./ResevationCalendar2";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { AvailableSchedule } from "@/apis/activityDetails/activityDetails.type";
-import { getSchedule } from "@/apis/activityDetails/activityDetails";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  AvailableSchedule,
+  ResevationRequestData,
+} from "@/apis/activityDetails/activityDetails.type";
+import {
+  ReservationRequest,
+  getSchedule,
+} from "@/apis/activityDetails/activityDetails";
+import { AxiosError } from "axios";
 
 interface Schedule {
   id: number;
@@ -28,22 +35,19 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
 
-  const getStringYear = selectedDate.getFullYear().toString();
-  const getStringMonth = (selectedDate.getMonth() + 1)
-    .toString()
-    .padStart(2, "0");
+  const stringYear = selectedDate.getFullYear().toString();
+  const stringMonth = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
 
   const { data, isError } = useQuery<AvailableSchedule[]>({
     queryKey: ["availableSchedules", selectedDate],
-    queryFn: () => getSchedule(getStringYear, getStringMonth, 915),
+    queryFn: () => getSchedule(stringYear, stringMonth, 915),
     enabled: !!selectedDate,
   });
 
-  if (isError) return console.log("에러가 발생했습니다.");
+  if (isError) <>console.log("에러가 발생했습니다.")</>;
 
-  const koreanSelectedDate = new Date(
-    selectedDate.getTime() + 9 * 60 * 60 * 1000,
-  );
+  const nineHours = 9 * 60 * 60 * 1000;
+  const koreanSelectedDate = new Date(selectedDate.getTime() + nineHours);
 
   const getAvailableTime = data?.filter(
     (schedule) =>
@@ -56,6 +60,30 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
     );
   };
 
+  console.log(schedule);
+
+  const resevationMutation = useMutation({
+    mutationFn: (data: ResevationRequestData) => ReservationRequest(data),
+    mutationKey: ["reservation"],
+    onSuccess: () => {
+      alert("예약이 완료되었습니다.");
+    },
+    onError: (error: AxiosError) => {
+      alert("예약에 실패했습니다. 다시 시도해주세요");
+      console.error("예약에 실패했습니다.:", AxiosError);
+    },
+  });
+
+  const handleResevation = () => {
+    if (selectedTime !== null) {
+      const data = {
+        scheduleId: selectedTime,
+        headCount: counter,
+      };
+      resevationMutation.mutate(data);
+    }
+  };
+
   return (
     <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6">
       <div className="border-b border-gnGray300 pb-4 text-[28px] font-bold">
@@ -64,7 +92,6 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
 
       <div className="flex flex-col gap-4">
         <p className="text-xl font-bold">날짜</p>
-        {/* <Image src="/images/CalendarSample.png" alt='calendar' width={305} height={241} /> */}
         <ReservationCalendar
           schedule={schedule}
           selectedDate={selectedDate}
@@ -81,12 +108,13 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
                 <p className="text-lg font-bold">예약 가능한 시간</p>
                 <div className="flex flex-row flex-wrap gap-3">
                   {getAvailableTime &&
+                    getAvailableTime.length > 0 &&
                     getAvailableTime[0].times.map((time) => (
                       <button
                         key={time.id}
                         onClick={() => handleTimeSelect(time.id)}
                         className={`whitespace-nowrap rounded-md border border-[#112111] px-3 py-2.5 text-base font-medium
-                        ${selectedTime === time.id ? "bg-[#112211] text-white" : ""}`}
+                          ${selectedTime === time.id ? "bg-[#112211] text-white" : ""}`}
                       >
                         {time.startTime} ~ {time.endTime}
                       </button>
@@ -125,6 +153,7 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
             <button
               className={`w-full rounded border bg-[#112211] px-10 py-2 text-base font-bold text-white ${selectedTime === null ? "bg-gnGray600 text-white" : ""}`}
               disabled={selectedTime === null}
+              onClick={handleResevation}
             >
               예약하기
             </button>
