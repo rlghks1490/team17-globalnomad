@@ -11,6 +11,7 @@ import { auth } from "@/apis/auth/auth";
 import { FormValues, PostAuthLoginRes } from "@/apis/auth/auth.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import Cookies from "js-cookie";
 
 interface ErrorMessage {
   message: string;
@@ -36,12 +37,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     mutationFn: (data: FormValues) => auth.signIn(data),
     mutationKey: ["signIn"],
     onSuccess: (data: PostAuthLoginRes) => {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
       if (data.accessToken) {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        document.cookie = `accessToken=${localStorage.getItem("accessToken")}`;
+        Cookies.set("accessToken", data.accessToken, {
+          expires: 1 / (24 * 60),
+        }); // 1분 동안 유효(임시)
+        Cookies.set("refreshToken", data.refreshToken, { expires: 7 }); // 7일 동안 유효
         setUser(data);
         router.push("/");
       }
@@ -57,8 +59,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signOut = () => {
     setUser(null);
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
     router.push("/login");
   };
 
