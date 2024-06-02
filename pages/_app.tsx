@@ -17,6 +17,7 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const queryClient = new QueryClient();
+  // getLayout 설정 안하면 MainLayout 적용
   const getLayout =
     Component.getLayout ?? ((page) => <MainLayout>{page}</MainLayout>);
 
