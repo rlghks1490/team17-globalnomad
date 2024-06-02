@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import { auth } from "@/apis/auth/auth";
-import { FormValues, PostAuthLoginRes } from "@/apis/auth/auth.type";
+import { FormValues, PostAuthLoginRes, UserInfo } from "@/apis/auth/auth.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import Cookies from "js-cookie";
@@ -30,7 +30,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // 여기에 새로고침 하면 로그아웃 안되도록 작성??
+    const accessToken = Cookies.get("accessToken");
+    const refreshToken = Cookies.get("refreshToken");
+
+    if (accessToken) {
+      auth
+        .getUser()
+        .then((data) => {
+          setUser({
+            accessToken: accessToken as string,
+            refreshToken: refreshToken as string,
+            user: data as UserInfo,
+          });
+        })
+        .catch(() => {
+          setUser(null);
+        });
+    }
   }, []);
 
   const signInMutation = useMutation({
@@ -41,8 +57,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       Cookies.remove("refreshToken");
       if (data.accessToken) {
         Cookies.set("accessToken", data.accessToken, {
-          expires: 1 / (24 * 60),
-        }); // 1분 동안 유효(임시)
+          expires: 7,
+        });
         Cookies.set("refreshToken", data.refreshToken, { expires: 7 }); // 7일 동안 유효
         setUser(data);
         router.push("/");
@@ -61,7 +77,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
-    router.push("/login");
   };
 
   return (

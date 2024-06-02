@@ -5,6 +5,7 @@ import { FormValues } from "@/apis/auth/auth.type";
 import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useAuth } from "@/context/Authcontext";
+import EmptyLayout from "@/layouts/EmptyLayout";
 
 const { email, password } = USER_INPUT_VALIDATION;
 
@@ -33,6 +34,7 @@ const Login = () => {
   const { signIn } = useAuth();
 
   const { formState, register, handleSubmit } = useForm<FormValues>({
+    defaultValues: { email: "", password: "" },
     mode: "onBlur",
   });
 
@@ -84,7 +86,7 @@ const Login = () => {
       <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
         <p>회원이 아니신가요?</p>
         <Link
-          href="/signup"
+          href="/signUp"
           className="text-base font-normal text-gnDarkGreen underline"
         >
           회원가입
@@ -95,3 +97,7 @@ const Login = () => {
 };
 
 export default Login;
+
+Login.getLayout = function getLayout(page: React.ReactNode) {
+  return <EmptyLayout>{page}</EmptyLayout>;
+};

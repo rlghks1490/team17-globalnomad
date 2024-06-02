@@ -49,3 +49,12 @@ export interface PostAuthLoginReq {
   email: string;
   password: string;
 }
+
+export interface UserInfo {
+  id: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
