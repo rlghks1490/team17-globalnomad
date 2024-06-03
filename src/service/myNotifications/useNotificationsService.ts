@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import queryOptions from "./notifications.queryOption";
 
 export const useMyNotificationsCheck = () => {
@@ -6,5 +6,5 @@ export const useMyNotificationsCheck = () => {
 };
 
 export const useDeleteMyNotifications = (notificationsId: number) => {
-  return useQuery(queryOptions.deleteMyNotifications(notificationsId));
+  return useMutation(queryOptions.deleteMyNotifications(notificationsId));
 };
