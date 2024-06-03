@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import queryOptions from "./myActivities.queryOption";
 
 export const useMyActivitiesCheck = () => {
@@ -21,15 +21,15 @@ export const useMyActivitiesUpdateReservationStatus = (
   activityId: number,
   reservationId: number,
 ) => {
-  return useQuery(
+  return useMutation(
     queryOptions.myActivitiesUpdateReservationStatus(activityId, reservationId),
   );
 };
 
 export const useDeleteMyActivities = (activityId: number) => {
-  return useQuery(queryOptions.deleteMyActivities(activityId));
+  return useMutation(queryOptions.deleteMyActivities(activityId));
 };
 
 export const usePatchMyActivities = (activityId: number) => {
-  return useQuery(queryOptions.patchMyActivities(activityId));
+  return useMutation(queryOptions.patchMyActivities(activityId));
 };

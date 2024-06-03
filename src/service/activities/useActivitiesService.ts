@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import queryOptions from "./activities.queryOption";
 
 export const useActivitiesCheck = () => {
@@ -6,7 +6,7 @@ export const useActivitiesCheck = () => {
 };
 
 export const useActivitiesRegistration = () => {
-  return useQuery(queryOptions.activitiesRegistration);
+  return useMutation(queryOptions.activitiesRegistration);
 };
 
 export const useActivitiesDetailCheck = (activityId: number) => {
@@ -22,9 +22,9 @@ export const useActivitiesReviewCheck = (activityId: number) => {
 };
 
 export const useActivitiesReservationRequest = (activityId: number) => {
-  return useQuery(queryOptions.activitiesReservationRequest(activityId));
+  return useMutation(queryOptions.activitiesReservationRequest(activityId));
 };
 
 export const useActivitiesImageUrl = () => {
-  return useQuery(queryOptions.activitiesImageUrl);
+  return useMutation(queryOptions.activitiesImageUrl);
 };
