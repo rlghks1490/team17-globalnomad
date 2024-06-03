@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useUsersCheckMyInformation } from "@/service/users/useUsersService";
+import Link from "next/link";
+import { useAuth } from "@/context/Authcontext";
 
 const LoginHeaderDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const { signOut } = useAuth();
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
 
   const toggleDropdown = () => {
@@ -21,6 +23,10 @@ const LoginHeaderDropdown: React.FC = () => {
   if (!response) {
     return <div>Not Found data...</div>;
   }
+
+  const handleSignOut = () => {
+    signOut();
+  };
 
   const data = response.data;
 
@@ -49,14 +55,21 @@ const LoginHeaderDropdown: React.FC = () => {
         >
           <ul className="top-0 w-48 rounded-md border-solid bg-white px-6 py-8 shadow-lg">
             <div className="block rounded-md px-4 py-2 hover:bg-gnGray200">
-              <a href="/" className="block cursor-pointer text-base font-bold">
+              <Link
+                href="/"
+                className="block cursor-pointer text-base font-bold"
+              >
                 마이페이지
-              </a>
+              </Link>
             </div>
             <div className="block rounded-md px-4 py-2 hover:bg-gnGray200">
-              <a href="/" className="block cursor-pointer text-base font-bold">
+              <Link
+                href="/"
+                onClick={handleSignOut}
+                className="block cursor-pointer text-base font-bold"
+              >
                 로그아웃
-              </a>
+              </Link>
             </div>
           </ul>
         </div>

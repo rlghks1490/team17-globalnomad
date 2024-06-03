@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import queryOptions from "./auth.queryOption";
 
 export const useAuthLogin = () => {
-  return useQuery(queryOptions.authLogin);
+  return useMutation(queryOptions.authLogin);
 };
 
 export const useAuthTokens = () => {
-  return useQuery(queryOptions.authTokens);
+  return useMutation(queryOptions.authTokens);
 };

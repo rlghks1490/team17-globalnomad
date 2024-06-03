@@ -8,6 +8,7 @@ import Link from "next/link";
 import { FormValues } from "@/apis/auth/auth.type";
 import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
+import EmptyLayout from "@/layouts/EmptyLayout";
 
 interface ErrorMessage {
   message: string;
@@ -143,3 +144,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+SignUp.getLayout = function getLayout(page: React.ReactNode) {
+  return <EmptyLayout>{page}</EmptyLayout>;
+};
