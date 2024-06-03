@@ -1,5 +1,6 @@
-import { FormValues } from "./auth.type";
+import { FormValues, PostAuthLoginReq, PostAuthLoginRes } from "./auth.type";
 import { instance } from "../apis";
+import axios from "axios";
 
 export const auth = {
   signIn: async (userData: FormValues) => {
@@ -8,6 +9,23 @@ export const auth = {
   },
   signUp: async (userData: FormValues) => {
     const response = await instance.post("/users", userData);
+    return response.data;
+  },
+  tokensUpdate: async (refreshToken: string) => {
+    const response = await instance.post(
+      "auth/tokens",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.data;
+  },
+  getUser: async () => {
+    const response = await instance.get("/users/me");
     return response.data;
   },
 };

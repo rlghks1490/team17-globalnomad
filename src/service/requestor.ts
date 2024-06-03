@@ -1,11 +1,18 @@
-import axios from "axios";
+import axios, { AxiosInstance, type AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 
-export const instance = axios.create({
-  baseURL: "https://sp-globalnomad-api.vercel.app/4-17",
-});
+const axiosRequestConfig: AxiosRequestConfig = {
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+  responseType: "json",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+};
 
-instance.interceptors.request.use((config) => {
+export const requestor: AxiosInstance = axios.create(axiosRequestConfig);
+
+requestor.interceptors.request.use((config) => {
   if (config.headers.Authorization) return config;
 
   const accessToken = Cookies.get("accessToken");
@@ -15,7 +22,7 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-instance.interceptors.response.use(
+requestor.interceptors.response.use(
   (res) => res,
   async (error) => {
     const originalRequest = error.config;
@@ -25,7 +32,7 @@ instance.interceptors.response.use(
       !originalRequest._retry &&
       refreshToken
     ) {
-      const res = await instance.post(
+      const res = await requestor.post(
         "/auth/tokens",
         {},
         {
@@ -38,7 +45,7 @@ instance.interceptors.response.use(
       Cookies.set("refreshToken", nextRefreshToken);
       originalRequest._retry = true;
 
-      return instance(originalRequest);
+      return requestor(originalRequest);
     }
     return Promise.reject(error);
   },

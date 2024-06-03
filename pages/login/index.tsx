@@ -1,17 +1,12 @@
 import React from "react";
 import LoginInput from "@/Components/Input/LoginInput";
-import { auth } from "@/apis/auth/auth";
-import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { FormValues } from "@/apis/auth/auth.type";
 import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
+import { useAuth } from "@/context/Authcontext";
+import EmptyLayout from "@/layouts/EmptyLayout";
 
-interface ErrorMessage {
-  message: string;
-}
 const { email, password } = USER_INPUT_VALIDATION;
 
 const rules = {
@@ -36,32 +31,21 @@ const rules = {
 };
 
 const Login = () => {
-  const router = useRouter();
-  const { formState, register, handleSubmit } = useForm<FormValues>({
-    mode: "onBlur",
-  });
+  const { signIn } = useAuth();
 
-  const signInMutation = useMutation({
-    mutationFn: (data: FormValues) => auth.signIn(data),
-    mutationKey: ["signIn"],
-    onSuccess: (data) => {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      if (data.accessToken) {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        router.push("/");
-      }
-    },
-    onError: (error: AxiosError<ErrorMessage>) => {
-      console.error("AxiosError", error);
-    },
+  const { formState, register, handleSubmit } = useForm<FormValues>({
+    defaultValues: { email: "", password: "" },
+    mode: "onBlur",
   });
 
   const { isValid, errors } = formState;
 
-  const onSubmit = (data: FormValues) => {
-    signInMutation.mutate(data);
+  const onSubmit = async (data: FormValues) => {
+    try {
+      await signIn(data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (
@@ -102,7 +86,7 @@ const Login = () => {
       <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
         <p>회원이 아니신가요?</p>
         <Link
-          href="/signup"
+          href="/signUp"
           className="text-base font-normal text-gnDarkGreen underline"
         >
           회원가입
@@ -113,3 +97,7 @@ const Login = () => {
 };
 
 export default Login;
+
+Login.getLayout = function getLayout(page: React.ReactNode) {
+  return <EmptyLayout>{page}</EmptyLayout>;
+};
