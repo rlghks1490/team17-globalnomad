@@ -8,6 +8,7 @@ import { useModal } from "@/hooks/useModal";
 import CommonModal from "../Modal/CommonModal";
 import ModalAlert from "../Modal/ModalAlert";
 import ModalReview from "../Modal/ModalReview";
+import ModalReservationCancel from "../Modal/ModalReservationCancel";
 
 const ActivityContent = () => {
   const { data } = useQuery<DataType>({
@@ -38,15 +39,21 @@ const ActivityContent = () => {
             <ReservationBox price={data.price} schedule={data.schedules} />
           </div>
           <button onClick={handleModalOpen}>모달 테스트</button>
-          {isOpenModal && (
+          {/* {isOpenModal && (
             <ModalAlert
               isOpenModal={isOpenModal}
               message={data.description}
               onClose={handleModalClose}
             />
+          )} */}
+          {isOpenModal && (
+            <ModalReview isOpenModal={isOpenModal} onClose={handleModalClose} />
           )}
           {/* {isOpenModal && (
-            <ModalReview isOpenModal={isOpenModal} onClose={handleModalClose} />
+            <ModalReservationCancel
+              isOpenModal={isOpenModal}
+              onClose={handleModalClose}
+            />
           )} */}
         </>
       )}

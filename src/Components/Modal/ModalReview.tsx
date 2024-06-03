@@ -21,7 +21,7 @@ const ModalReview = ({ isOpenModal, onClose }: ModalReviewProps) => {
 
   return (
     <>
-      <CommonModal isOpenModal={isOpenModal} onClose={onClose}>
+      <CommonModal isOpenModal={isOpenModal} onClose={onClose} size="Review">
         <div className="flex flex-col items-center justify-center gap-10">
           <div className="flex w-full justify-between">
             <h2 className="text-[28px] font-bold">후기 작성</h2>
@@ -67,7 +67,7 @@ const ModalReview = ({ isOpenModal, onClose }: ModalReviewProps) => {
             <div className="flex flex-col gap-6">
               <textarea
                 placeholder="후기를 작성해주세요"
-                className="h-[240px] w-[432px] resize-none rounded border border-gnGray700"
+                className="h-[240px] w-[432px] resize-none rounded border border-gnGray700 p-4"
               />
               <button className="flex h-[56px] w-full items-center justify-center rounded border bg-gnDarkBlack text-base font-bold text-white">
                 작성하기

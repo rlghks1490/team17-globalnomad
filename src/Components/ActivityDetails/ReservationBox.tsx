@@ -87,7 +87,7 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
   return (
     <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6">
       <div className="border-b border-gnGray300 pb-4 text-[28px] font-bold">
-        ￦ {price} / 인
+        ￦ {price.toLocaleString()} / 인
       </div>
 
       <div className="flex flex-col gap-4">
@@ -162,7 +162,7 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
 
         <div className="flex flex-row justify-between border-t border-gnGray300 pt-4 text-xl font-bold">
           <p>총 합계</p>
-          <div>￦ {price * counter}</div>
+          <div>￦ {(price * counter).toLocaleString()}</div>
         </div>
       </div>
     </div>
