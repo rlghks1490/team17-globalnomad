@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import queryOptions from "./reservations.queryOption";
 
 export const useMyReservationsCheck = () => {
@@ -6,9 +6,9 @@ export const useMyReservationsCheck = () => {
 };
 
 export const useMyReservationsCancel = (reservationId: number) => {
-  return useQuery(queryOptions.myReservationsCancel(reservationId));
+  return useMutation(queryOptions.myReservationsCancel(reservationId));
 };
 
 export const useMyReservationsReviews = (reservationId: number) => {
-  return useQuery(queryOptions.myReservationsReviews(reservationId));
+  return useMutation(queryOptions.myReservationsReviews(reservationId));
 };

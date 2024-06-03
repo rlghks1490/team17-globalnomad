@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import queryOptions from "./users.queryOption";
 
 export const useUsersSignup = () => {
@@ -10,9 +10,9 @@ export const useUsersCheckMyInformation = () => {
 };
 
 export const useUsersEditMyInformation = () => {
-  return useQuery(queryOptions.usersEditMyInformation);
+  return useMutation(queryOptions.usersEditMyInformation);
 };
 
 export const useUsersProfileImageUrl = () => {
-  return useQuery(queryOptions.usersProfileImageUrl);
+  return useMutation(queryOptions.usersProfileImageUrl);
 };
