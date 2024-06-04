@@ -10,11 +10,11 @@ const queryOptions = {
     mutationFn: () => ActivitiesService.postActivitiesRegistration(),
   },
   activitiesDetailCheck: (activityId: number) => ({
-    queryKey: ["activitiesDetailCheck,activityId"],
+    queryKey: ["activitiesDetailCheck", "activityId"],
     queryFn: () => ActivitiesService.getActivitiesDetailCheck(activityId),
   }),
   activitiesReservationCheck: (activityId: number) => ({
-    queryKey: ["activitiesReservationCheck,activityId"],
+    queryKey: ["activitiesReservationCheck", "activityId"],
     queryFn: () => ActivitiesService.getActivitiesReservationCheck(activityId),
   }),
   activitiesReviewCheck: (activityId: number) => ({

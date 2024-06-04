@@ -6,17 +6,17 @@ const queryOptions = {
     queryFn: () => myActivitiesService.getMyActivitiesCheck(),
   },
   myActivitiesRegistrationDashboard: (activityId: number) => ({
-    queryKey: ["myActivitiesRegistrationDashboard,activityId"],
+    queryKey: ["myActivitiesRegistrationDashboard", "activityId"],
     queryFn: () =>
       myActivitiesService.getMyActivitiesRegistrationDashboard(activityId),
   }),
   myActivitiesRegistrationSchedule: (activityId: number) => ({
-    queryKey: ["myActivitiesRegistrationSchedule,activityId"],
+    queryKey: ["myActivitiesRegistrationSchedule", "activityId"],
     queryFn: () =>
       myActivitiesService.getMyActivitiesRegistrationSchedule(activityId),
   }),
   myActivitiesReservationCheck: (activityId: number) => ({
-    queryKey: ["myActivitiesReservationCheck,activityId"],
+    queryKey: ["myActivitiesReservationCheck", "activityId"],
     queryFn: () =>
       myActivitiesService.getMyActivitiesReservationCheck(activityId),
   }),
@@ -25,7 +25,9 @@ const queryOptions = {
     reservationId: number,
   ) => ({
     mutationKey: [
-      "myActivitiesUpdateReservationStatus,activityId,reservationId",
+      "myActivitiesUpdateReservationStatus",
+      "activityId",
+      "reservationId",
     ],
     mutationFn: () =>
       myActivitiesService.patchMyActivitiesUpdateReservationStatus(
@@ -34,11 +36,11 @@ const queryOptions = {
       ),
   }),
   deleteMyActivities: (activityId: number) => ({
-    mutationKey: ["deleteMyActivities,activityId"],
+    mutationKey: ["deleteMyActivities", "activityId"],
     mutationFn: () => myActivitiesService.deleteMyActivities(activityId),
   }),
   patchMyActivities: (activityId: number) => ({
-    mutationKey: ["patchMyActivities,activityId"],
+    mutationKey: ["patchMyActivities", "activityId"],
     mutationFn: () => myActivitiesService.patchMyActivities(activityId),
   }),
 };
