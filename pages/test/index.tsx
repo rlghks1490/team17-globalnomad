@@ -1,40 +1,63 @@
-import { useAuth } from "@/context/Authcontext";
-import React from "react";
+import ReservationList from "@/Components/Common/ReservationList";
+import { getMyReservations } from "@/apis/myReservation/myReservation";
+import {
+  QueryClient,
+  dehydrate,
+  keepPreviousData,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
+import { GetServerSidePropsContext } from "next";
+import { useState } from "react";
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const { req } = context;
-//   const { cookies } = req;
-//   console.log(cookies);
+// export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+//   const queryClient = new QueryClient();
+//   setContext(context);
 
-//   if (!req.headers.cookie)
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-
-//   if (req.headers.cookie) {
-//     if (req.headers.cookie.includes("accessToken")) {
-//       return { props: {} };
-//     }
-//   }
-//   return {
-//     redirect: {
-//       destination: "/",
-//       permanent: false,
+//   await queryClient.prefetchInfiniteQuery({
+//     queryKey: ['ReservationAll'],
+//     queryFn: ({ pageParam }) => {
+//       const status = null;
+//       return getMyReservations({ size: 6, status, cursorId: pageParam });
 //     },
-//   };
+//     initialPageParam: 0,
+//   });
+
+//   return { props: { dehydratedState: dehydrate(queryClient) } };
 // };
 
-const test = () => {
-  const { user } = useAuth();
+function Reservations() {
+  const [viewStatue, setViewStatue] = useState(null);
 
+  const { isFetching, data, fetchNextPage } = useInfiniteQuery({
+    queryKey: ["MyReservations"],
+    queryFn: ({ pageParam }) => {
+      const status = viewStatue === "" ? null : viewStatue;
+      return getMyReservations({ size: 6, status, cursorId: pageParam });
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.data.cursorId,
+    select: (data) => ({
+      pages: data?.pages.flatMap((page) => page.data.reservations),
+      pageParams: data?.pageParams,
+    }),
+  });
+
+  const reservationData = data?.pages;
+  console.log(reservationData);
   return (
-    <div>
-      <h1>안녕 나는 {user?.user.nickname} 에용</h1>
-    </div>
+    <>
+      <div>
+        <div>
+          <h2>예약 내역</h2>
+        </div>
+        <div className="bg-gnGray100">
+          {reservationData?.map((reservation) => (
+            <ReservationList key={reservation.id} data={reservation} />
+          ))}
+        </div>
+      </div>
+    </>
   );
-};
+}
 
-export default test;
+export default Reservations;

@@ -45,6 +45,15 @@ module.exports = {
       width: {
         loginForm: "40rem",
       },
+      height: {
+        reservationBoxHeight: "204px",
+      },
+      boxShadow: {
+        reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",
+      },
+      borderRadius: {
+        reservationRadius: "2.4rem 0 0 2.4rem",
+      },
     },
   },
   plugins: [],
