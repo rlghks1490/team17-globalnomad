@@ -1,5 +1,7 @@
 import ReservationList from "@/Components/Common/ReservationList";
+import ProfileModify from "@/Components/ProfileModify/ProfileModify";
 import { getMyReservations } from "@/apis/myReservation/myReservation";
+import MyPageLayout from "@/layouts/MyPageLayour";
 import {
   QueryClient,
   dehydrate,
@@ -7,6 +9,7 @@ import {
   useInfiniteQuery,
 } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from "next";
+import Link from "next/link";
 import { useState } from "react";
 
 // export const getServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -45,7 +48,7 @@ function Reservations() {
   const reservationData = data?.pages;
   console.log(reservationData);
   return (
-    <>
+    <div>
       <div>
         <div>
           <h2>예약 내역</h2>
@@ -55,9 +58,14 @@ function Reservations() {
             <ReservationList key={reservation.id} data={reservation} />
           ))}
         </div>
+        <Link href="/test/activity">activity 이동</Link>
       </div>
-    </>
+    </div>
   );
 }
 
 export default Reservations;
+
+Reservations.getLayout = function getLayout(page: React.ReactNode) {
+  return <MyPageLayout>{page}</MyPageLayout>;
+};
