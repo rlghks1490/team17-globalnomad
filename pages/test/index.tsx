@@ -51,9 +51,9 @@ function Reservations() {
     <div>
       <div>
         <div>
-          <h2>예약 내역</h2>
+          <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
         </div>
-        <div className="bg-gnGray100">
+        <div className="w-reservationBoxWidth bg-gnGray100">
           {reservationData?.map((reservation) => (
             <ReservationList key={reservation.id} data={reservation} />
           ))}

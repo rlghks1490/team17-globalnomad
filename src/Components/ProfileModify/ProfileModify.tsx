@@ -19,7 +19,7 @@ const ProfileModify: React.FC = () => {
   const data = response.data;
 
   return (
-    <div className="flex justify-center gap-10 py-10">
+    <div className="flex justify-center gap-10 pb-10">
       <div className="flex w-full max-w-4xl ">
         <div className="flex w-64 flex-col gap-6 rounded-lg border bg-white p-6">
           <div className="relative flex items-center space-x-3">
@@ -44,7 +44,7 @@ const ProfileModify: React.FC = () => {
           <div className="mt-6 space-y-1">
             <Link
               href="#"
-              className="block rounded-xl bg-gnSoftGreen px-3 py-2 text-left font-bold text-black"
+              className="bg-gnSoftGreen block rounded-xl px-3 py-2 text-left font-bold text-black"
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">

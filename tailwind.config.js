@@ -45,8 +45,11 @@ module.exports = {
       },
       width: {
         loginForm: "40rem",
+        reservationBoxWidth: "768px",
+        reservationButtonWidth: "540px",
       },
       height: {
+        sidebar: "432px",
         reservationBoxHeight: "204px",
       },
       boxShadow: {
