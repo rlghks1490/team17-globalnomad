@@ -25,6 +25,7 @@ module.exports = {
 
         gnDarkGreen: "#0B3B2D",
         gnGreen: "#00AC07",
+        gnSoftGreen: "#CED8D5",
         gnLightGreen: "#F1EFFD",
 
         gnDarkRed: "#FF472E",
