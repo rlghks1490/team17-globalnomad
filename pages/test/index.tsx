@@ -65,7 +65,3 @@ function Reservations() {
 }
 
 export default Reservations;
-
-Reservations.getLayout = function getLayout(page: React.ReactNode) {
-  return <MyPageLayout>{page}</MyPageLayout>;
-};
