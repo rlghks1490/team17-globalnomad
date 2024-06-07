@@ -6,12 +6,12 @@ const queryOptions = {
     queryFn: () => MyReservationsService.getMyReservationsCheck(),
   },
   myReservationsCancel: (reservationId: number) => ({
-    mutationKey: ["myReservationsCancel,reservationId"],
+    mutationKey: ["myReservationsCancel", "reservationId"],
     mutationFn: () =>
       MyReservationsService.patchMyReservationsCancel(reservationId),
   }),
   myReservationsReviews: (reservationId: number) => ({
-    mutationKey: ["myReservationsReviews,reservationId"],
+    mutationKey: ["myReservationsReviews", "reservationId"],
     mutationFn: () =>
       MyReservationsService.postMyReservationsReviews(reservationId),
   }),
