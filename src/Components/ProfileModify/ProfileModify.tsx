@@ -44,7 +44,7 @@ const ProfileModify: React.FC = () => {
           <div className="mt-6 space-y-1">
             <Link
               href="#"
-              className="bg-gnSoftGreen block rounded-xl px-3 py-2 text-left font-bold text-black"
+              className="block rounded-xl bg-gnSoftGreen px-3 py-2 text-left font-bold text-black"
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
@@ -57,7 +57,10 @@ const ProfileModify: React.FC = () => {
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
-                <img src="/icons/myReservationList.svg" alt="myInfo.svg" />
+                <img
+                  src="/icons/myReservationList.svg"
+                  alt="myReservationList.svg"
+                />
                 예약 내역
               </div>
             </Link>
@@ -67,8 +70,8 @@ const ProfileModify: React.FC = () => {
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
-                <img src="/icons/myActivities.svg" alt="myInfo.svg" />내 체험
-                관리
+                <img src="/icons/myActivities.svg" alt="myActivities.svg" />내
+                체험 관리
               </div>
             </Link>
             <Link
@@ -77,7 +80,10 @@ const ProfileModify: React.FC = () => {
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
-                <img src="/icons/myReservationCheck.svg" alt="myInfo.svg" />
+                <img
+                  src="/icons/myReservationCheck.svg"
+                  alt="myReservationCheck.svg"
+                />
                 예약 현황
               </div>
             </Link>
