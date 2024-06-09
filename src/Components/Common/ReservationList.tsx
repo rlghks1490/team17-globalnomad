@@ -1,7 +1,7 @@
 import { Reservation } from "@/apis/myReservation/myReservation.type";
 import Image from "next/image";
 import React from "react";
-import ReservationStatus from "./ReservationStatus";
+import ReservationStatue from "./ReservationStatus";
 
 interface ReservationListProps {
   data: Reservation;
@@ -9,7 +9,7 @@ interface ReservationListProps {
 
 const ReservationList = ({ data }: ReservationListProps) => {
   return (
-    <div className="shadow-reservationBox h-reservationBoxHeight mb-6 flex w-full shrink-0 gap-6 rounded-3xl">
+    <div className="mb-6 flex h-reservationBoxHeight w-full shrink-0 gap-6 rounded-3xl shadow-reservationBox">
       <div>
         <Image
           src={data.activity.bannerImageUrl}
@@ -17,12 +17,12 @@ const ReservationList = ({ data }: ReservationListProps) => {
           height={204}
           alt="내 예약내역 배너이미지"
           priority={true}
-          className="rounded-reservationRadius h-full"
+          className="h-full rounded-reservationRadius"
         />
       </div>
       <div className="my-6 flex flex-col">
         <div>
-          <ReservationStatus status={data.status} />
+          <ReservationStatue status={data.status} />
           <h1 className="mb-3 text-xl font-bold leading-6">
             {data.activity.title}
           </h1>
@@ -30,7 +30,7 @@ const ReservationList = ({ data }: ReservationListProps) => {
             {data.date} · {data.startTime} ~ {data.endTime} · {data.headCount}명
           </p>
         </div>
-        <div className="w-reservationButtonWidth flex justify-between">
+        <div className="flex w-reservationButtonWidth justify-between">
           <p className="text-2xl font-medium leading-normal">
             ₩{data.totalPrice}
           </p>

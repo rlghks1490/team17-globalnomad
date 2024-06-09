@@ -1,3 +1,18 @@
+import { ReservationStatueList } from "@/constants/reservation";
+
+/**
+ * @param ReservationStatus /{
+  status:
+    | "pending"
+    | "confirmed"
+    | "declined"
+    | "canceled"
+    | "completed"
+}
+ */
+
+export type ReservationStatus = keyof typeof ReservationStatueList;
+
 /**
  * @param GetMyReservationsParam /{
   cursorId?: number;
@@ -15,13 +30,7 @@
 export interface GetMyReservationsParam {
   cursorId?: number;
   size?: number;
-  status:
-    | "pending"
-    | "confirmed"
-    | "declined"
-    | "canceled"
-    | "completed"
-    | null;
+  status: ReservationStatus | null;
 }
 
 /**
@@ -57,7 +66,7 @@ export interface Reservation {
     id: number;
   };
   scheduleId: number;
-  status: "pending" | "confirmed" | "declined" | "canceled" | "completed";
+  status: ReservationStatus;
   reviewSubmitted: boolean;
   totalPrice: number;
   headCount: number;

@@ -1,40 +1,19 @@
 import ReservationList from "@/Components/Common/ReservationList";
-import ProfileModify from "@/Components/ProfileModify/ProfileModify";
+import NoReservationList from "@/Components/MyReservation/NoReservationList";
+import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
 import { getMyReservations } from "@/apis/myReservation/myReservation";
-import MyPageLayout from "@/layouts/MyPageLayour";
-import {
-  QueryClient,
-  dehydrate,
-  keepPreviousData,
-  useInfiniteQuery,
-} from "@tanstack/react-query";
-import { GetServerSidePropsContext } from "next";
+import { ReservationStatus } from "@/apis/myReservation/myReservation.type";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useState } from "react";
-
-// export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-//   const queryClient = new QueryClient();
-//   setContext(context);
-
-//   await queryClient.prefetchInfiniteQuery({
-//     queryKey: ['ReservationAll'],
-//     queryFn: ({ pageParam }) => {
-//       const status = null;
-//       return getMyReservations({ size: 6, status, cursorId: pageParam });
-//     },
-//     initialPageParam: 0,
-//   });
-
-//   return { props: { dehydratedState: dehydrate(queryClient) } };
-// };
+import { useEffect, useState } from "react";
 
 function Reservations() {
-  const [viewStatue, setViewStatue] = useState(null);
+  const [viewStatue, setViewStatue] = useState<ReservationStatus>("all");
 
   const { isFetching, data, fetchNextPage } = useInfiniteQuery({
     queryKey: ["MyReservations"],
     queryFn: ({ pageParam }) => {
-      const status = viewStatue === "" ? null : viewStatue;
+      const status = viewStatue === "all" ? null : viewStatue;
       return getMyReservations({ size: 6, status, cursorId: pageParam });
     },
     initialPageParam: 0,
@@ -45,18 +24,25 @@ function Reservations() {
     }),
   });
 
-  const reservationData = data?.pages;
-  console.log(reservationData);
+  useEffect(() => {});
+
+  const reservationData = data?.pages || [];
+
   return (
     <div>
       <div>
         <div>
           <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
+          <ReservationFilter value={viewStatue} setValue={setViewStatue} />
         </div>
         <div className="w-reservationBoxWidth bg-gnGray100">
-          {reservationData?.map((reservation) => (
-            <ReservationList key={reservation.id} data={reservation} />
-          ))}
+          {reservationData.length > 0 ? (
+            reservationData?.map((reservation) => (
+              <ReservationList key={reservation.id} data={reservation} />
+            ))
+          ) : (
+            <NoReservationList />
+          )}
         </div>
         <Link href="/test/activity">activity 이동</Link>
       </div>
