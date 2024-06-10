@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 function Reservations() {
   const [viewStatue, setViewStatue] = useState<ReservationStatus>("all");
 
-  const { isFetching, data, fetchNextPage } = useInfiniteQuery({
+  const { isFetching, data, fetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ["MyReservations"],
     queryFn: ({ pageParam }) => {
       const status = viewStatue === "all" ? null : viewStatue;
@@ -24,14 +24,16 @@ function Reservations() {
     }),
   });
 
-  useEffect(() => {});
+  useEffect(() => {
+    refetch();
+  }, [viewStatue]);
 
   const reservationData = data?.pages || [];
 
   return (
     <div>
       <div>
-        <div>
+        <div className="flex justify-between">
           <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
           <ReservationFilter value={viewStatue} setValue={setViewStatue} />
         </div>
