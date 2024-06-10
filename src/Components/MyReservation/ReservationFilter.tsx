@@ -31,7 +31,7 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
   };
 
   return (
-    <div>
+    <div className="relative">
       <button
         onClick={handleDropdown}
         className="radius flex h-14 w-40 items-center justify-between rounded-2xl border border-gnDarkGreen px-5 py-4 text-lg font-medium leading-normal text-gnDarkGreen"
@@ -47,11 +47,11 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
         }
       </button>
       {isOpen && (
-        <div className="relative z-10 flex flex-col items-center justify-center shadow-reservationBox">
+        <div className="absolute left-0 top-16 z-10 flex flex-col items-center justify-center shadow-reservationBox">
           {filterList.map((item) => (
             <button
               onClick={() => handleDropdownClick(item)}
-              className="h-14 w-40 border border-gnGray300 bg-white text-lg font-medium leading-5"
+              className="h-14 w-40 border border-gnGray300 bg-white text-lg font-medium leading-5 "
             >
               {ReservationStatueList[item]}
             </button>

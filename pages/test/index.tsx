@@ -4,31 +4,33 @@ import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
 import { getMyReservations } from "@/apis/myReservation/myReservation";
 import { ReservationStatus } from "@/apis/myReservation/myReservation.type";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroller";
 
 function Reservations() {
   const [viewStatue, setViewStatue] = useState<ReservationStatus>("all");
 
-  const { isFetching, data, fetchNextPage, refetch } = useInfiniteQuery({
-    queryKey: ["MyReservations"],
-    queryFn: ({ pageParam }) => {
-      const status = viewStatue === "all" ? null : viewStatue;
-      return getMyReservations({ size: 6, status, cursorId: pageParam });
-    },
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage.data.cursorId,
-    select: (data) => ({
-      pages: data?.pages.flatMap((page) => page.data.reservations),
-      pageParams: data?.pageParams,
-    }),
-  });
+  const { isFetching, data, fetchNextPage, refetch, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ["MyReservations"],
+      queryFn: ({ pageParam }) => {
+        const status = viewStatue === "all" ? null : viewStatue;
+        return getMyReservations({ size: 6, status, cursorId: pageParam });
+      },
+      initialPageParam: 0,
+      getNextPageParam: (lastPage) => lastPage.data.cursorId,
+      select: (data) => ({
+        pages: data?.pages.flatMap((page) => page.data.reservations),
+        pageParams: data?.pageParams,
+      }),
+    });
 
   useEffect(() => {
     refetch();
   }, [viewStatue]);
 
   const reservationData = data?.pages || [];
+  console.log(reservationData);
 
   return (
     <div>
@@ -37,16 +39,17 @@ function Reservations() {
           <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
           <ReservationFilter value={viewStatue} setValue={setViewStatue} />
         </div>
-        <div className="w-reservationBoxWidth bg-gnGray100">
-          {reservationData.length > 0 ? (
-            reservationData?.map((reservation) => (
-              <ReservationList key={reservation.id} data={reservation} />
-            ))
-          ) : (
-            <NoReservationList />
-          )}
-        </div>
-        <Link href="/test/activity">activity 이동</Link>
+        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
+          <div className="w-reservationBoxWidth bg-gnGray100">
+            {reservationData.length > 0 ? (
+              reservationData?.map((reservation) => (
+                <ReservationList key={reservation.id} data={reservation} />
+              ))
+            ) : (
+              <NoReservationList />
+            )}
+          </div>
+        </InfiniteScroll>
       </div>
     </div>
   );
