@@ -34,15 +34,25 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
     <div>
       <button
         onClick={handleDropdown}
-        className="radius flex h-14 w-40 items-center justify-between rounded-2xl border px-5 py-4"
+        className="radius flex h-14 w-40 items-center justify-between rounded-2xl border border-gnDarkGreen px-5 py-4 text-lg font-medium leading-normal text-gnDarkGreen"
       >
         {ReservationStatueList[value]}
-        {<Image alt="필터 이미지" src={ArrowDown} width={22} height={22} />}
+        {
+          <Image
+            alt="필터 화살표 이미지"
+            src={ArrowDown}
+            width={22}
+            height={22}
+          />
+        }
       </button>
       {isOpen && (
-        <div className="relative z-10 flex flex-col items-center justify-center">
+        <div className="relative z-10 flex flex-col items-center justify-center shadow-reservationBox">
           {filterList.map((item) => (
-            <button onClick={() => handleDropdownClick(item)}>
+            <button
+              onClick={() => handleDropdownClick(item)}
+              className="h-14 w-40 border border-gnGray300 bg-white text-lg font-medium leading-5"
+            >
               {ReservationStatueList[item]}
             </button>
           ))}

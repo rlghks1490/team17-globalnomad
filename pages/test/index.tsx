@@ -1,4 +1,4 @@
-import ReservationList from "@/Components/Common/ReservationList";
+import ReservationList from "@/Components/MyReservation/ReservationList";
 import NoReservationList from "@/Components/MyReservation/NoReservationList";
 import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
 import { getMyReservations } from "@/apis/myReservation/myReservation";
