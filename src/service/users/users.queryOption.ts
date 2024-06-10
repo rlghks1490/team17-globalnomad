@@ -1,4 +1,5 @@
 import usersService from "./users.service";
+import { UsersEditMyInformation, UsersProfileImageUrl } from "./users.type";
 
 const queryOptions = {
   usersSignup: {
@@ -10,12 +11,12 @@ const queryOptions = {
     queryFn: () => usersService.getUsersCheckMyInformation(),
   },
   usersEditMyInformation: {
-    mutationKey: ["usersEditMyInformation"],
-    mutationFn: () => usersService.patchUsersEditMyInformation(),
+    mutationKey: ["usersEditMyInformation","data"],
+    mutationFn: (data: UsersEditMyInformation) => usersService.patchUsersEditMyInformation(data),
   },
   usersProfileImageUrl: {
-    mutationKey: ["usersProfileImageUrl"],
-    mutationFn: () => usersService.postUsersProfileImageUrl(),
+    mutationKey: ["usersProfileImageUrl","data"],
+    mutationFn: (data: UsersProfileImageUrl ) => usersService.postUsersProfileImageUrl(data),
   },
 };
 
