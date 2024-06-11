@@ -1,4 +1,4 @@
-import { requestor } from "@/service/requestor";
+import { requestor, requestorWithFormData } from "@/service/requestor";
 import {
   ActivitiesCheck,
   ActivitiesDetailCheck,
@@ -40,8 +40,11 @@ class ActivitiesService {
     );
   }
 
-  postActivitiesImageUrl() {
-    return requestor.post<ActivitiesImageUrl>(`/activities/image`);
+  postActivitiesImageUrl(formData: FormData) {
+    return requestorWithFormData.post<ActivitiesImageUrl>(
+      `/activities/image`,
+      formData,
+    );
   }
 }
 

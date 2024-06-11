@@ -28,7 +28,8 @@ const queryOptions = {
   }),
   activitiesImageUrl: {
     mutationKey: ["activitiesImageUrl"],
-    mutationFn: () => ActivitiesService.postActivitiesImageUrl(),
+    mutationFn: (formData: FormData) =>
+      ActivitiesService.postActivitiesImageUrl(formData),
   },
 };
 

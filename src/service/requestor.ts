@@ -50,3 +50,12 @@ requestor.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+//이미지 업로드 시 사용할 requestor
+export const requestorWithFormData: AxiosInstance = axios.create({
+  ...axiosRequestConfig,
+  headers: {
+    ...axiosRequestConfig.headers,
+    "Content-Type": "multipart/form-data",
+  },
+});
