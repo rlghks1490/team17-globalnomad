@@ -11,8 +11,9 @@ class MyReservationsService {
   }
 
   patchMyReservationsCancel(reservationId: number) {
-    return requestor.delete<myReservationsCancel>(
+    return requestor.patch<myReservationsCancel>(
       `/my-reservations/${reservationId}`,
+      { status: "canceled" },
     );
   }
   postMyReservationsReviews(reservationId: number) {

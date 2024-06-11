@@ -2,12 +2,15 @@ import { Reservation } from "@/apis/myReservation/myReservation.type";
 import Image from "next/image";
 import React from "react";
 import ReservationStatue from "./ReservationStatus";
+import { useModal } from "@/hooks/useModal";
+import ModalReservationCancel from "../Modal/ModalReservationCancel";
 
 interface ReservationListProps {
   data: Reservation;
 }
 
 const ReservationList = ({ data }: ReservationListProps) => {
+  const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
   return (
     <div className="mb-6 flex h-reservationBoxHeight w-full shrink-0 gap-6 rounded-3xl shadow-reservationBox">
       <div>
@@ -35,9 +38,19 @@ const ReservationList = ({ data }: ReservationListProps) => {
             ₩{data.totalPrice}
           </p>
           {data.status === "pending" && (
-            <button className="h-10 w-36 divide-solid rounded-md border border-black px-3 py-2 text-base font-semibold">
+            <button
+              onClick={() => handleModalOpen()}
+              className="h-10 w-36 divide-solid rounded-md border border-black px-3 py-2 text-base font-semibold"
+            >
               예약취소
             </button>
+          )}
+          {isOpenModal && (
+            <ModalReservationCancel
+              isOpenModal={isOpenModal}
+              onClose={handleModalClose}
+              id={data.id}
+            />
           )}
           {data.status === "completed" && (
             <button className="h-10 w-36  rounded-md  bg-black px-3 py-2 text-base font-semibold text-white">
