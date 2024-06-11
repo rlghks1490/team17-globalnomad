@@ -84,7 +84,7 @@ const onSubmit = (formData: FormValues) => {
     <>
       <div className="flex px-20 gap-10">
         <ProfileModify />
-        <div className="flex flex-col w-full justify-center gap-10 py-10">
+        <div className="flex flex-col w-full gap-10 py-10 tablet:py-0 tablet:pb-10 h-screen">
           <div className="flex justify-between">
             <div className=" text-3xl font-bold ">내 정보</div>
             <button
