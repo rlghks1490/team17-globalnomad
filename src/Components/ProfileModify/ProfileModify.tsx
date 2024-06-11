@@ -20,10 +20,10 @@ const ProfileModify: React.FC = () => {
 
   return (
     <div className="flex justify-center gap-10 py-10">
-      <div className="flex h-[460px] w-full max-w-4xl">
-        <div className="flex w-64 flex-col gap-6 rounded-lg border bg-white p-6">
-          <div className="relative flex items-center space-x-3">
-            <button className=" relative flex flex-nowrap items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
+      <div className="flex h-[400px] w-full max-w-4xl">
+        <div className="flex w-64 flex-col rounded-lg border bg-white p-6">
+          <div className="relative flex items-center space-x-3 justify-center">
+            <button className=" relative flex flex-nowrap w-[160px] h-[160px] items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
               {data.profileImageUrl ? (
                 <img src={data.profileImageUrl} alt="profileImgUrl" />
               ) : (
@@ -33,13 +33,13 @@ const ProfileModify: React.FC = () => {
                 />
               )}
             </button>
-            <div className="absolute bottom-0 right-1 ">
+            <button className="absolute bottom-0 right-6 ">
               <img
                 className="rounded-full bg-gnDarkGreen p-2.5"
                 src="/icons/profileModifyIcon.svg"
                 alt="modifyIcon"
               ></img>
-            </div>
+            </button>
           </div>
           <div className="mt-6 space-y-1">
             <Link

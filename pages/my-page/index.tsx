@@ -2,10 +2,9 @@ import ProfileModify from "@/Components/ProfileModify/ProfileModify";
 import LoginInput from "@/Components/Input/LoginInput";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useForm } from "react-hook-form";
-import React, { useEffect } from "react";
 import { FormValues } from "@/apis/auth/auth.type";
 import { useUsersCheckMyInformation, useUsersEditMyInformation } from "@/service/users/useUsersService";
-import { disconnect } from "process";
+import { UsersEditMyInformation } from "@/service/users/users.type";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -43,7 +42,6 @@ const rules = {
 const index = () => {
   const { register,
           handleSubmit,
-          setValue,
           getValues,
           formState: {isValid, errors },
         } = useForm<FormValues>({ mode: "onChange"});
@@ -52,17 +50,17 @@ const index = () => {
   const { mutate: editUserInformation } = useUsersEditMyInformation();
 
 const onSubmit = (formData: FormValues) => {
-  const payload = {
+  const payload:{ nickname: string; newPassword: string; profileImageUrl?: string } = {
     nickname: formData.nickname || "",
-    profileImageUrl: "",
     newPassword: formData.password
   };
-  
-  editUserInformation(payload, {
+
+  editUserInformation(payload as UsersEditMyInformation, {
     onSuccess: () => {
       alert("정보가 성공적으로 수정되었습니다.");
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("에러 발생:", error);
       alert("정보 수정에 실패했습니다.");
     }
   });
@@ -88,12 +86,12 @@ const onSubmit = (formData: FormValues) => {
         <ProfileModify />
         <div className="flex flex-col w-full justify-center gap-10 py-10">
           <div className="flex justify-between">
-            <div>내 정보</div>
+            <div className=" text-3xl font-bold ">내 정보</div>
             <button
               type="submit"
               onClick={handleSubmit(onSubmit)}
               disabled={!isValid}
-              className="flex rounded-md active:bg-green-950 leading-6 font-bold flex-col items-end gap-6 py-2 px-4 bg-gnDarkGreen text-white ">
+              className="flex cursor-pointer rounded-md active:bg-green-950 leading-6 font-bold flex-col items-end gap-6 py-2 px-4 bg-gnDarkGreen text-white ">
               저장하기
             </button>
           </div>
@@ -117,10 +115,10 @@ const onSubmit = (formData: FormValues) => {
               <LoginInput
               label="비밀번호"
               type="password"
-              placeholder=""
+              placeholder="8자 이상 입력해 주세요"
               isError={!!errors.password}
               errorMessage={errors.password?.message}
-              {...register("nickname", rules.passwordRules)}
+              {...register("password", rules.passwordRules)}
               />
               <LoginInput
               label="비밀번호 확인"
