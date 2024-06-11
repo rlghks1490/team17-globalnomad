@@ -30,7 +30,6 @@ function Reservations() {
   }, [viewStatue]);
 
   const reservationData = data?.pages || [];
-  console.log(reservationData);
 
   return (
     <div>
