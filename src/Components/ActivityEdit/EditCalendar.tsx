@@ -2,6 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/locale";
+import React from "react";
 
 interface EditCalendarProps {
   selectedDate: Date;

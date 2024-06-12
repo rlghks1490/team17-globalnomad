@@ -25,7 +25,7 @@ interface formDataType {
 }
 
 const ActivityEditForm = () => {
-  const { data: details } = useActivitiesDetailCheck(915);
+  const { data: details } = useActivitiesDetailCheck(1148);
 
   const [formData, setFormData] = useState<formDataType>({
     title: "",
@@ -90,7 +90,12 @@ const ActivityEditForm = () => {
   };
 
   // 새로운 이미지 추가
-  const handleAddImage = () => {};
+  const handleAddImage = (imageUrl: string) => {
+    setFormData({
+      ...formData,
+      bannerImageUrl: imageUrl,
+    });
+  };
 
   console.log(formData);
 
@@ -118,7 +123,10 @@ const ActivityEditForm = () => {
         handleRemoveSchedule={handleRemoveSchedule}
         handleSchedulesToAdd={handleSchedulesToAdd}
       />
-      <ActivityEditImageUploader bannerImageUrl={details.data.bannerImageUrl} />
+      <ActivityEditImageUploader
+        bannerImageUrl={details.data.bannerImageUrl}
+        handleAddImage={handleAddImage}
+      />
     </div>
   );
 };

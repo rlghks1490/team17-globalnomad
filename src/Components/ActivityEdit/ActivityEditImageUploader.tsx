@@ -10,10 +10,12 @@ interface ActivityImageUrl {
 
 interface ActivityEditImageUploaderProps {
   bannerImageUrl: string;
+  handleAddImage: (imageUrl: string) => void;
 }
 
 const ActivityEditImageUploader = ({
   bannerImageUrl,
+  handleAddImage,
 }: ActivityEditImageUploaderProps) => {
   const [bannerImage, setBannerImage] = useState<string>(bannerImageUrl);
   const { mutate: uploadImage } = useActivitiesImageUrl();
@@ -28,6 +30,7 @@ const ActivityEditImageUploader = ({
       uploadImage(formData, {
         onSuccess: (response) => {
           setBannerImage(response.data.activityImageUrl);
+          handleAddImage(response.data.activityImageUrl);
         },
         onError: (error) => {
           console.error("Image upload failed:", error);
@@ -62,10 +65,10 @@ const ActivityEditImageUploader = ({
             </div>
           </label>
           <div className="relative h-[180px] w-[180px]">
-            <Image
+            {/* <Image
               // src={bannerImageUrl}
               src="/images/sampleBannerImage.jpeg"
-              alt="bannerImageUrl"
+              alt="bannerImage"
               fill
               style={{ objectFit: "cover" }}
               className="rounded-xl"
@@ -76,7 +79,24 @@ const ActivityEditImageUploader = ({
               width={40}
               height={40}
               className="absolute -right-4 -top-4"
+            /> */}
+            <Image
+              src={bannerImage}
+              alt="bannerImage"
+              fill
+              style={{ objectFit: "cover" }}
+              className="rounded-xl"
             />
+            <button>
+              <Image
+                src={CloseBtn_Large}
+                alt="closeBtn"
+                width={40}
+                height={40}
+                className="absolute -right-4 -top-4"
+                onClick={handleImageRemove}
+              />
+            </button>
           </div>
         </div>
       </div>
