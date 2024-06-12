@@ -89,8 +89,6 @@ const ActivityEditSchedule = ({
     handleSchedulesToAdd(newSchedules);
   };
 
-  console.log(newSchedule);
-
   return (
     <div className="flex flex-col gap-6">
       <label className="text-2xl font-bold text-gnDarkBlack">
@@ -176,7 +174,7 @@ const ActivityEditSchedule = ({
         ))}
       </div>
       {/* 추가한 새로운 스케쥴 */}
-      <div>
+      <div className="flex flex-col gap-[21px]">
         {addedSchedule.map((newSchedule, index) => (
           <div key={index} className="flex gap-5">
             <div className="text-gnDarkBalck w-[379px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">

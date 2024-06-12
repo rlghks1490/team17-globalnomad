@@ -14,8 +14,8 @@ class ActivitiesService {
     return requestor.get<ActivitiesCheck>(`/activities`);
   }
 
-  postActivitiesRegistration() {
-    return requestor.post<ActivitiesRegistration>(`/activities`);
+  postActivitiesRegistration(formData: ActivitiesRegistration) {
+    return requestor.post<ActivitiesRegistration>(`/activities`, formData);
   }
 
   getActivitiesDetailCheck(activityId: number) {

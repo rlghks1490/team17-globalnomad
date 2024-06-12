@@ -13,7 +13,7 @@ const EditCalendar = ({ selectedDate, setSelectedDate }: EditCalendarProps) => {
   return (
     <div>
       <DatePicker
-        className="flex cursor-pointer flex-row items-center rounded-md border border-black"
+        className="flex w-[377px] cursor-pointer flex-row items-center rounded-md border border-black"
         dateFormat="yyyy-MM-dd" // 날짜 형태
         showIcon
         toggleCalendarOnIconClick

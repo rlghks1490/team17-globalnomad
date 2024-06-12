@@ -102,9 +102,6 @@ const ActivityRegistSchedule = ({
               ))}
             </select>
           </div>
-          <div className="text-gnDarkBalck flex items-center justify-center text-xl font-bold">
-            ~
-          </div>
           <div className="flex flex-col gap-3.5">
             <label className="text-xl font-medium text-gnGray800">
               종료 시간
@@ -130,7 +127,7 @@ const ActivityRegistSchedule = ({
         </div>
       </div>
       <div className="border border-gnGray300"></div>
-      <div>
+      <div className="flex flex-col gap-[21px]">
         {addedSchedule.map((newSchedule, index) => (
           <div key={index} className="flex gap-5">
             <div className="text-gnDarkBalck w-[379px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">

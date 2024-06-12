@@ -2,7 +2,22 @@
 export interface ActivitiesCheck {}
 
 // 체험 등록 타입
-export interface ActivitiesRegistration {}
+export interface Schedule {
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface ActivitiesRegistration {
+  title: string;
+  category: string;
+  description: string;
+  price: number;
+  address: string;
+  schedules: Schedule[];
+  bannerImageUrl: string;
+  subImageUrls: string[];
+}
 
 // 체험 상세 조회 타입
 export interface ActivitySchedule {

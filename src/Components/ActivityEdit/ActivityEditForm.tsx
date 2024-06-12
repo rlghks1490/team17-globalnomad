@@ -2,8 +2,14 @@ import ActivityEditInfo from "./ActivityEditInfo";
 import ActivityEditSchedule from "./ActivityEditSchedule";
 import ActivityEditImageUploader from "./ActivityEditImageUploader";
 import { useEffect, useState } from "react";
-import { useActivitiesDetailCheck } from "@/service/activities/useActivitiesService";
+import {
+  useActivitiesDetailCheck,
+  useActivitiesRegistration,
+} from "@/service/activities/useActivitiesService";
 import { ActivitiesDetailCheck } from "@/service/activities/activities.type";
+import { useModal } from "@/hooks/useModal";
+import { usePatchMyActivities } from "@/service/myActivities/useMyActiviesService";
+import ModalAlert from "../Modal/ModalAlert";
 
 interface newSchedule {
   date: string;
@@ -18,7 +24,7 @@ interface formDataType {
   price: number;
   address: string;
   bannerImageUrl: string;
-  subImageIdsToRemove: string[];
+  subImageIdsToRemove: number[];
   subImageUrlsToAdd: string[];
   scheduleIdsToRemove: number[];
   schedulesToAdd: newSchedule[];
@@ -57,6 +63,21 @@ const ActivityEditForm = () => {
     }
   }, [details]);
 
+  const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
+  const { mutate: modify } = usePatchMyActivities(1148);
+
+  const handleActivityModify = (formData: formDataType) => {
+    modify(formData, {
+      onSuccess: () => {
+        handleModalOpen();
+        console.log("등록 성공!");
+      },
+      onError: (error) => {
+        console.error("등록에 실패했습니다.", error);
+      },
+    });
+  };
+
   // Info(title, category, description, price, address) 변경 시 formData에 적용하는 함수
   const handleInfoChange = (name: string, value: string | number) => {
     setFormData((prevFormData) => ({
@@ -89,15 +110,29 @@ const ActivityEditForm = () => {
     });
   };
 
-  // 새로운 이미지 추가
-  const handleAddImage = (imageUrl: string) => {
+  // 배너 이미지 변경
+  const handleChangeBannerImage = (imageUrl: string) => {
     setFormData({
       ...formData,
       bannerImageUrl: imageUrl,
     });
   };
 
-  console.log(formData);
+  //서브 이미지 변경(추가 및 제거)
+  const handleChangeSubImages = (imageUrl: string[]) => {
+    setFormData({
+      ...formData,
+      subImageUrlsToAdd: imageUrl,
+    });
+  };
+
+  //원래 있던 서브 이미지(디폴트) 제거
+  const handleRemoveDefaultSubImages = (ids: number[]) => {
+    setFormData({
+      ...formData,
+      subImageIdsToRemove: ids,
+    });
+  };
 
   if (!details) return null;
 
@@ -105,7 +140,10 @@ const ActivityEditForm = () => {
     <div className="flex w-[792px] flex-col gap-6">
       <div className="flex justify-between">
         <h1 className="text-4xl font-bold">내 체험 수정</h1>
-        <button className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white">
+        <button
+          className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
+          onClick={() => handleActivityModify(formData)}
+        >
           수정하기
         </button>
       </div>
@@ -125,8 +163,18 @@ const ActivityEditForm = () => {
       />
       <ActivityEditImageUploader
         bannerImageUrl={details.data.bannerImageUrl}
-        handleAddImage={handleAddImage}
+        subImagesUrl={details.data.subImages}
+        handleChangeBannerImage={handleChangeBannerImage}
+        handleChangeSubImages={handleChangeSubImages}
+        handleRemoveDefaultSubImages={handleRemoveDefaultSubImages}
       />
+      {isOpenModal && (
+        <ModalAlert
+          isOpenModal={isOpenModal}
+          message={"등록에 성공했습니다."}
+          onClose={handleModalClose}
+        />
+      )}
     </div>
   );
 };

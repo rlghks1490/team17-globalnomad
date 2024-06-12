@@ -32,7 +32,7 @@ const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
         <input
           className="rounded border border-gnGray700 bg-white px-4 py-[15px] text-base font-normal"
           placeholder="가격"
-          onBlur={(e) => handleFormData("price", e.target.value)}
+          onBlur={(e) => handleFormData("price", parseInt(e.target.value))}
         />
       </div>
       <div className="flex flex-col gap-4">
