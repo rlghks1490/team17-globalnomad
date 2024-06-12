@@ -4,6 +4,7 @@ import React from "react";
 import ReservationStatue from "./ReservationStatus";
 import { useModal } from "@/hooks/useModal";
 import ModalReservationCancel from "../Modal/ModalReservationCancel";
+import ModalReview from "../Modal/ModalReview";
 
 interface ReservationListProps {
   data: Reservation;
@@ -11,6 +12,7 @@ interface ReservationListProps {
 
 const ReservationList = ({ data }: ReservationListProps) => {
   const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
+
   return (
     <div className="mb-6 flex h-reservationBoxHeight w-full shrink-0 gap-6 rounded-3xl shadow-reservationBox">
       <div>
@@ -56,6 +58,13 @@ const ReservationList = ({ data }: ReservationListProps) => {
             <button className="h-10 w-36  rounded-md  bg-black px-3 py-2 text-base font-semibold text-white">
               후기작성
             </button>
+          )}
+          {isOpenModal && (
+            <ModalReview
+              isOpenModal={isOpenModal}
+              onClose={handleModalClose}
+              data={data}
+            />
           )}
         </div>
       </div>

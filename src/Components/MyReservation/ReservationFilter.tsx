@@ -25,7 +25,7 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
     setIsOpen(!isOpen);
   };
 
-  const handleDropdownClick = (item: any) => {
+  const handleDropdownClick = (item: ReservationStatus) => {
     setValue(item);
     setIsOpen(false);
   };

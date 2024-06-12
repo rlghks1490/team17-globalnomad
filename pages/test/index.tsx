@@ -10,24 +10,19 @@ import InfiniteScroll from "react-infinite-scroller";
 function Reservations() {
   const [viewStatue, setViewStatue] = useState<ReservationStatus>("all");
 
-  const { isFetching, data, fetchNextPage, refetch, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ["MyReservations"],
-      queryFn: ({ pageParam }) => {
-        const status = viewStatue === "all" ? null : viewStatue;
-        return getMyReservations({ size: 6, status, cursorId: pageParam });
-      },
-      initialPageParam: 0,
-      getNextPageParam: (lastPage) => lastPage.data.cursorId,
-      select: (data) => ({
-        pages: data?.pages.flatMap((page) => page.data.reservations),
-        pageParams: data?.pageParams,
-      }),
-    });
-
-  useEffect(() => {
-    refetch();
-  }, [viewStatue]);
+  const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+    queryKey: ["MyReservations", viewStatue],
+    queryFn: ({ pageParam }) => {
+      const status = viewStatue === "all" ? null : viewStatue;
+      return getMyReservations({ size: 6, status, cursorId: pageParam });
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.data.cursorId,
+    select: (data) => ({
+      pages: data?.pages.flatMap((page) => page.data.reservations),
+      pageParams: data?.pageParams,
+    }),
+  });
 
   const reservationData = data?.pages || [];
 
