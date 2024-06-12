@@ -15,12 +15,12 @@ class UsersService {
     return requestor.get<UsersCheckMyInformation>(`/users/me`);
   }
 
-  patchUsersEditMyInformation() {
-    return requestor.patch<UsersEditMyInformation>(`/users/me`);
+  patchUsersEditMyInformation(data: UsersEditMyInformation) {
+    return requestor.patch<UsersEditMyInformation>(`/users/me`, data);
   }
 
-  postUsersProfileImageUrl() {
-    return requestor.post<UsersProfileImageUrl>(`/users/me/image`);
+  postUsersProfileImageUrl(data: UsersProfileImageUrl) {
+    return requestor.post<UsersProfileImageUrl>(`/users/me/image`, data);
   }
 }
 
