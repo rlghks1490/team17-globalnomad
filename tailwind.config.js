@@ -5,10 +5,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      tablet: { max: "1200px" },
+      mobile: { max: "768px" },
+    },
     extend: {
       colors: {
         gnDarkBlack: "#1B1B1B",
-        gnLightBlack: "#333236",
+        gnLightBlack: "#112211",
 
         gnGray100: "#FAFAFA",
         gnGray200: "#EEEEEE",
@@ -21,6 +25,7 @@ module.exports = {
 
         gnDarkGreen: "#0B3B2D",
         gnGreen: "#00AC07",
+        gnSoftGreen: "#CED8D5",
         gnLightGreen: "#F1EFFD",
 
         gnDarkRed: "#FF472E",
@@ -37,6 +42,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Pretendard", "ui-sans-serif", "system-ui"],
+      },
+      width: {
+        loginForm: "40rem",
       },
     },
   },
