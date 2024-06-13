@@ -24,16 +24,18 @@ const ReservationList = ({ data }: ReservationListProps) => {
     handleModalClose,
   } = useModal();
 
+  const bannerImage = data.activity.bannerImageUrl;
+
   return (
-    <div className="mb-6 flex h-reservationBoxHeight w-full shrink-0 gap-6 rounded-3xl shadow-reservationBox">
+    <div className="shrink- 0 mb-6 flex h-reservationBoxHeight w-full gap-6 rounded-3xl shadow-reservationBox">
       <div>
         <Image
-          src={data.activity.bannerImageUrl}
+          src={bannerImage}
           width={204}
           height={204}
           alt="내 예약내역 배너이미지"
-          priority={true}
           className="h-full rounded-reservationRadius"
+          priority
         />
       </div>
       <div className="my-6 flex flex-col">
@@ -48,7 +50,7 @@ const ReservationList = ({ data }: ReservationListProps) => {
         </div>
         <div className="flex w-reservationButtonWidth justify-between">
           <p className="text-2xl font-medium leading-normal">
-            ₩{data.totalPrice}
+            ₩{data.totalPrice.toLocaleString("ko-KR")}
           </p>
           {data.status === "pending" && !isReservationCancelled && (
             <button

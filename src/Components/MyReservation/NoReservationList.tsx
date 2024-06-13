@@ -11,6 +11,7 @@ const NoReservationList = () => {
           alt="NoReservation 이미지"
           width={130}
           height={177}
+          priority
         />
         <p>아직 등록된 체험이 없어요.</p>
       </div>
