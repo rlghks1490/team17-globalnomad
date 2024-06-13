@@ -7,7 +7,7 @@ function MyPageLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <LoginHeader />
-      <div className="flex justify-center gap-6">
+      <div className="mt-myPageTopMargin flex justify-center gap-6">
         <ProfileModify />
         <main>{children}</main>
       </div>

@@ -8,12 +8,12 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 
 function Reservations() {
-  const [viewStatue, setViewStatue] = useState<ReservationStatus>("all");
+  const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
 
   const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["MyReservations", viewStatue],
+    queryKey: ["MyReservations", viewStatus],
     queryFn: ({ pageParam }) => {
-      const status = viewStatue === "all" ? null : viewStatue;
+      const status = viewStatus === "all" ? null : viewStatus;
       return getMyReservations({ size: 6, status, cursorId: pageParam });
     },
     initialPageParam: 0,
@@ -31,7 +31,7 @@ function Reservations() {
       <div>
         <div className="flex justify-between">
           <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
-          <ReservationFilter value={viewStatue} setValue={setViewStatue} />
+          <ReservationFilter value={viewStatus} setValue={setViewStatus} />
         </div>
         <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
           <div className="w-reservationBoxWidth bg-gnGray100">

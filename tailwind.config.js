@@ -59,6 +59,9 @@ module.exports = {
       borderRadius: {
         reservationRadius: "2.4rem 0 0 2.4rem",
       },
+      margin: {
+        myPageTopMargin: "4.5rem",
+      },
     },
   },
   plugins: [],
