@@ -8,12 +8,14 @@ interface ModalReservationCancelProps {
   isOpenModal: boolean;
   onClose: () => void;
   id: number;
+  setIsReservationCancelled: (isReservationCancelled: boolean) => void;
 }
 
 const ModalReservationCancel = ({
   isOpenModal,
   onClose,
   id,
+  setIsReservationCancelled,
 }: ModalReservationCancelProps) => {
   const { mutate: reservationCancel } = useMyReservationsCancel(id);
   console.log(reservationCancel);
@@ -21,6 +23,7 @@ const ModalReservationCancel = ({
   const handleReservationCancel = () => {
     reservationCancel();
     onClose();
+    setIsReservationCancelled(true);
   };
 
   useEffect(() => {});

@@ -47,6 +47,7 @@ module.exports = {
         loginForm: "40rem",
         reservationBoxWidth: "768px",
         reservationButtonWidth: "540px",
+        myInfoBoxWidth: "49.5rem",
       },
       height: {
         sidebar: "432px",

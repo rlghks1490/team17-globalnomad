@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
     Component.getLayout ||
     ((page) => {
-      if (router.pathname.startsWith("/test")) {
+      if (router.pathname.startsWith("/my-page")) {
         return <MyPageLayout>{page}</MyPageLayout>;
       }
       return <MainLayout>{page}</MainLayout>;

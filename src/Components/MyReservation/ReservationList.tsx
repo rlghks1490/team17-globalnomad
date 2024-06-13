@@ -1,6 +1,6 @@
 import { Reservation } from "@/apis/myReservation/myReservation.type";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import ReservationStatue from "./ReservationStatus";
 import { useModal } from "@/hooks/useModal";
 import ModalReservationCancel from "../Modal/ModalReservationCancel";
@@ -11,7 +11,18 @@ interface ReservationListProps {
 }
 
 const ReservationList = ({ data }: ReservationListProps) => {
-  const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
+  const [isReviewSubmitted, setIsReviewSubmitted] = useState(
+    data.reviewSubmitted,
+  );
+  const [isReservationCancelled, setIsReservationCancelled] = useState(false);
+
+  const {
+    isOpenModal,
+    isOpenReviewModal,
+    handleReviewModalOpen,
+    handleModalOpen,
+    handleModalClose,
+  } = useModal();
 
   return (
     <div className="mb-6 flex h-reservationBoxHeight w-full shrink-0 gap-6 rounded-3xl shadow-reservationBox">
@@ -39,10 +50,10 @@ const ReservationList = ({ data }: ReservationListProps) => {
           <p className="text-2xl font-medium leading-normal">
             ₩{data.totalPrice}
           </p>
-          {data.status === "pending" && (
+          {data.status === "pending" && !isReservationCancelled && (
             <button
               onClick={() => handleModalOpen()}
-              className="h-10 w-36 divide-solid rounded-md border border-black px-3 py-2 text-base font-semibold"
+              className="mr-6 h-10 w-36 divide-solid rounded-md border border-black px-3 py-2 text-base font-semibold"
             >
               예약취소
             </button>
@@ -52,16 +63,22 @@ const ReservationList = ({ data }: ReservationListProps) => {
               isOpenModal={isOpenModal}
               onClose={handleModalClose}
               id={data.id}
+              setIsReservationCancelled={setIsReservationCancelled}
             />
           )}
-          {data.status === "completed" && (
-            <button className="h-10 w-36  rounded-md  bg-black px-3 py-2 text-base font-semibold text-white">
+          {data.status === "completed" && !isReviewSubmitted && (
+            <button
+              disabled={isReviewSubmitted}
+              onClick={() => handleReviewModalOpen()}
+              className="mr-6 h-10  w-36  rounded-md bg-black px-3 py-2 text-base font-semibold text-white"
+            >
               후기작성
             </button>
           )}
-          {isOpenModal && (
+          {isOpenReviewModal && (
             <ModalReview
-              isOpenModal={isOpenModal}
+              setIsReviewSubmitted={setIsReviewSubmitted}
+              isOpenModal={isOpenReviewModal}
               onClose={handleModalClose}
               data={data}
             />
