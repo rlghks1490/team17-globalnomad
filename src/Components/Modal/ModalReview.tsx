@@ -24,8 +24,6 @@ const ModalReview = ({
   const [content, setContent] = useState("");
   const reservationId = data.id;
 
-  console.log(rating, content);
-
   const { mutate: reservationReview } = useMyReservationsReviews(
     reservationId,
     rating,
@@ -76,7 +74,9 @@ const ModalReview = ({
                   {data.headCount}명
                 </div>
                 <div className="h-px border border-gnDarkBlack border-opacity-10"></div>
-                <div className="text-[32px] font-bold">{data.totalPrice}</div>
+                <div className="text-[32px] font-bold">
+                  ₩{data.totalPrice.toLocaleString("ko-KR")}
+                </div>
               </div>
             </div>
             <form onSubmit={handleReviewSubmit}>
