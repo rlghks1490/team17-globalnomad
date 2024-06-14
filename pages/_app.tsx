@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import { UserProvider } from "@/context/UserContext";
 
 // 각 페이지에서 불러와서 쓸 '레이아웃이 적용된 페이지'의 type
 type NextPageWithLayout = NextPage & {
@@ -34,8 +35,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        {getLayout(<Component {...pageProps} />)}
-        <ReactQueryDevtools initialIsOpen={false} />
+        <UserProvider>
+          {getLayout(<Component {...pageProps} />)}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </UserProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
