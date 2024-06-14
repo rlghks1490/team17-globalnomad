@@ -1,5 +1,6 @@
 import { requestor } from "@/service/requestor";
 import {
+  MyReservationReviewsReq,
   MyReservationsCheck,
   myReservationsCancel,
   myReservationsReviews,
@@ -11,13 +12,19 @@ class MyReservationsService {
   }
 
   patchMyReservationsCancel(reservationId: number) {
-    return requestor.delete<myReservationsCancel>(
+    return requestor.patch<myReservationsCancel>(
       `/my-reservations/${reservationId}`,
+      { status: "canceled" },
     );
   }
-  postMyReservationsReviews(reservationId: number) {
-    return requestor.delete<myReservationsReviews>(
+  postMyReservationsReviews(
+    reservationId: number,
+    rating: number,
+    content: string,
+  ) {
+    return requestor.post<MyReservationReviewsReq>(
       `/my-reservations/${reservationId}/reviews`,
+      { rating, content },
     );
   }
 }

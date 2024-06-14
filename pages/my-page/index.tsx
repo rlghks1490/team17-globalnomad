@@ -3,7 +3,10 @@ import LoginInput from "@/Components/Input/LoginInput";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/apis/auth/auth.type";
-import { useUsersCheckMyInformation, useUsersEditMyInformation } from "@/service/users/useUsersService";
+import {
+  useUsersCheckMyInformation,
+  useUsersEditMyInformation,
+} from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
@@ -36,35 +39,40 @@ const rules = {
   },
   passwordConfirm: {
     required: passwordConfirm.errorMessage.confirm,
-  }
+  },
 };
 
 const index = () => {
-  const { register,
-          handleSubmit,
-          getValues,
-          formState: {isValid, errors },
-        } = useForm<FormValues>({ mode: "onChange"});
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { isValid, errors },
+  } = useForm<FormValues>({ mode: "onChange" });
 
-  const { data: response, isLoading, isError} = useUsersCheckMyInformation();
+  const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { mutate: editUserInformation } = useUsersEditMyInformation();
 
-const onSubmit = (formData: FormValues) => {
-  const payload:{ nickname: string; newPassword: string; profileImageUrl?: string } = {
-    nickname: formData.nickname || "",
-    newPassword: formData.password
-  };
+  const onSubmit = (formData: FormValues) => {
+    const payload: {
+      nickname: string;
+      newPassword: string;
+      profileImageUrl?: string;
+    } = {
+      nickname: formData.nickname || "",
+      newPassword: formData.password,
+    };
 
-  editUserInformation(payload as UsersEditMyInformation, {
-    onSuccess: () => {
-      alert("정보가 성공적으로 수정되었습니다.");
-    },
-    onError: (error) => {
-      console.error("에러 발생:", error);
-      alert("정보 수정에 실패했습니다.");
-    }
-  });
-};
+    editUserInformation(payload as UsersEditMyInformation, {
+      onSuccess: () => {
+        alert("정보가 성공적으로 수정되었습니다.");
+      },
+      onError: (error) => {
+        console.error("에러 발생:", error);
+        alert("정보 수정에 실패했습니다.");
+      },
+    });
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -82,16 +90,16 @@ const onSubmit = (formData: FormValues) => {
 
   return (
     <>
-      <div className="flex px-20 gap-10">
-        <ProfileModify />
-        <div className="flex flex-col w-full gap-10 py-10 tablet:py-0 tablet:pb-10 h-screen">
+      <div className="w-myInfoBoxWidth flex gap-10">
+        <div className="flex h-screen w-full flex-col gap-10  tablet:pb-10">
           <div className="flex justify-between">
             <div className=" text-3xl font-bold ">내 정보</div>
             <button
               type="submit"
               onClick={handleSubmit(onSubmit)}
               disabled={!isValid}
-              className="flex cursor-pointer rounded-md active:bg-green-950 leading-6 font-bold flex-col items-end gap-6 py-2 px-4 bg-gnDarkGreen text-white ">
+              className="flex cursor-pointer flex-col items-end gap-6 rounded-md bg-gnDarkGreen px-4 py-2 font-bold leading-6 text-white active:bg-green-950 "
+            >
               저장하기
             </button>
           </div>
@@ -103,24 +111,24 @@ const onSubmit = (formData: FormValues) => {
               isError={!!errors.nickname}
               errorMessage={errors.nickname?.message}
               {...register("nickname", rules.nicknameRules)}
-              />
-              <LoginInput
+            />
+            <LoginInput
               label="이메일"
               type="email"
               placeholder={data.email}
               isError={!!errors.email}
               errorMessage={errors.email?.message}
               {...register("email", rules.emailRules)}
-              />
-              <LoginInput
+            />
+            <LoginInput
               label="비밀번호"
               type="password"
               placeholder="8자 이상 입력해 주세요"
               isError={!!errors.password}
               errorMessage={errors.password?.message}
               {...register("password", rules.passwordRules)}
-              />
-              <LoginInput
+            />
+            <LoginInput
               label="비밀번호 확인"
               type="password"
               placeholder="비밀번호를 한번 더 입력해 주세요"
@@ -131,12 +139,13 @@ const onSubmit = (formData: FormValues) => {
                   notMatch: (value) => {
                     const { password } = getValues();
                     return (
-                      password === value || passwordConfirm?.errorMessage.confirm
+                      password === value ||
+                      passwordConfirm?.errorMessage.confirm
                     );
                   },
                 },
               })}
-              />
+            />
           </form>
         </div>
       </div>
