@@ -1,4 +1,5 @@
 import ActivitiesService from "./activities.service";
+import { ActivitiesRegistration } from "./activities.type";
 
 const queryOptions = {
   activitiesCheck: {
@@ -7,7 +8,8 @@ const queryOptions = {
   },
   activitiesRegistration: {
     mutationKey: ["ActivitiesRegistration"],
-    mutationFn: () => ActivitiesService.postActivitiesRegistration(),
+    mutationFn: (formData: ActivitiesRegistration) =>
+      ActivitiesService.postActivitiesRegistration(formData),
   },
   activitiesDetailCheck: (activityId: number) => ({
     queryKey: ["activitiesDetailCheck", "activityId"],
@@ -28,7 +30,8 @@ const queryOptions = {
   }),
   activitiesImageUrl: {
     mutationKey: ["activitiesImageUrl"],
-    mutationFn: () => ActivitiesService.postActivitiesImageUrl(),
+    mutationFn: (formData: FormData) =>
+      ActivitiesService.postActivitiesImageUrl(formData),
   },
 };
 

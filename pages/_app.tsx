@@ -1,3 +1,4 @@
+
 import { AuthProvider } from "@/context/Authcontext";
 import MainLayout from "@/layouts/MainLayout";
 import "@/styles/globals.css";
@@ -5,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-
 // 각 페이지에서 불러와서 쓸 '레이아웃이 적용된 페이지'의 type
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -27,6 +27,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         {getLayout(<Component {...pageProps} />)}
         <ReactQueryDevtools initialIsOpen={false} />
       </AuthProvider>
+
     </QueryClientProvider>
   );
 }

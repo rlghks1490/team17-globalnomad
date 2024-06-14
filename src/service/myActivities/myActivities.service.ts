@@ -45,8 +45,11 @@ class MyActivitiesService {
     return requestor.delete<deleteMyActivities>(`/my-activities/${activityId}`);
   }
 
-  patchMyActivities(activityId: number) {
-    return requestor.patch<patchMyActivities>(`/my-activities/${activityId}`);
+  patchMyActivities(activityId: number, formData: patchMyActivities) {
+    return requestor.patch<patchMyActivities>(
+      `/my-activities/${activityId}`,
+      formData,
+    );
   }
 }
 

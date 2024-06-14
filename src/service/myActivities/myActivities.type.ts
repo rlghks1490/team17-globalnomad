@@ -35,5 +35,22 @@ export interface MyActivitiesUpdateReservationStatus {}
 // 내 체험 삭제
 export interface deleteMyActivities {}
 
-//내 체험 수정
-export interface patchMyActivities {}
+// 내 체험 수정
+export interface newSchedule {
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface patchMyActivities {
+  title: string;
+  category: string;
+  description: string;
+  price: number;
+  address: string;
+  bannerImageUrl: string;
+  subImageIdsToRemove: number[];
+  subImageUrlsToAdd: string[];
+  scheduleIdsToRemove: number[];
+  schedulesToAdd: newSchedule[];
+}
