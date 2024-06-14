@@ -90,7 +90,6 @@ const ProfileModify = ({
                 className="rounded-full bg-gnDarkGreen p-2.5"
                 src="/icons/profileModifyIcon.svg"
                 alt="modifyIcon"
-                alt="modifyIcon"
               ></img>
             </label>
           </div>
