@@ -19,11 +19,11 @@ const ProfileModify: React.FC = () => {
   const data = response.data;
 
   return (
-    <div className="flex justify-center gap-10 py-10 tablet:py-0 ">
+    <div className="flex justify-center gap-10">
       <div className="flex h-[400px] max-w-4xl tablet:w-[250px] ">
         <div className="flex w-[380px] flex-col rounded-lg border bg-white p-6">
-          <div className="relative flex items-center space-x-3 justify-center">
-            <button className=" relative flex flex-nowrap w-[160px] h-[160px] items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
+          <div className="relative flex items-center justify-center space-x-3">
+            <button className=" relative flex h-[160px] w-[160px] flex-nowrap items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
               {data.profileImageUrl ? (
                 <img src={data.profileImageUrl} alt="profileImgUrl" />
               ) : (
@@ -37,14 +37,14 @@ const ProfileModify: React.FC = () => {
               <img
                 className="rounded-full bg-gnDarkGreen p-2.5"
                 src="/icons/profileModifyIcon.svg"
-                alt="modifyIcon" 
+                alt="modifyIcon"
               ></img>
             </button>
           </div>
           <div className="mt-6 space-y-1">
             <Link
-              href="#"
-              className="block rounded-xl bg-gnSoftGreen px-3 py-2 text-left font-bold text-black"
+              href="/my-page"
+              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black "
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
@@ -52,8 +52,8 @@ const ProfileModify: React.FC = () => {
               </div>
             </Link>
             <Link
-              href="#"
-              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gray-100"
+              href="/my-page/reservations"
+              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black "
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
@@ -66,7 +66,7 @@ const ProfileModify: React.FC = () => {
             </Link>
             <Link
               href="#"
-              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gray-100"
+              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
@@ -76,7 +76,7 @@ const ProfileModify: React.FC = () => {
             </Link>
             <Link
               href="#"
-              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gray-100"
+              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">

@@ -71,73 +71,79 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center pt-24">
-      <div>
-        <Link href="/">
-          <img src="/icons/logo.svg" alt="글로벌노마드 로고 이미지" />
-        </Link>
-      </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="mt-10 flex w-loginForm flex-col gap-7"
-      >
-        <LoginInput
-          label="이메일"
-          type="email"
-          placeholder="이메일을 입력해 주세요"
-          isError={!!errors.email}
-          errorMessage={errors.email?.message}
-          {...register("email", rules.emailRules)}
-        />
-        <LoginInput
-          label="닉네임"
-          type="text"
-          placeholder="닉네임을 입력해 주세요"
-          isError={!!errors.nickname}
-          errorMessage={errors.nickname?.message}
-          {...register("nickname", rules.nicknameRules)}
-        />
-        <LoginInput
-          label="비밀번호"
-          type="password"
-          placeholder="비밀번호를 입력해 주세요"
-          isError={!!errors.password}
-          errorMessage={errors.password?.message}
-          {...register("password", rules.passwordRules)}
-        />
-        <LoginInput
-          label="비밀번호 확인"
-          type="password"
-          placeholder="비밀번호를 한번 더 입력해 주세요"
-          isError={!!errors.passwordConfirm}
-          errorMessage={errors.passwordConfirm?.message}
-          {...register("passwordConfirm", {
-            validate: {
-              notMatch: (value) => {
-                const { password } = getValues();
-                return (
-                  password === value || passwordConfirm?.errorMessage.confirm
-                );
+    <div className="flex items-center justify-center">
+      <div className="flex w-loginForm flex-col items-center pt-24">
+        <div>
+          <Link href="/">
+            <img
+              src="/icons/logo.svg"
+              alt="글로벌노마드 로고 이미지"
+              className="mobile:w-loginLogo"
+            />
+          </Link>
+        </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mt-10 flex w-full flex-col gap-7 mobile:min-w-80 mobile:px-3"
+        >
+          <LoginInput
+            label="이메일"
+            type="email"
+            placeholder="이메일을 입력해 주세요"
+            isError={!!errors.email}
+            errorMessage={errors.email?.message}
+            {...register("email", rules.emailRules)}
+          />
+          <LoginInput
+            label="닉네임"
+            type="text"
+            placeholder="닉네임을 입력해 주세요"
+            isError={!!errors.nickname}
+            errorMessage={errors.nickname?.message}
+            {...register("nickname", rules.nicknameRules)}
+          />
+          <LoginInput
+            label="비밀번호"
+            type="password"
+            placeholder="비밀번호를 입력해 주세요"
+            isError={!!errors.password}
+            errorMessage={errors.password?.message}
+            {...register("password", rules.passwordRules)}
+          />
+          <LoginInput
+            label="비밀번호 확인"
+            type="password"
+            placeholder="비밀번호를 한번 더 입력해 주세요"
+            isError={!!errors.passwordConfirm}
+            errorMessage={errors.passwordConfirm?.message}
+            {...register("passwordConfirm", {
+              validate: {
+                notMatch: (value) => {
+                  const { password } = getValues();
+                  return (
+                    password === value || passwordConfirm?.errorMessage.confirm
+                  );
+                },
               },
-            },
-          })}
-        />
-        <button
-          type="submit"
-          disabled={!isValid}
-          className={`h-12 rounded-md text-base font-bold text-white ${isValid ? "bg-gnDarkGreen" : "bg-gray-400"}`}
-        >
-          회원가입 하기
-        </button>
-      </form>
-      <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
-        <p>회원이신가요?</p>
-        <Link
-          href="/login"
-          className="text-base font-normal text-gnDarkGreen underline"
-        >
-          로그인하기
-        </Link>
+            })}
+          />
+          <button
+            type="submit"
+            disabled={!isValid}
+            className={`h-12 rounded-md text-base font-bold text-white ${isValid ? "bg-gnDarkGreen" : "bg-gray-400"}`}
+          >
+            회원가입 하기
+          </button>
+        </form>
+        <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
+          <p>회원이신가요?</p>
+          <Link
+            href="/login"
+            className="text-base font-normal text-gnDarkGreen underline"
+          >
+            로그인하기
+          </Link>
+        </div>
       </div>
     </div>
   );
