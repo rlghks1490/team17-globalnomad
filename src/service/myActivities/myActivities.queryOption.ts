@@ -1,4 +1,5 @@
 import myActivitiesService from "./myActivities.service";
+import { patchMyActivities } from "./myActivities.type";
 
 const queryOptions = {
   myActivitiesCheck: {
@@ -41,7 +42,8 @@ const queryOptions = {
   }),
   patchMyActivities: (activityId: number) => ({
     mutationKey: ["patchMyActivities", "activityId"],
-    mutationFn: () => myActivitiesService.patchMyActivities(activityId),
+    mutationFn: (formData: patchMyActivities) =>
+      myActivitiesService.patchMyActivities(activityId, formData),
   }),
 };
 
