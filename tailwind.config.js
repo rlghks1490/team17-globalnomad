@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     screens: {
-      tablet: { max: "1200px" },
+      tablet: { min: "769px", max: "1200px" },
       mobile: { max: "768px" },
     },
     extend: {
@@ -45,6 +45,29 @@ module.exports = {
       },
       width: {
         loginForm: "40rem",
+        reservationBoxWidth: "49.5rem",
+        reservationButtonWidth: "540px",
+        myInfoBoxWidth: "49.5rem",
+        loginLogo: "16.875rem",
+        mLoginForm: "21.875rem",
+        reservationTablet: "26.813rem", //429px
+        reservationImage: "12.75rem", //204px
+        reservationImageTablet: "9.813rem", //157px
+      },
+      height: {
+        sidebar: "432px",
+        reservationBoxHeight: "12.75rem", //204px
+        reservationImage: "12.75rem",
+        reservationImageTablet: "9.813rem", //157px
+      },
+      boxShadow: {
+        reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",
+      },
+      borderRadius: {
+        reservationRadius: "2.4rem 0 0 2.4rem",
+      },
+      margin: {
+        myPageTopMargin: "4.5rem",
       },
     },
   },

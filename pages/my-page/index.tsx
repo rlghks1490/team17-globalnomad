@@ -90,9 +90,8 @@ const index = () => {
 
   return (
     <>
-      <div className="flex gap-10 px-20">
-        <ProfileModify />
-        <div className="flex h-screen w-full flex-col gap-10 py-10 tablet:py-0 tablet:pb-10">
+      <div className="w-myInfoBoxWidth flex gap-10">
+        <div className="flex h-screen w-full flex-col gap-10  tablet:pb-10">
           <div className="flex justify-between">
             <div className=" text-3xl font-bold ">내 정보</div>
             <button
