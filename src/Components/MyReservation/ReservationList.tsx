@@ -27,14 +27,14 @@ const ReservationList = ({ data }: ReservationListProps) => {
   const bannerImage = data.activity.bannerImageUrl;
 
   return (
-    <div className="shrink- 0 mb-6 flex h-reservationBoxHeight w-full gap-6 rounded-3xl shadow-reservationBox">
-      <div>
+    <div className="shrink- 0 tablet: mb-6 flex h-reservationBoxHeight w-reservationBoxWidth gap-6 rounded-3xl shadow-reservationBox">
+      <div className=" h-reservationImage w-reservationImage">
         <Image
           src={bannerImage}
           width={204}
           height={204}
           alt="내 예약내역 배너이미지"
-          className="h-full rounded-reservationRadius"
+          className="tablet: h-full w-full rounded-reservationRadius"
           priority
         />
       </div>

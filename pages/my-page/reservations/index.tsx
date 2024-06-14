@@ -34,7 +34,7 @@ function Reservations() {
           <ReservationFilter value={viewStatus} setValue={setViewStatus} />
         </div>
         <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-          <div className="w-reservationBoxWidth bg-gnGray100">
+          <div className=" bg-gnGray100">
             {reservationData.length > 0 ? (
               reservationData?.map((reservation) => (
                 <ReservationList key={reservation.id} data={reservation} />
