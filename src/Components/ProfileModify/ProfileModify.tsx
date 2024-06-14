@@ -1,8 +1,54 @@
-import React from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useUsersCheckMyInformation } from "@/service/users/useUsersService";
+import {
+  useUsersCheckMyInformation,
+  useUsersProfileImageUrl,
+} from "@/service/users/useUsersService";
 
-const ProfileModify: React.FC = () => {
+interface UsersEditImageUploaderProps {
+  profileImageUrl: string;
+  handleChangeImage: (imageUrl: string) => void;
+}
+
+const ProfileModify = ({
+  profileImageUrl,
+  handleChangeImage,
+}: UsersEditImageUploaderProps) => {
+  const [profileImage, setProfileImage] = useState<string>(profileImageUrl);
+  const { mutate: uploadImage } = useUsersProfileImageUrl();
+
+  const handleImageUpload = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    isImageProfile: boolean = false,
+  ) => {
+    e.preventDefault();
+    const file = e.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("profileImage", file);
+
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      try {
+        uploadImage(formData, {
+          onSuccess: (response) => {
+            if (isImageProfile) {
+              setProfileImage(response.data.profileImageUrl);
+              handleChangeImage(response.data.profileImageUrl);
+            }
+          },
+          onError: (error) => {
+            console.error("Image upload failed:", error);
+          },
+        });
+      } catch (error) {
+        console.error("An unexpected error occurred:", error);
+      }
+    }
+  };
+
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
 
   if (isLoading) {
@@ -16,30 +62,36 @@ const ProfileModify: React.FC = () => {
   if (!response) {
     return <div>Not Found data...</div>;
   }
+
   const data = response.data;
 
   return (
     <div className="flex justify-center gap-10 py-10 tablet:py-0 ">
       <div className="flex h-[400px] max-w-4xl tablet:w-[250px] ">
         <div className="flex w-[380px] flex-col rounded-lg border bg-white p-6">
-          <div className="relative flex items-center space-x-3 justify-center">
-            <button className=" relative flex flex-nowrap w-[160px] h-[160px] items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
+          <div className="relative flex items-center justify-center space-x-3">
+            <label className=" relative flex h-[160px] w-[160px] flex-nowrap items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => handleImageUpload(e)}
+              />
               {data.profileImageUrl ? (
-                <img src={data.profileImageUrl} alt="profileImgUrl" />
+                <img src={profileImage} alt="profileImgUrl" />
               ) : (
                 <img
                   src="/images/defaultProfileImage.png"
                   alt="defaultProfileImage.png"
                 />
               )}
-            </button>
-            <button className="absolute bottom-0 right-20 tablet:right-4 ">
+            </label>
+            <label className="absolute bottom-0 right-20 tablet:right-4 ">
               <img
                 className="rounded-full bg-gnDarkGreen p-2.5"
                 src="/icons/profileModifyIcon.svg"
-                alt="modifyIcon" 
+                alt="modifyIcon"
               ></img>
-            </button>
+            </label>
           </div>
           <div className="mt-6 space-y-1">
             <Link

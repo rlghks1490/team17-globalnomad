@@ -1,4 +1,4 @@
-import { requestor } from "@/service/requestor";
+import { requestor, requestorWithFormData } from "@/service/requestor";
 import {
   UsersSignup,
   UsersCheckMyInformation,
@@ -19,8 +19,11 @@ class UsersService {
     return requestor.patch<UsersEditMyInformation>(`/users/me`, data);
   }
 
-  postUsersProfileImageUrl(data: UsersProfileImageUrl) {
-    return requestor.post<UsersProfileImageUrl>(`/users/me/image`, data);
+  postUsersProfileImageUrl(formData: FormData) {
+    return requestorWithFormData.post<UsersProfileImageUrl>(
+      `/users/me/image`,
+      formData,
+    );
   }
 }
 
