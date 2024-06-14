@@ -1,4 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 
 interface CommonModalProps {
   isOpenModal: boolean;
@@ -14,6 +16,7 @@ const CommonModal = ({
   size,
 }: CommonModalProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const modalRoot = document.getElementById("modal-root");
 
   useEffect(() => {
     function handleMouseDown(event: MouseEvent) {
@@ -24,9 +27,18 @@ const CommonModal = ({
         onClose();
       }
     }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+
     document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -38,16 +50,19 @@ const CommonModal = ({
 
   if (!isOpenModal) return null;
 
-  return (
-    <div className="fixed z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-80">
-      <div
-        className={`flex items-center justify-center rounded-lg bg-white p-6 ${modalSize[size]}`}
-        ref={wrapperRef}
-      >
-        {children}
-      </div>
-    </div>
-  );
+  return modalRoot
+    ? ReactDOM.createPortal(
+        <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-80">
+          <div
+            className={`flex items-center justify-center rounded-lg bg-white p-6 ${modalSize[size]}`}
+            ref={wrapperRef}
+          >
+            {children}
+          </div>
+        </div>,
+        modalRoot,
+      )
+    : null;
 };
 
 export default CommonModal;
