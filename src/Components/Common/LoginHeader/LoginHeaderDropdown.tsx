@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUsersCheckMyInformation } from "@/service/users/useUsersService";
 import Link from "next/link";
 import { useAuth } from "@/context/Authcontext";
@@ -9,7 +9,13 @@ const LoginHeaderDropdown: React.FC = () => {
   const { signOut } = useAuth();
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const [profileImage, setProfileImage] = useState<string>("");
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    if (response && response.data) {
+      setUser(response.data);
+    }
+  }, [response, setUser]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
