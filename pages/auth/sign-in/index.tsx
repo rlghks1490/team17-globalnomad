@@ -30,7 +30,7 @@ const rules = {
   },
 };
 
-const Login = () => {
+const SignIn = () => {
   const { signIn } = useAuth();
 
   const { formState, register, handleSubmit } = useForm<FormValues>({
@@ -91,7 +91,7 @@ const Login = () => {
         <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
           <p>회원이 아니신가요?</p>
           <Link
-            href="/signup"
+            href="/auth/sign-up"
             className="text-base font-normal text-gnDarkGreen underline"
           >
             회원가입
@@ -102,8 +102,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
 
-Login.getLayout = function getLayout(page: React.ReactNode) {
+SignIn.getLayout = function getLayout(page: React.ReactNode) {
   return <EmptyLayout>{page}</EmptyLayout>;
 };
