@@ -9,7 +9,7 @@ const IndexPage = () => {
     return (
       <>
         <div>안녕하세요!! {user.user.nickname}님!!</div>
-        <Link href="/test">test로 이동</Link>
+        <Link href="/my-page">test로 이동</Link>
       </>
     );
   } else {
