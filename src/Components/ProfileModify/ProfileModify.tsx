@@ -65,7 +65,7 @@ const ProfileModify: React.FC = () => {
               </div>
             </Link>
             <Link
-              href="#"
+              href="/my-page/activities"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
               prefetch={false}
             >

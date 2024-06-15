@@ -53,12 +53,15 @@ module.exports = {
         reservationTablet: "26.813rem", //429px
         reservationImage: "12.75rem", //204px
         reservationImageTablet: "9.813rem", //157px
+        activityButton: "7.5rem", // 120px
+        myActivitiesStar: "1.188rem", // 19px
       },
       height: {
         sidebar: "432px",
         reservationBoxHeight: "12.75rem", //204px
         reservationImage: "12.75rem",
         reservationImageTablet: "9.813rem", //157px
+        myActivitiesStar: "1.188rem", // 19pxv
       },
       boxShadow: {
         reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",
@@ -68,6 +71,10 @@ module.exports = {
       },
       margin: {
         myPageTopMargin: "4.5rem",
+        myReservationList: "1.313rem", // 21px
+      },
+      gap: {
+        activitiesContentGap: "4.5rem",
       },
     },
   },
