@@ -107,7 +107,7 @@ const Banner = () => {
       <div className="relative w-full overflow-hidden">
         <button
           onClick={() => handleSwipeClick(-1)}
-          className="absolute left-4 top-1/2 z-10 hidden opacity-60 hover:opacity-100 lg:block"
+          className="lg:block absolute left-4 top-1/2 z-10 hidden opacity-60 hover:opacity-100"
         >
           <Image
             src={ICON.leftArrow.variant1.src}
@@ -118,7 +118,7 @@ const Banner = () => {
         </button>
         <button
           onClick={() => handleSwipeClick(1)}
-          className="absolute right-4 top-1/2 z-10 hidden rotate-180 transform opacity-60 hover:opacity-100 lg:block"
+          className="lg:block absolute right-4 top-1/2 z-10 hidden rotate-180 transform opacity-60 hover:opacity-100"
         >
           <Image
             src={ICON.leftArrow.variant1.src}
@@ -140,8 +140,8 @@ const Banner = () => {
                 <Image
                   src={banner.imageSrc}
                   alt="배너 이미지"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   priority
                 />
               </div>
@@ -157,7 +157,7 @@ const Banner = () => {
           ))}
         </ul>
       </div>
-      <div className="h-[34.38rem] lg:h-[15rem]" />
+      <div className="lg:h-[15rem] h-[34.38rem]" />
     </div>
   );
 };
