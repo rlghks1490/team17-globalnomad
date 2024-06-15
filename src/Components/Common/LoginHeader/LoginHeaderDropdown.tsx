@@ -56,7 +56,7 @@ const LoginHeaderDropdown: React.FC = () => {
           <ul className="top-0 w-48 rounded-md border-solid bg-white px-6 py-8 shadow-lg">
             <div className="block rounded-md px-4 py-2 hover:bg-gnGray200">
               <Link
-                href="/"
+                href="/my-page"
                 className="block cursor-pointer text-base font-bold"
               >
                 마이페이지
