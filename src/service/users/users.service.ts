@@ -20,10 +20,10 @@ class UsersService {
   }
 
   postUsersProfileImageUrl(formData: FormData) {
-    return requestorWithFormData.post<UsersProfileImageUrl>(
-      `/users/me/image`,
-      formData,
-    );
+    console.log(formData.get("profileImage"));
+    return requestorWithFormData.post<UsersProfileImageUrl>(`/users/me/image`, {
+      image: formData.get("profileImage"),
+    });
   }
 }
 
