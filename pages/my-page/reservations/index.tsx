@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroller";
 function Reservations() {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
 
-  const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["MyReservations", viewStatus],
     queryFn: ({ pageParam }) => {
       const status = viewStatus === "all" ? null : viewStatus;
