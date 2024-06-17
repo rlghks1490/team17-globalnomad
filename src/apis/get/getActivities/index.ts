@@ -1,3 +1,5 @@
+import { instance } from "@/apis/apis";
+
 interface GetActivitiesList {
   address: string;
   bannerImageUrl: string;
