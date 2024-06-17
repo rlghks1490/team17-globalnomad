@@ -48,8 +48,9 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
       </button>
       {isOpen && (
         <div className="absolute left-0 top-16 z-10 flex flex-col items-center justify-center shadow-reservationBox">
-          {filterList.map((item) => (
+          {filterList.map((item, idx) => (
             <button
+              key={idx}
               onClick={() => handleDropdownClick(item)}
               className="h-14 w-40 border border-gnGray300 bg-white text-lg font-medium leading-5 "
             >
