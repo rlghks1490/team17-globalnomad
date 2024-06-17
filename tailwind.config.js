@@ -53,12 +53,15 @@ module.exports = {
         reservationTablet: "26.813rem", //429px
         reservationImage: "12.75rem", //204px
         reservationImageTablet: "9.813rem", //157px
+        width245px: "15.313rem", //245px
+        width330px: "20.625rem", //330px
       },
       height: {
         sidebar: "432px",
         reservationBoxHeight: "12.75rem", //204px
         reservationImage: "12.75rem",
         reservationImageTablet: "9.813rem", //157px
+        TabletCardList: "9.75rem", //156px
       },
       boxShadow: {
         reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",
@@ -68,6 +71,7 @@ module.exports = {
       },
       margin: {
         myPageTopMargin: "4.5rem",
+        margin5px: "0.313rem", // 5px
       },
     },
   },

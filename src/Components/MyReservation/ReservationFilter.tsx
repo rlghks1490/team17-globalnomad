@@ -34,7 +34,7 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
     <div className="relative">
       <button
         onClick={handleDropdown}
-        className="radius flex h-14 w-40 items-center justify-between rounded-2xl border border-gnDarkGreen px-5 py-4 text-lg font-medium leading-normal text-gnDarkGreen"
+        className="radius flex h-14 w-40 items-center justify-between rounded-2xl border border-gnDarkGreen px-5 py-4 text-lg font-medium leading-normal text-gnDarkGreen tablet:h-10 tablet:w-28"
       >
         {ReservationStatueList[value]}
         {

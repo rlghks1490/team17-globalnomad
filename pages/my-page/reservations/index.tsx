@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroller";
 function Reservations() {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
 
-  const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["MyReservations", viewStatus],
     queryFn: ({ pageParam }) => {
       const status = viewStatus === "all" ? null : viewStatus;
@@ -28,23 +28,21 @@ function Reservations() {
 
   return (
     <div>
-      <div>
-        <div className="flex justify-between">
-          <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
-          <ReservationFilter value={viewStatus} setValue={setViewStatus} />
-        </div>
-        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-          <div className=" bg-gnGray100">
-            {reservationData.length > 0 ? (
-              reservationData?.map((reservation) => (
-                <ReservationList key={reservation.id} data={reservation} />
-              ))
-            ) : (
-              <NoReservationList />
-            )}
-          </div>
-        </InfiniteScroll>
+      <div className="flex justify-between">
+        <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
+        <ReservationFilter value={viewStatus} setValue={setViewStatus} />
       </div>
+      <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
+        <div className=" bg-gnGray100 ">
+          {reservationData.length > 0 ? (
+            reservationData?.map((reservation) => (
+              <ReservationList key={reservation.id} data={reservation} />
+            ))
+          ) : (
+            <NoReservationList />
+          )}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 }
