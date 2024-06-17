@@ -6,20 +6,36 @@ const queryOptions = {
     queryKey: ["myActivitiesCheck"],
     queryFn: () => myActivitiesService.getMyActivitiesCheck(),
   },
-  myActivitiesRegistrationDashboard: (activityId: number) => ({
+  myActivitiesRegistrationDashboard: (
+    year: string,
+    month: string,
+    activityId: number,
+  ) => ({
     queryKey: ["myActivitiesRegistrationDashboard", "activityId"],
     queryFn: () =>
-      myActivitiesService.getMyActivitiesRegistrationDashboard(activityId),
+      myActivitiesService.getMyActivitiesRegistrationDashboard(
+        year,
+        month,
+        activityId,
+      ),
   }),
-  myActivitiesRegistrationSchedule: (activityId: number) => ({
+  myActivitiesRegistrationSchedule: (date: string, activityId: number) => ({
     queryKey: ["myActivitiesRegistrationSchedule", "activityId"],
     queryFn: () =>
-      myActivitiesService.getMyActivitiesRegistrationSchedule(activityId),
+      myActivitiesService.getMyActivitiesRegistrationSchedule(date, activityId),
   }),
-  myActivitiesReservationCheck: (activityId: number) => ({
+  myActivitiesReservationCheck: (
+    scheduleId: number,
+    status: string,
+    activityId: number,
+  ) => ({
     queryKey: ["myActivitiesReservationCheck", "activityId"],
     queryFn: () =>
-      myActivitiesService.getMyActivitiesReservationCheck(activityId),
+      myActivitiesService.getMyActivitiesReservationCheck(
+        scheduleId,
+        status,
+        activityId,
+      ),
   }),
   myActivitiesUpdateReservationStatus: (
     activityId: number,

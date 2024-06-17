@@ -23,7 +23,7 @@ const ReservationStatus = () => {
             className="h-14 w-full rounded border border-gnGray700"
           >
             {list.data.activities.map((activity) => (
-              <option key={activity.id} value={activity.title}>
+              <option key={activity.id} value={activity.id}>
                 {activity.title}
               </option>
             ))}

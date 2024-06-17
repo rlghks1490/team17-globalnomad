@@ -4,8 +4,8 @@ import AcitivyRegistForm from "@/Components/ActivityRegist/ActivityRegistForm";
 const ActivityEdit = () => {
   return (
     <>
-      {/* <ActivityEditForm /> */}
-      <AcitivyRegistForm />
+      <ActivityEditForm />
+      {/* <AcitivyRegistForm /> */}
     </>
   );
 };

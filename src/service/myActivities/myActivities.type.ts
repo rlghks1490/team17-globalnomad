@@ -21,15 +21,57 @@ export interface MyActivitiesCheck {
 }
 
 // 내 체험 월별 예약 현황 조회
-export interface MyActivitiesRegistrationDashboard {}
+export interface Reservation {
+  completed: number;
+  confirmed: number;
+  pending: number;
+}
+
+export interface MyActivitiesRegistrationDashboard {
+  date: string;
+  reservations: Reservation;
+}
 
 // 내 체험 날짜별 예약 정보(신청, 승인, 거절)가 있는 스케쥴 조회
-export interface MyActivitiesRegistrationSchedule {}
+export interface Count {
+  declined: number;
+  confirmed: number;
+  pending: number;
+}
+
+export interface MyActivitiesRegistrationSchedule {
+  scheduleId: number;
+  startTime: string;
+  endTime: string;
+  count: Count;
+}
 
 // 내 체험 예약 시간대별 예약 내역 조회
-export interface MyActivitiesReservationCheck {}
+export interface Reservations {
+  id: number;
+  nickname: string;
+  userId: number;
+  teamId: string;
+  activityId: number;
+  scheduleId: number;
+  status: string;
+  reviewSubmitted: boolean;
+  totalPrice: number;
+  headCount: number;
+  date: string;
+  startTime: string;
+  endTitme: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-// 내 체험 예약 시간대별 예약 내역 조회
+export interface MyActivitiesReservationCheck {
+  cursorId: number;
+  totalCount: number;
+  reservations: Reservations[];
+}
+
+// 내 체험 예약 상태(승인, 거절) 업데이트
 export interface MyActivitiesUpdateReservationStatus {}
 
 // 내 체험 삭제
