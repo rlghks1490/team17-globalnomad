@@ -1,4 +1,4 @@
-import { requestor } from "@/service/requestor";
+import { requestor, requestorWithFormData } from "@/service/requestor";
 import {
   UsersSignup,
   UsersCheckMyInformation,
@@ -16,11 +16,15 @@ class UsersService {
   }
 
   patchUsersEditMyInformation(data: UsersEditMyInformation) {
+    console.log(data);
     return requestor.patch<UsersEditMyInformation>(`/users/me`, data);
   }
 
-  postUsersProfileImageUrl(data: UsersProfileImageUrl) {
-    return requestor.post<UsersProfileImageUrl>(`/users/me/image`, data);
+  postUsersProfileImageUrl(formData: FormData) {
+    console.log(formData.get("profileImage"));
+    return requestorWithFormData.post<UsersProfileImageUrl>(`/users/me/image`, {
+      image: formData.get("profileImage"),
+    });
   }
 }
 
