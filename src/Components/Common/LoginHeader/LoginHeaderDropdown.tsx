@@ -7,15 +7,20 @@ import { useUser } from "@/context/UserContext";
 const LoginHeaderDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { signOut } = useAuth();
-  const { data: response, isLoading, isError } = useUsersCheckMyInformation();
-  const [profileImage, setProfileImage] = useState<string>("");
+  const {
+    data: response,
+    isLoading,
+    isError,
+    refetch,
+  } = useUsersCheckMyInformation();
   const { user, setUser } = useUser();
 
   useEffect(() => {
     if (response && response.data) {
+      refetch();
       setUser(response.data);
     }
-  }, [response, setUser]);
+  }, [response, setUser, refetch]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -46,11 +51,11 @@ const LoginHeaderDropdown: React.FC = () => {
         onClick={toggleDropdown}
       >
         <div className="flex items-center justify-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gnDarkGreen text-center text-sm font-semibold text-gnGray200">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gnDarkGreen text-center text-sm font-semibold text-gnGray200">
             {user?.profileImageUrl ? (
               <img
                 className="h-full w-full rounded-full"
-                src={profileImage}
+                src={data.profileImageUrl}
                 alt="Profile Picture"
               />
             ) : (

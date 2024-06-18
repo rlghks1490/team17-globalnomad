@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
+  useUsersEditMyInformation,
   useUsersCheckMyInformation,
   useUsersProfileImageUrl,
 } from "@/service/users/useUsersService";
+import { UsersEditMyInformation } from "@/service/users/users.type";
+import { useUser } from "@/context/UserContext";
 
 interface UsersEditImageUploaderProps {
   profileImageUrl: string;
@@ -15,31 +18,46 @@ const ProfileModify = ({
   handleChangeImage,
 }: UsersEditImageUploaderProps) => {
   const [profileImage, setProfileImage] = useState<string>(profileImageUrl);
+  const [pickedImage, setPickedImage] = useState<string | null>(null);
   const { mutate: uploadImage } = useUsersProfileImageUrl();
+  const { mutate: editImage } = useUsersEditMyInformation();
+  const { user, setUser } = useUser();
 
-  const handleImageUpload = (
+  const handleImageUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
     isImageProfile: boolean = false,
   ) => {
     e.preventDefault();
     const file = e.target.files?.[0];
-    console.log("file: ", file);
     if (file) {
       const formData = new FormData();
       formData.append("profileImage", file);
 
-      formData.forEach((value, key) => {
-        console.log(key, value);
-      });
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onloadend = () => {
+        setPickedImage(fileReader.result as string);
+      };
 
       try {
         uploadImage(formData, {
           onSuccess: (response) => {
-            console.log(response);
-            console.log(isImageProfile);
             if (isImageProfile) {
-              setProfileImage(response.data.profileImageUrl);
-              handleChangeImage(response.data.profileImageUrl);
+              const newProfileImageUrl = response.data.profileImageUrl;
+              setProfileImage(newProfileImageUrl);
+              handleChangeImage(newProfileImageUrl);
+              const payload: UsersEditMyInformation = {
+                nickname: user!.nickname,
+                profileImageUrl: newProfileImageUrl,
+              };
+              editImage(payload, {
+                onSuccess: (response) => {
+                  alert("프로필 이미지가 성공적으로 수정되었습니다.");
+                },
+                onError: (error) => {
+                  alert("프로필 이미지 수정에 실패했습니다.");
+                },
+              });
             }
           },
           onError: (error) => {
@@ -70,17 +88,19 @@ const ProfileModify = ({
 
   return (
     <div className="flex justify-center gap-10">
-      <div className="flex h-[400px] max-w-4xl tablet:w-[250px] ">
+      <div className="flex h-[400px] max-w-4xl tablet:w-[250px]">
         <div className="flex w-[380px] flex-col rounded-lg border bg-white p-6">
           <div className="relative flex items-center justify-center space-x-3">
-            <label className=" relative flex h-[160px] w-[160px] flex-nowrap items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
+            <label className="relative flex h-[160px] w-[160px] cursor-pointer flex-nowrap items-center overflow-auto rounded-full border-4 border-gnGray200 bg-gnGray200">
               <input
                 type="file"
                 className="hidden"
                 onChange={(e) => handleImageUpload(e, true)}
               />
-              {data.profileImageUrl ? (
-                <img src={profileImage} alt="profileImgUrl" />
+              {pickedImage ? (
+                <img src={pickedImage} alt="profileImgUrl" />
+              ) : data.profileImageUrl ? (
+                <img src={data.profileImageUrl} alt="profileImgUrl" />
               ) : (
                 <img
                   src="/images/defaultProfileImage.png"
@@ -88,18 +108,18 @@ const ProfileModify = ({
                 />
               )}
             </label>
-            <label className="absolute bottom-0 right-20 tablet:right-4 ">
+            <div className="absolute bottom-0 right-20 tablet:right-4">
               <img
                 className="rounded-full bg-gnDarkGreen p-2.5"
                 src="/icons/profileModifyIcon.svg"
                 alt="modifyIcon"
-              ></img>
-            </label>
+              />
+            </div>
           </div>
           <div className="mt-6 space-y-1">
             <Link
               href="/my-page"
-              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black "
+              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
@@ -108,7 +128,7 @@ const ProfileModify = ({
             </Link>
             <Link
               href="/my-page/reservations"
-              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black "
+              className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
               prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">

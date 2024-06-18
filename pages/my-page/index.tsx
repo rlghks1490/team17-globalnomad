@@ -68,7 +68,7 @@ const myPage = () => {
   const onSubmit = (formData: FormValues) => {
     const payload: {
       nickname: string;
-      newPassword: string;
+      newPassword?: string;
       profileImageUrl?: string;
     } = {
       nickname: formData.nickname || "",
@@ -132,6 +132,7 @@ const myPage = () => {
               isError={!!errors.email}
               errorMessage={errors.email?.message}
               {...register("email", rules.emailRules)}
+              // disabled={true}
             />
             <LoginInput
               label="비밀번호"

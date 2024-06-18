@@ -16,6 +16,7 @@ class UsersService {
   }
 
   patchUsersEditMyInformation(data: UsersEditMyInformation) {
+    console.log(data);
     return requestor.patch<UsersEditMyInformation>(`/users/me`, data);
   }
 
