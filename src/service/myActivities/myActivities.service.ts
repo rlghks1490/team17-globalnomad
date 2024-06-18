@@ -14,30 +14,48 @@ class MyActivitiesService {
     return requestor.get<MyActivitiesCheck>(`/my-activities`);
   }
 
-  getMyActivitiesRegistrationDashboard(activityId: number) {
-    return requestor.get<MyActivitiesRegistrationDashboard>(
+  getMyActivitiesRegistrationDashboard(
+    year: string,
+    month: string,
+    activityId: number,
+  ) {
+    return requestor.get<MyActivitiesRegistrationDashboard[]>(
       `/my-activities/${activityId}/reservation-dashboard`,
+      {
+        params: {
+          year: year,
+          month: month,
+        },
+      },
     );
   }
 
-  getMyActivitiesRegistrationSchedule(activityId: number) {
-    return requestor.get<MyActivitiesRegistrationSchedule>(
-      `/my-activities/${activityId}/reservation-schedule`,
+  getMyActivitiesRegistrationSchedule(date: string, activityId: number) {
+    return requestor.get<MyActivitiesRegistrationSchedule[]>(
+      `/my-activities/${activityId}/reserved-schedule`,
+      { params: { date: date } },
     );
   }
 
-  getMyActivitiesReservationCheck(activityId: number) {
+  getMyActivitiesReservationCheck(
+    scheduleId: number,
+    status: string,
+    activityId: number,
+  ) {
     return requestor.get<MyActivitiesReservationCheck>(
       `/my-activities/${activityId}/reservations`,
+      { params: { scheduleId: scheduleId, status: status } },
     );
   }
 
   patchMyActivitiesUpdateReservationStatus(
     activityId: number,
     reservationId: number,
+    status: MyActivitiesUpdateReservationStatus,
   ) {
     return requestor.patch<MyActivitiesUpdateReservationStatus>(
       `/my-activities/${activityId}/reservations/${reservationId}`,
+      status,
     );
   }
 
