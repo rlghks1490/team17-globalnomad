@@ -17,7 +17,7 @@ const Reservations = () => {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["MyReservations", null],
+    queryKey: ["MyReservations", viewStatus],
     queryFn: async ({ pageParam = 0 }) => {
       const status = viewStatus === "all" ? null : viewStatus;
       return await getMyReservations({ size: 6, status, cursorId: pageParam });
@@ -57,8 +57,6 @@ export default Reservations;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
-
-  console.log("SSR: Fetching reservations data");
 
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["MyReservations", null],
