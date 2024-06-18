@@ -5,7 +5,11 @@ import interactionPlugin, {
   Draggable,
   DropArg,
 } from "@fullcalendar/interaction";
-import { DatesSetArg, DayHeaderContentArg } from "@fullcalendar/core/index.js";
+import {
+  DatesSetArg,
+  DayHeaderContentArg,
+  EventClickArg,
+} from "@fullcalendar/core/index.js";
 import { useEffect, useState } from "react";
 import {
   useMyActivitiesRegistrationDashboard,
@@ -13,11 +17,27 @@ import {
 } from "@/service/myActivities/useMyActiviesService";
 import StatusBox from "./StausBox";
 
+interface Reservation {
+  completed: number;
+  confirmed: number;
+  pending: number;
+}
+
+interface EventData {
+  date: string;
+  reservations: Reservation;
+}
+
 const StatusCalendar = () => {
   const [currentYear, setCurrentYear] = useState("");
   const [currentMonth, setCurrentMonth] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+  const [events, setEvents] = useState<{ title: string; start: string }[]>([]);
+  const [clickPosition, setClickPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null); // 추가
 
   const { data: monthlyStatus, refetch } = useMyActivitiesRegistrationDashboard(
     currentYear,
@@ -25,18 +45,45 @@ const StatusCalendar = () => {
     1148,
   );
 
-  const events = [
-    { title: "Meeting1", start: new Date("2024-6-17") },
-    { title: "Meeting2", start: new Date("2024-6-18") },
-  ];
+  const transformEvents = (data: EventData[]) => {
+    const events: { title: string; start: string; className: string }[] = [];
+    data.forEach((item) => {
+      events.push({
+        title: `예약: ${item.reservations.pending}`,
+        start: item.date,
+        className: "event-pending",
+      });
+      events.push({
+        title: `승인: ${item.reservations.confirmed}`,
+        start: item.date,
+        className: "event-confirmed",
+      });
+      events.push({
+        title: `완료: ${item.reservations.completed}`,
+        start: item.date,
+        className: "event-completed",
+      });
+    });
+    return events;
+  };
 
   const renderDayHeaderContent = (args: DayHeaderContentArg) => {
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     return days[args.date.getDay()];
   };
 
-  const renderDayCellContent = (dayCell: { dayNumberText: string }) => {
-    return <div>{dayCell.dayNumberText.replace("일", "")}</div>;
+  const renderDayCellContent = (dayCell: {
+    dayNumberText: string;
+    date: Date;
+  }) => {
+    const cellDate = dayCell.date.toISOString().split("T")[0];
+    const hasEvents = events.some((event) => event.start === cellDate);
+
+    return (
+      <div className={`${hasEvents ? "cursor-pointer" : "disabled"}`}>
+        {dayCell.dayNumberText.replace("일", "")}
+      </div>
+    );
   };
 
   const handleDatesSet = (dateInfo: DatesSetArg) => {
@@ -74,22 +121,74 @@ const StatusCalendar = () => {
     const clickedDate = info.date.toISOString().split("T")[0];
     setSelectedDay(clickedDay);
     setSelectedDate(clickedDate);
+
+    const cellDate = clickedDate;
+    const hasEvents = events.some((event) => event.start === cellDate);
+
+    if (hasEvents) {
+      const rect = info.dayEl.getBoundingClientRect();
+      setClickPosition({
+        y: rect.top - 500,
+        x: rect.right + 10,
+      });
+    } else {
+      setSelectedDay("");
+      setSelectedDate("");
+    }
+  };
+
+  const handleEventClick = (info: EventClickArg) => {
+    const clickedDay = info.event.start!.getDate().toString().padStart(2, "0");
+    const clickedDate = info.event.start!.toISOString().split("T")[0];
+    setSelectedDay(clickedDay);
+    setSelectedDate(clickedDate);
+
+    const rect = info.el.getBoundingClientRect();
+    setClickPosition({
+      y: rect.top - 500,
+      x: rect.right + 10,
+    });
+  };
+
+  const handleCloseStatusBox = () => {
+    setClickPosition(null);
+    setSelectedDay("");
+    setSelectedDate("");
   };
 
   useEffect(() => {
-    // 최초 렌더링 시 또는 currentYear, currentMonth이 변경될 때 데이터 다시 불러오기
+    if (monthlyStatus) {
+      const newEvents = transformEvents(monthlyStatus.data);
+      setEvents(newEvents);
+    }
+  }, [monthlyStatus]);
+
+  useEffect(() => {
     if (currentYear && currentMonth) {
       refetch();
     }
   }, [currentYear, currentMonth, refetch]);
 
   return (
-    <div>
+    <div className="relative">
       <FullCalendar
         locale={"kr"}
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         events={events}
+        eventContent={(eventInfo) => (
+          <div
+            className={`${
+              eventInfo.event.classNames.includes("event-pending")
+                ? "w-full border-gnDarkBlue bg-gnDarkBlue text-white"
+                : eventInfo.event.classNames.includes("event-confirmed")
+                  ? "text-gnDarkOrange w-full border-gnLightOrange bg-gnLightOrange"
+                  : "border-gnGray300 bg-gnGray300 text-gnGray800"
+            } bottom-0 rounded px-1 py-[3px]`}
+          >
+            {eventInfo.event.title}
+          </div>
+        )}
         timeZone="KST"
         fixedWeekCount={false}
         headerToolbar={{
@@ -101,8 +200,17 @@ const StatusCalendar = () => {
         dayCellContent={renderDayCellContent}
         datesSet={handleDatesSet}
         dateClick={handleDateClick}
+        eventClick={handleEventClick}
       />
-      <StatusBox selectedDay={selectedDay} selectedDate={selectedDate} />
+      {clickPosition && (
+        <StatusBox
+          selectedDay={selectedDay}
+          selectedDate={selectedDate}
+          x={clickPosition.x}
+          y={clickPosition.y}
+          onClose={handleCloseStatusBox}
+        />
+      )}
     </div>
   );
 };

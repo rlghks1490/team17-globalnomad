@@ -1,5 +1,8 @@
 import myActivitiesService from "./myActivities.service";
-import { patchMyActivities } from "./myActivities.type";
+import {
+  MyActivitiesUpdateReservationStatus,
+  patchMyActivities,
+} from "./myActivities.type";
 
 const queryOptions = {
   myActivitiesCheck: {
@@ -46,10 +49,11 @@ const queryOptions = {
       "activityId",
       "reservationId",
     ],
-    mutationFn: () =>
+    mutationFn: (status: MyActivitiesUpdateReservationStatus) =>
       myActivitiesService.patchMyActivitiesUpdateReservationStatus(
         activityId,
         reservationId,
+        status,
       ),
   }),
   deleteMyActivities: (activityId: number) => ({

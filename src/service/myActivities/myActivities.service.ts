@@ -51,9 +51,11 @@ class MyActivitiesService {
   patchMyActivitiesUpdateReservationStatus(
     activityId: number,
     reservationId: number,
+    status: MyActivitiesUpdateReservationStatus,
   ) {
     return requestor.patch<MyActivitiesUpdateReservationStatus>(
       `/my-activities/${activityId}/reservations/${reservationId}`,
+      status,
     );
   }
 

@@ -31,7 +31,7 @@ module.exports = {
         gnDarkRed: "#FF472E",
         gnLightRed: "#FFE4E0",
 
-        gnDarkOrang: "#FF7C1D",
+        gnDarkOrange: "#FF7C1D",
         gnLightOrange: "#FFF4E8",
 
         gnYellow: "#FFC23D",

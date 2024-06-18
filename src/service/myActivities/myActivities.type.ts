@@ -60,7 +60,7 @@ export interface Reservations {
   headCount: number;
   date: string;
   startTime: string;
-  endTitme: string;
+  endTime: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -72,7 +72,9 @@ export interface MyActivitiesReservationCheck {
 }
 
 // 내 체험 예약 상태(승인, 거절) 업데이트
-export interface MyActivitiesUpdateReservationStatus {}
+export interface MyActivitiesUpdateReservationStatus {
+  status: string;
+}
 
 // 내 체험 삭제
 export interface deleteMyActivities {}
