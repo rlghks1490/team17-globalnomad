@@ -91,7 +91,13 @@ const StatusBox = ({
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">예약 정보</h1>
         <button onClick={onClose}>
-          <Image src={CloseBtn} alt="CloseBtn" width={40} height={40} />
+          <Image
+            src={CloseBtn}
+            alt="CloseBtn"
+            width={40}
+            height={40}
+            priority
+          />
         </button>
       </div>
       <div className="flex border-b border-gnGray300">

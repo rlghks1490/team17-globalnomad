@@ -29,8 +29,12 @@ interface EventData {
 }
 
 const StatusCalendar = () => {
-  const [currentYear, setCurrentYear] = useState("");
-  const [currentMonth, setCurrentMonth] = useState("");
+  const [currentYear, setCurrentYear] = useState<string>(
+    new Date().getFullYear().toString(),
+  );
+  const [currentMonth, setCurrentMonth] = useState<string>(
+    (new Date().getMonth() + 1).toString().padStart(2, "0"),
+  );
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [events, setEvents] = useState<{ title: string; start: string }[]>([]);
