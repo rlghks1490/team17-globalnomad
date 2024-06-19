@@ -15,12 +15,12 @@ const LoginHeaderDropdown: React.FC = () => {
   } = useUsersCheckMyInformation();
   const { user, setUser } = useUser();
 
-  useEffect(() => {
-    if (response && response.data) {
-      refetch();
-      setUser(response.data);
-    }
-  }, [response, setUser, refetch]);
+  // useEffect(() => {
+  //   if (response && response.data) {
+  //     refetch();
+  //     setUser(response.data);
+  //   }
+  // }, [response, setUser, refetch]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
