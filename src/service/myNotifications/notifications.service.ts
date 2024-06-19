@@ -10,9 +10,7 @@ class MyNotificationsService {
   }
 
   deleteMyNotifications(notificationsId: number) {
-    return requestor.delete<deleteMyNotifications>(
-      `/my-notifications${notificationsId}`,
-    );
+    return requestor.delete(`/my-notifications/${notificationsId}`);
   }
 }
 
