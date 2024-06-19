@@ -7,20 +7,14 @@ import { useUser } from "@/context/UserContext";
 const LoginHeaderDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { signOut } = useAuth();
-  const {
-    data: response,
-    isLoading,
-    isError,
-    refetch,
-  } = useUsersCheckMyInformation();
+  const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { user, setUser } = useUser();
 
-  // useEffect(() => {
-  //   if (response && response.data) {
-  //     refetch();
-  //     setUser(response.data);
-  //   }
-  // }, [response, setUser, refetch]);
+  useEffect(() => {
+    if (response && response.data) {
+      setUser(response.data);
+    }
+  }, [response, setUser]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
