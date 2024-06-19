@@ -12,6 +12,7 @@ import { FormValues, PostAuthLoginRes, UserInfo } from "@/apis/auth/auth.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import Cookies from "js-cookie";
+import Toast from "@/Components/Toast/Toast";
 
 interface ErrorMessage {
   message: string;
@@ -27,6 +28,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<PostAuthLoginRes | null>(null);
+  const [showToast, setShowToast] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -65,7 +67,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     },
     onError: (error: AxiosError<ErrorMessage>) => {
-      console.error(error);
+      if (error) {
+        {
+          showToast && (
+            <Toast onShow={() => setShowToast(false)}>로그인 실패</Toast>
+          );
+        }
+      } else {
+        {
+          showToast && (
+            <Toast onShow={() => setShowToast(false)}>로그인 성공</Toast>
+          );
+        }
+      }
     },
   });
 
