@@ -8,7 +8,7 @@ function MyPageLayout({ children }: { children: React.ReactNode }) {
     <>
       <LoginHeader />
       <div className="mt-myPageTopMargin flex justify-center gap-6">
-        <ProfileModify />
+        <ProfileModify profileImageUrl="" handleChangeImage={() => {}} />
         <main>{children}</main>
       </div>
       <Footer />

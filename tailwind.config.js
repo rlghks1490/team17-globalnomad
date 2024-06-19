@@ -31,7 +31,7 @@ module.exports = {
         gnDarkRed: "#FF472E",
         gnLightRed: "#FFE4E0",
 
-        gnDarkOrang: "#FF7C1D",
+        gnDarkOrange: "#FF7C1D",
         gnLightOrange: "#FFF4E8",
 
         gnYellow: "#FFC23D",
@@ -55,6 +55,8 @@ module.exports = {
         reservationImageTablet: "9.813rem", //157px
         width245px: "15.313rem", //245px
         width330px: "20.625rem", //330px
+        activityButton: "7.5rem", // 120px
+        myActivitiesStar: "1.188rem", // 19px
       },
       height: {
         sidebar: "432px",
@@ -62,6 +64,7 @@ module.exports = {
         reservationImage: "12.75rem",
         reservationImageTablet: "9.813rem", //157px
         TabletCardList: "9.75rem", //156px
+        myActivitiesStar: "1.188rem", // 19pxv
       },
       boxShadow: {
         reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",
@@ -72,6 +75,10 @@ module.exports = {
       margin: {
         myPageTopMargin: "4.5rem",
         margin5px: "0.313rem", // 5px
+        myReservationList: "1.313rem", // 21px
+      },
+      gap: {
+        activitiesContentGap: "4.5rem",
       },
     },
   },

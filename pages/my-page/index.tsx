@@ -1,13 +1,14 @@
-import ProfileModify from "@/Components/ProfileModify/ProfileModify";
 import LoginInput from "@/Components/Input/LoginInput";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/apis/auth/auth.type";
+import { useState, useEffect } from "react";
 import {
   useUsersCheckMyInformation,
   useUsersEditMyInformation,
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
+import { useUser } from "@/context/UserContext";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -29,6 +30,10 @@ const rules = {
       value: 8,
       message: password.errorMessage.minLength,
     },
+    maxLength: {
+      value: 16,
+      message: password.errorMessage.maxLength,
+    },
   },
   nicknameRules: {
     required: nickname.errorMessage.empty,
@@ -42,7 +47,7 @@ const rules = {
   },
 };
 
-const index = () => {
+const myPage = () => {
   const {
     register,
     handleSubmit,
@@ -52,11 +57,18 @@ const index = () => {
 
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { mutate: editUserInformation } = useUsersEditMyInformation();
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    if (response && response.data) {
+      setUser(response.data);
+    }
+  }, [response, setUser]);
 
   const onSubmit = (formData: FormValues) => {
     const payload: {
       nickname: string;
-      newPassword: string;
+      newPassword?: string;
       profileImageUrl?: string;
     } = {
       nickname: formData.nickname || "",
@@ -64,7 +76,8 @@ const index = () => {
     };
 
     editUserInformation(payload as UsersEditMyInformation, {
-      onSuccess: () => {
+      onSuccess: (updateData) => {
+        setUser(updateData.data);
         alert("정보가 성공적으로 수정되었습니다.");
       },
       onError: (error) => {
@@ -119,6 +132,7 @@ const index = () => {
               isError={!!errors.email}
               errorMessage={errors.email?.message}
               {...register("email", rules.emailRules)}
+              // disabled={true}
             />
             <LoginInput
               label="비밀번호"
@@ -153,4 +167,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default myPage;

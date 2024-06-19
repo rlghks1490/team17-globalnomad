@@ -5,16 +5,33 @@ export const useMyActivitiesCheck = () => {
   return useQuery(queryOptions.myActivitiesCheck);
 };
 
-export const useMyActivitiesRegistrationDashboard = (activityId: number) => {
-  return useQuery(queryOptions.myActivitiesRegistrationDashboard(activityId));
+export const useMyActivitiesRegistrationDashboard = (
+  year: string,
+  month: string,
+  activityId: number,
+) => {
+  return useQuery(
+    queryOptions.myActivitiesRegistrationDashboard(year, month, activityId),
+  );
 };
 
-export const useMyActivitiesRegistrationSchedule = (activityId: number) => {
-  return useQuery(queryOptions.myActivitiesRegistrationSchedule(activityId));
+export const useMyActivitiesRegistrationSchedule = (
+  date: string,
+  activityId: number,
+) => {
+  return useQuery(
+    queryOptions.myActivitiesRegistrationSchedule(date, activityId),
+  );
 };
 
-export const useMyActivitiesReservationCheck = (activityId: number) => {
-  return useQuery(queryOptions.myActivitiesReservationCheck(activityId));
+export const useMyActivitiesReservationCheck = (
+  scheduleId: number,
+  status: string,
+  activityId: number,
+) => {
+  return useQuery(
+    queryOptions.myActivitiesReservationCheck(scheduleId, status, activityId),
+  );
 };
 
 export const useMyActivitiesUpdateReservationStatus = (

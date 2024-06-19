@@ -11,12 +11,14 @@ const queryOptions = {
     queryFn: () => usersService.getUsersCheckMyInformation(),
   },
   usersEditMyInformation: {
-    mutationKey: ["usersEditMyInformation","data"],
-    mutationFn: (data: UsersEditMyInformation) => usersService.patchUsersEditMyInformation(data),
+    mutationKey: ["usersEditMyInformation", "data"],
+    mutationFn: (data: UsersEditMyInformation) =>
+      usersService.patchUsersEditMyInformation(data),
   },
   usersProfileImageUrl: {
-    mutationKey: ["usersProfileImageUrl","data"],
-    mutationFn: (data: UsersProfileImageUrl ) => usersService.postUsersProfileImageUrl(data),
+    mutationKey: ["usersProfileImageUrl"],
+    mutationFn: (formData: FormData) =>
+      usersService.postUsersProfileImageUrl(formData),
   },
 };
 

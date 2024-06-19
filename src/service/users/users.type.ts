@@ -1,8 +1,8 @@
-export interface UsersSignup  {
+export interface UsersSignup {
   email: string;
   nickname: string;
   password: string;
-};
+}
 
 export interface UsersCheckMyInformation {
   id: number;
@@ -11,14 +11,14 @@ export interface UsersCheckMyInformation {
   profileImageUrl: string;
   createdAt: string;
   updatedAt: string;
-};
+}
 
 export interface UsersEditMyInformation {
   nickname: string;
   profileImageUrl: string;
-  newPassword: string;
-};
+  newPassword?: string;
+}
 
 export interface UsersProfileImageUrl {
   profileImageUrl: string;
-};
+}
