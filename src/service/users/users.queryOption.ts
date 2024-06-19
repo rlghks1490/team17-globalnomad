@@ -6,7 +6,7 @@ const queryOptions = {
     queryKey: ["usersSignup"],
     queryFn: () => usersService.postUsersSignup(),
   },
-  usersCheckMyInformation: (profileImageUrl: string) => ({
+  usersCheckMyInformation: (profileImageUrl: string = "") => ({
     queryKey: ["usersCheckMyInformation", profileImageUrl],
     queryFn: () => usersService.getUsersCheckMyInformation(profileImageUrl),
   }),

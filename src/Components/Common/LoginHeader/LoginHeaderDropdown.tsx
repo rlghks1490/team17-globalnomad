@@ -7,8 +7,13 @@ import { useUser } from "@/context/UserContext";
 const LoginHeaderDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { signOut } = useAuth();
-  const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { user, setUser } = useUser();
+  const profileImageUrl = user?.profileImageUrl || "";
+  const {
+    data: response,
+    isLoading,
+    isError,
+  } = useUsersCheckMyInformation(profileImageUrl);
 
   useEffect(() => {
     if (response && response.data) {
