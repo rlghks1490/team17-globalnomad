@@ -105,7 +105,7 @@ const myPage = () => {
     <>
       <div className="flex w-myInfoBoxWidth gap-10">
         <div className="flex h-screen w-full flex-col gap-10  tablet:pb-10">
-          <div className="flex justify-between">
+          <form className="flex justify-between">
             <div className=" text-3xl font-bold ">내 정보</div>
             <button
               type="submit"
@@ -115,8 +115,8 @@ const myPage = () => {
             >
               저장하기
             </button>
-          </div>
-          <form className="flex flex-col gap-4">
+          </form>
+          <div className="flex flex-col gap-4">
             <LoginInput
               label="닉네임"
               type="text"
@@ -160,7 +160,7 @@ const myPage = () => {
                 },
               })}
             />
-          </form>
+          </div>
         </div>
       </div>
     </>

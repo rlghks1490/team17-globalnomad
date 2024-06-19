@@ -120,7 +120,6 @@ const ProfileModify = ({
             <Link
               href="/my-page"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
-              prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
                 <img src="/icons/myInfo.svg" alt="myInfo.svg" />내 정보
@@ -129,7 +128,6 @@ const ProfileModify = ({
             <Link
               href="/my-page/reservations"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
-              prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
                 <img
@@ -142,7 +140,6 @@ const ProfileModify = ({
             <Link
               href="/my-page/activities"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
-              prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
                 <img src="/icons/myActivities.svg" alt="myActivities.svg" />내
@@ -152,7 +149,6 @@ const ProfileModify = ({
             <Link
               href="#"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
-              prefetch={false}
             >
               <div className="flex gap-3 tracking-tighter">
                 <img
