@@ -70,7 +70,11 @@ const ProfileModify = ({
     }
   };
 
-  const { data: response, isLoading, isError } = useUsersCheckMyInformation();
+  const {
+    data: response,
+    isLoading,
+    isError,
+  } = useUsersCheckMyInformation(profileImageUrl);
 
   if (isLoading) {
     return <div>Loading...</div>;

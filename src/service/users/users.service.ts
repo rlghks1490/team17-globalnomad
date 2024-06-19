@@ -11,8 +11,10 @@ class UsersService {
     return requestor.post<UsersSignup>(`/users`);
   }
 
-  getUsersCheckMyInformation() {
-    return requestor.get<UsersCheckMyInformation>(`/users/me`);
+  getUsersCheckMyInformation(profileImageUrl: string) {
+    return requestor.get<UsersCheckMyInformation>(`/users/me`, {
+      params: { profileImageUrl },
+    });
   }
 
   patchUsersEditMyInformation(data: UsersEditMyInformation) {
