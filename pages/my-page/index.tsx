@@ -9,7 +9,7 @@ import {
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
-import Test from "../test";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -109,7 +109,7 @@ const myPage = () => {
           <form className="flex justify-between">
             <div className="flex">
               <div className=" text-3xl font-bold ">내 정보</div>
-              <Test />
+              <MobileDropDown />
             </div>
             <button
               type="submit"

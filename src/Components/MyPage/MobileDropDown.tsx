@@ -22,7 +22,7 @@ const MobileDropDown = () => {
   };
 
   return (
-    <div className="deskTop:hidden flex items-center tablet:hidden">
+    <div className="flex items-center tablet:hidden deskTop:hidden">
       <div>
         <button onClick={handleDropdown} type="button">
           <Image
@@ -37,15 +37,15 @@ const MobileDropDown = () => {
         className={`fixed left-0 top-0 z-10 h-full w-full bg-black bg-opacity-65 transition-opacity duration-500 ${
           !isOpen && "pointer-events-none opacity-0"
         }`}
-        onClick={handleClose} // 검은 배경을 클릭했을 때 드롭다운을 닫음
+        onClick={handleClose}
       >
         <div
-          className={`fixed bottom-0 left-0 z-20 flex w-full flex-col items-center justify-start border border-gnGray300 bg-white shadow-reservationBox transition-transform duration-300 ease-in-out ${
+          className={`fixed bottom-0 left-0 z-20 flex w-full flex-col items-center justify-start rounded  border-gnGray300 bg-white font-medium shadow-reservationBox transition-transform duration-300 ease-in-out ${
             isOpen
               ? "translate-y-0 opacity-100"
               : "pointer-events-none translate-y-full opacity-0"
           }`}
-          onClick={(e) => e.stopPropagation()} // 드롭다운 내부를 클릭해도 배경 클릭 이벤트가 트리거되지 않도록 함
+          onClick={(e) => e.stopPropagation()}
         >
           {linkList.map((link, index) => (
             <Link
