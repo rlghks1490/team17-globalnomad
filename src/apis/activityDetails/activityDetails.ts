@@ -7,12 +7,12 @@ import { AvailableSchedule } from "./activityDetails.type";
 const BASE_URL = "https://sp-globalnomad-api.vercel.app/4-17";
 
 // 체험 상세 조회
-export async function getDatas(): Promise<DataType> {
-  const response = await fetch(`${BASE_URL}/activities/915`);
+export async function getDatas(activityId: number): Promise<DataType> {
+  const response = await fetch(`${BASE_URL}/activities/${activityId}`);
   return await response.json();
 }
 
-export const getActivityDetails = async (activityId: number = 915) => {
+export const getActivityDetails = async (activityId: number) => {
   const response = await instance.get(`/activities/${activityId}`);
   const ActivityDetailsData = response.data;
   return ActivityDetailsData;

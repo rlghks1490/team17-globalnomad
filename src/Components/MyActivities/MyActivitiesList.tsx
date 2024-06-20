@@ -25,7 +25,7 @@ const MyActivitiesList = ({ data }: ReservationListProps) => {
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex items-center gap-1.5">
-          <div className="w-myActivitiesStar h-myActivitiesStar">
+          <div className="h-myActivitiesStar w-myActivitiesStar">
             <Image
               src={StarIcon}
               width={19}
@@ -40,7 +40,7 @@ const MyActivitiesList = ({ data }: ReservationListProps) => {
             {data.rating} ({data.reviewCount})
           </div>
         </div>
-        <div className="gap-activitiesContentGap flex flex-col  ">
+        <div className="flex flex-col gap-activitiesContentGap  ">
           <div>
             <h1 className=" mt-1.5 text-xl font-bold leading-6">
               {data.title}
@@ -53,7 +53,7 @@ const MyActivitiesList = ({ data }: ReservationListProps) => {
               </p>
             </div>
             <div className="mr-6 ">
-              <Kebab />
+              <Kebab activityId={data.id} />
             </div>
           </div>
         </div>

@@ -147,7 +147,7 @@ const ProfileModify = ({
               </div>
             </Link>
             <Link
-              href="#"
+              href="/my-page/reservation-status"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
             >
               <div className="flex gap-3 tracking-tighter">
