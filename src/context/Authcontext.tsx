@@ -1,4 +1,3 @@
-// context/AuthContext.tsx
 import React, {
   createContext,
   useContext,
@@ -29,6 +28,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<PostAuthLoginRes | null>(null);
   const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
@@ -67,19 +67,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     },
     onError: (error: AxiosError<ErrorMessage>) => {
-      if (error) {
-        {
-          showToast && (
-            <Toast onShow={() => setShowToast(false)}>로그인 실패</Toast>
-          );
-        }
-      } else {
-        {
-          showToast && (
-            <Toast onShow={() => setShowToast(false)}>로그인 성공</Toast>
-          );
-        }
-      }
+      console.error("error", error);
+      setToastMessage(error.response?.data.message || "");
+      setShowToast(true);
     },
   });
 
@@ -96,6 +86,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </AuthContext.Provider>
   );
 };
@@ -103,7 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error();
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

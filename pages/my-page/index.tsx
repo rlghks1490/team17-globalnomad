@@ -9,6 +9,7 @@ import {
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
+import Toast from "@/Components/Toast/Toast";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -58,6 +59,8 @@ const myPage = () => {
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { mutate: editUserInformation } = useUsersEditMyInformation();
   const { user, setUser } = useUser();
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
 
   useEffect(() => {
     if (response && response.data) {
@@ -78,11 +81,13 @@ const myPage = () => {
     editUserInformation(payload as UsersEditMyInformation, {
       onSuccess: (updateData) => {
         setUser(updateData.data);
-        alert("정보가 성공적으로 수정되었습니다.");
+        setToastMessage("정보가 성공적으로 수정되었습니다.");
+        setShowToast(true);
       },
       onError: (error) => {
         console.error("에러 발생:", error);
-        alert("정보 수정에 실패했습니다.");
+        setToastMessage("정보 수정에 실패했습니다.");
+        setShowToast(true);
       },
     });
   };
@@ -162,6 +167,9 @@ const myPage = () => {
             />
           </div>
         </div>
+        {showToast && (
+          <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+        )}
       </div>
     </>
   );

@@ -33,8 +33,6 @@ const rules = {
 
 const SignIn = () => {
   const { signIn } = useAuth();
-  const [showToast, setShowToast] = useState<boolean>(false);
-  const [toastMessage, setToastMessage] = useState<string>("");
   const { formState, register, handleSubmit } = useForm<FormValues>({
     defaultValues: { email: "", password: "" },
     mode: "onBlur",
@@ -43,14 +41,7 @@ const SignIn = () => {
   const { isValid, errors } = formState;
 
   const onSubmit = async (data: FormValues) => {
-    try {
-      await signIn(data);
-      setToastMessage("로그인 성공");
-    } catch (error) {
-      setToastMessage("로그인 실패");
-    } finally {
-      setShowToast(true);
-    }
+    await signIn(data);
   };
 
   return (
@@ -105,9 +96,6 @@ const SignIn = () => {
           </Link>
         </div>
       </div>
-      {showToast && (
-        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
-      )}
     </div>
   );
 };

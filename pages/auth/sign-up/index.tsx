@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginInput from "@/Components/Input/LoginInput";
 import { auth } from "@/apis/auth/auth";
 import { useMutation } from "@tanstack/react-query";
@@ -9,6 +9,7 @@ import { FormValues } from "@/apis/auth/auth.type";
 import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import EmptyLayout from "@/layouts/EmptyLayout";
+import Toast from "@/Components/Toast/Toast";
 
 interface ErrorMessage {
   message: string;
@@ -49,6 +50,8 @@ const rules = {
 
 const SignUp = () => {
   const router = useRouter();
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
   const { formState, register, handleSubmit, getValues } = useForm<FormValues>({
     mode: "onBlur",
   });
@@ -60,11 +63,9 @@ const SignUp = () => {
       router.push("/login");
     },
     onError: (error: AxiosError<ErrorMessage>) => {
-      if (error.response && error.response.status >= 400) {
-        console.log("AxiosError");
-        return;
-      }
-      console.error("AxiosError", error);
+      console.error("error", error);
+      setToastMessage(error.response?.data.message || "");
+      setShowToast(true);
     },
   });
 
@@ -142,13 +143,16 @@ const SignUp = () => {
         <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
           <p>회원이신가요?</p>
           <Link
-            href="/login"
+            href="/auth/sign-in"
             className="text-base font-normal text-gnDarkGreen underline"
           >
             로그인하기
           </Link>
         </div>
       </div>
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </div>
   );
 };
