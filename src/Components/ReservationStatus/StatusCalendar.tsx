@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import {
   useMyActivitiesRegistrationDashboard,
   useMyActivitiesRegistrationSchedule,
-} from "@/service/myActivities/useMyActiviesService";
+} from "@/service/myActivities/useMyActivitiesService";
 import StatusBox from "./StausBox";
 
 interface Reservation {

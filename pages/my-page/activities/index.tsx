@@ -45,7 +45,7 @@ function Activities() {
                 <MyActivitiesList key={activity.id} data={activity} />
               ))
             ) : (
-              <NoReservationList />
+              <NoReservationList/>
             )}
           </div>
         </InfiniteScroll>
