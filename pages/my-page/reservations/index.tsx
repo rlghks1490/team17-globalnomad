@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { GetServerSideProps } from "next";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 const Reservations = () => {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
@@ -33,9 +34,12 @@ const Reservations = () => {
   const reservationData = data?.pages || [];
 
   return (
-    <div>
+    <div className="flex flex-col gap-6 mobile:gap-3">
       <div className="flex justify-between">
-        <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
+        <div className="relative flex">
+          <h2 className="text-3xl font-bold">예약 내역</h2>
+          <MobileDropDown />
+        </div>
         <ReservationFilter value={viewStatus} setValue={setViewStatus} />
       </div>
       <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>

@@ -8,7 +8,7 @@ interface ReservationStatusProps {
 
 const ReservationStatue = ({ status }: ReservationStatusProps) => {
   return (
-    <div className="mb-2 tablet:m-0">
+    <div className="mb-2 tablet:m-0 mobile:m-0 mobile:text-sm">
       {status === "pending" ? (
         <p className="text-base font-bold text-gnBlue">
           {ReservationStatueList[status]}

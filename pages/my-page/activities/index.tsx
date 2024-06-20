@@ -1,13 +1,9 @@
-import ReservationList from "@/Components/MyReservation/ReservationList";
 import NoReservationList from "@/Components/MyReservation/NoReservationList";
-import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
-import { getMyReservations } from "@/apis/myReservation/myReservation";
-import { ReservationStatus } from "@/apis/myReservation/myReservation.type";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { getMyActivities } from "@/apis/myActivities/myActivites";
 import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 function Activities() {
   const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -28,10 +24,13 @@ function Activities() {
     <div>
       <div>
         <div className="flex justify-between">
-          <h2 className="mb-6 text-3xl font-bold leading-normal">
-            내 체험 관리
-          </h2>
-          <button className="w-activityButton h-12 rounded border bg-gnLightBlack text-white">
+          <div className="flex">
+            <h2 className="mb-6 text-3xl font-bold leading-normal">
+              내 체험 관리
+            </h2>
+            <MobileDropDown />
+          </div>
+          <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
             체험 등록하기
           </button>
         </div>

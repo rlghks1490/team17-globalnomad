@@ -9,6 +9,7 @@ import {
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
+import Test from "../test";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -106,7 +107,10 @@ const myPage = () => {
       <div className="flex w-myInfoBoxWidth gap-10">
         <div className="flex h-screen w-full flex-col gap-10  tablet:pb-10">
           <form className="flex justify-between">
-            <div className=" text-3xl font-bold ">내 정보</div>
+            <div className="flex">
+              <div className=" text-3xl font-bold ">내 정보</div>
+              <Test />
+            </div>
             <button
               type="submit"
               onClick={handleSubmit(onSubmit)}

@@ -8,6 +8,7 @@ module.exports = {
     screens: {
       tablet: { min: "769px", max: "1200px" },
       mobile: { max: "768px" },
+      deskTop: { min: "769px" },
     },
     extend: {
       colors: {
@@ -57,6 +58,9 @@ module.exports = {
         width330px: "20.625rem", //330px
         activityButton: "7.5rem", // 120px
         myActivitiesStar: "1.188rem", // 19px
+        width344px: "21.5rem", //344px
+        width142px: "8.875rem", //142px
+        width190px: "11.875rem", //190px
       },
       height: {
         sidebar: "432px",
@@ -65,6 +69,7 @@ module.exports = {
         reservationImageTablet: "9.813rem", //157px
         TabletCardList: "9.75rem", //156px
         myActivitiesStar: "1.188rem", // 19pxv
+        height142: "8.875rem", //142px
       },
       boxShadow: {
         reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",
@@ -76,9 +81,13 @@ module.exports = {
         myPageTopMargin: "4.5rem",
         margin5px: "0.313rem", // 5px
         myReservationList: "1.313rem", // 21px
+        margin9px: "0.563rem", //9px
       },
       gap: {
         activitiesContentGap: "4.5rem",
+      },
+      translate: {
+        translate394px: "24.625rem", //394px
       },
     },
   },

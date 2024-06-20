@@ -27,8 +27,8 @@ const ReservationList = ({ data }: ReservationListProps) => {
   const bannerImage = data.activity.bannerImageUrl;
 
   return (
-    <div className="shrink- 0 tablet:h-TabletCardList mb-6 flex h-reservationBoxHeight w-reservationBoxWidth gap-6 rounded-3xl shadow-reservationBox tablet:w-reservationTablet">
-      <div className=" h-reservationImage w-reservationImage tablet:h-reservationImageTablet tablet:w-reservationImageTablet">
+    <div className="tablet:h-TabletCardList mobile:w-width344px mb-6 flex h-reservationBoxHeight w-reservationBoxWidth shrink-0 gap-6 rounded-3xl shadow-reservationBox tablet:w-reservationTablet mobile:h-32">
+      <div className=" mobile:w-width142px mobile:h-height142 h-reservationImage w-reservationImage tablet:h-reservationImageTablet tablet:w-reservationImageTablet">
         <Image
           src={bannerImage}
           width={204}
@@ -38,24 +38,24 @@ const ReservationList = ({ data }: ReservationListProps) => {
           priority
         />
       </div>
-      <div className="my-6 flex flex-col tablet:my-3.5 tablet:w-60">
+      <div className="mobile:my-margin9px my-6 flex flex-col tablet:my-3.5 tablet:w-60 mobile:w-48">
         <div>
           <ReservationStatue status={data.status} />
-          <h1 className="tablet:mb-margin5px mb-3 truncate text-xl font-bold leading-6 tablet:text-lg ">
+          <h1 className="tablet:mb-margin5px mb-3 truncate text-xl font-bold leading-6 tablet:text-lg mobile:m-0 mobile:text-sm">
             {data.activity.title}
           </h1>
-          <p className="mb-4 text-lg font-normal leading-6 tablet:text-sm">
+          <p className="mb-4 text-lg font-normal leading-6 tablet:text-sm mobile:text-xs">
             {data.date} · {data.startTime} ~ {data.endTime} · {data.headCount}명
           </p>
         </div>
-        <div className="tablet:w-width245px flex w-reservationButtonWidth justify-between">
-          <p className="text-2xl font-medium leading-normal tablet:text-xl">
+        <div className="tablet:w-width245px mobile:w-width190px flex w-reservationButtonWidth justify-between">
+          <p className="text-2xl font-medium leading-normal tablet:text-xl mobile:text-base">
             ₩{data.totalPrice.toLocaleString("ko-KR")}
           </p>
           {data.status === "pending" && !isReservationCancelled && (
             <button
               onClick={() => handleModalOpen()}
-              className="mr-6 h-10 w-36 divide-solid rounded-md border border-black px-3 py-2 text-base font-semibold tablet:mr-4 tablet:h-10 tablet:w-28"
+              className="mr-6 h-10 w-36 divide-solid rounded-md border border-black px-3 py-2 text-base font-semibold tablet:mr-4 tablet:h-10 tablet:w-28 mobile:m-0 mobile:h-8 mobile:w-20 mobile:px-3.5 mobile:py-1.5 mobile:text-sm"
             >
               예약취소
             </button>
@@ -72,7 +72,7 @@ const ReservationList = ({ data }: ReservationListProps) => {
             <button
               disabled={isReviewSubmitted}
               onClick={() => handleReviewModalOpen()}
-              className="mr-6 h-10 w-36 rounded-md bg-black px-3 py-2 text-base font-semibold text-white tablet:mr-4 tablet:h-10 tablet:w-28"
+              className="mr-6 h-10 w-36 rounded-md bg-black px-3 py-2 text-base font-semibold text-white tablet:mr-4 tablet:h-10 tablet:w-28 mobile:m-0 mobile:h-8 mobile:w-20 mobile:text-sm"
             >
               후기작성
             </button>
