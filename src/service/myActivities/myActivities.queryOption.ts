@@ -56,9 +56,10 @@ const queryOptions = {
         status,
       ),
   }),
-  deleteMyActivities: (activityId: number) => ({
+  deleteMyActivities: () => ({
     mutationKey: ["deleteMyActivities", "activityId"],
-    mutationFn: () => myActivitiesService.deleteMyActivities(activityId),
+    mutationFn: (activityId: number) =>
+      myActivitiesService.deleteMyActivities(activityId),
   }),
   patchMyActivities: (activityId: number) => ({
     mutationKey: ["patchMyActivities", "activityId"],

@@ -43,8 +43,8 @@ export const useMyActivitiesUpdateReservationStatus = (
   );
 };
 
-export const useDeleteMyActivities = (activityId: number) => {
-  return useMutation(queryOptions.deleteMyActivities(activityId));
+export const useDeleteMyActivities = () => {
+  return useMutation(queryOptions.deleteMyActivities());
 };
 
 export const usePatchMyActivities = (activityId: number) => {

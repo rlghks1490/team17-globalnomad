@@ -8,7 +8,11 @@ import { getReviews } from "@/apis/activityDetails/activityDetails";
 import TempComment from "./TempComment";
 import { useState } from "react";
 
-const Review = () => {
+interface ReviewProps {
+  activityId: number;
+}
+
+const Review = ({ activityId }: ReviewProps) => {
   const { data } = useQuery<ReviewData>({
     queryKey: ["reviews"],
     queryFn: getReviews,

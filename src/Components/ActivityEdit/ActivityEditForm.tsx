@@ -11,6 +11,10 @@ import { useModal } from "@/hooks/useModal";
 import { usePatchMyActivities } from "@/service/myActivities/useMyActiviesService";
 import ModalAlert from "../Modal/ModalAlert";
 
+interface ActivityEditFormProps {
+  activityId: number;
+}
+
 interface newSchedule {
   date: string;
   startTime: string;
@@ -30,8 +34,8 @@ interface formDataType {
   schedulesToAdd: newSchedule[];
 }
 
-const ActivityEditForm = () => {
-  const { data: details } = useActivitiesDetailCheck(1148);
+const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
+  const { data: details } = useActivitiesDetailCheck(activityId);
 
   const [formData, setFormData] = useState<formDataType>({
     title: "",
@@ -64,7 +68,7 @@ const ActivityEditForm = () => {
   }, [details]);
 
   const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
-  const { mutate: modify } = usePatchMyActivities(1148);
+  const { mutate: modify } = usePatchMyActivities(activityId);
 
   const handleActivityModify = (formData: formDataType) => {
     modify(formData, {
