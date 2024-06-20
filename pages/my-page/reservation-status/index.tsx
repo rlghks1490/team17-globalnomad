@@ -1,4 +1,4 @@
-import ReservationStatus from "@/Components/ReservationStatus/ResrvationStatus";
+import ReservationStatus from "@/Components/ReservationStatus/ReservationStatus";
 
 const reservationStatus = () => {
   return (
