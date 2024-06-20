@@ -132,6 +132,7 @@ const NotificationBox = ({ onClose }: NotificationBoxProps) => {
             height={24}
             priority
             onClick={onClose}
+            className="cursor-pointer"
           />
         </div>
       </div>
