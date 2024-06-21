@@ -46,4 +46,4 @@ const ActivityContent = ({ activityId }: ActivityContentProps) => {
   );
 };
 
-// export default ActivityContent;
+export default ActivityContent;
