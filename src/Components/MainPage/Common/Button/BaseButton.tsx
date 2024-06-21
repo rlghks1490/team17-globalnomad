@@ -23,10 +23,10 @@ const BaseButton = ({
     "inline-flex items-center justify-center font-sans transition-opacity focus:outline-none focus:transition-all focus:ease-in-out focus:duration-200";
 
   const sizeStyles = {
-    xl: "w-[12.7rem] py-4",
-    lg: "w-full py-3.5",
-    md: "w-[14.4rem] py-4",
-    sm: "w-[10.8rem] py-2.5",
+    xl: "w-[7.9rem] py-[1rem]",
+    lg: "w-full py-[0.87rem]",
+    md: "w-[9rem] py-[1rem]",
+    sm: "w-[6.8rem] py-[0.6rem]",
   };
 
   const variantStyles = {

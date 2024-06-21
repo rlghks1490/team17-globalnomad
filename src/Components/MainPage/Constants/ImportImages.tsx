@@ -8,8 +8,8 @@ import IconRightArrow from "/public/icons/rightArrowDefaultIcon.svg";
 import IconRightArrowActive from "/public/icons/rightArrowActiveIcon.svg";
 import IconRightArrowVariant1 from "/public/icons/rightArrowVariant1Icon.svg";
 
-import ImageSteppingStone from "/public/images/steppingStoneImage.png";
-import ImageHotAirBalloon from "/public/images/HotAirBalloonImage.png";
+import ImagePlanTravel from "/public/images/PlanTravelImage.png";
+import ImageWithTogether from "/public/images/WithTogetherImage.png";
 import ImageStreetDance from "/public/images/StreetDanceImage.png";
 import ImageNoData from "/public/images/noData.png";
 
@@ -63,15 +63,15 @@ export const ICON = {
 export const IMAGE = {
   banner: {
     first: {
-      src: ImageSteppingStone,
+      src: ImageStreetDance,
       alt: "첫 번째 배너 이미지",
     },
     second: {
-      src: ImageHotAirBalloon,
+      src: ImagePlanTravel,
       alt: "두 번째 배너 이미지",
     },
     third: {
-      src: ImageStreetDance,
+      src: ImageWithTogether,
       alt: "세 번째 배너 이미지",
     },
   },
