@@ -15,18 +15,18 @@ const Banner = () => {
     const bannerImageList = [
       {
         imageSrc: IMAGE.banner.first.src,
-        title: "고민없이 여행을",
-        text: "여행을 갈 때 무엇을 할지에 대한 해답을 제공합니다.",
+        title: "우선 떠나는 여행",
+        text: "여행을 시작했다면 액티비티 선택에 도움을 드립니다",
       },
       {
         imageSrc: IMAGE.banner.second.src,
-        title: "간편한 체험 예약",
-        text: "원하는 여행지의 다양한 체험 상품을 탐색하고, 몇 번의 클릭만으로 예약을 완료할 수 있습니다.",
+        title: "버튼 하나로 예약 완료",
+        text: "원하는 여행지에 따라 손 쉽게 여행 예약까지 한번에",
       },
       {
         imageSrc: IMAGE.banner.third.src,
-        title: "체험 상품 등록",
-        text: "여행지의 체험을 등록해 체험을 소개하고, 여행자들에게 잊지 못할 추억을 선사해 주세요.",
+        title: "같이 떠날 체험자 ",
+        text: "여행을 함께할 체험자를 만나기 위해 체험 소개와 등록까지",
       },
     ];
 
@@ -107,7 +107,7 @@ const Banner = () => {
       <div className="relative w-full overflow-hidden">
         <button
           onClick={() => handleSwipeClick(-1)}
-          className="absolute left-4 top-1/2 z-10 hidden opacity-60 hover:opacity-100 lg:block"
+          className="absolute left-[0.6rem] top-[45%] z-10 block rounded-[0.63rem] opacity-60 hover:opacity-100"
         >
           <Image
             src={ICON.leftArrow.variant1.src}
@@ -118,7 +118,7 @@ const Banner = () => {
         </button>
         <button
           onClick={() => handleSwipeClick(1)}
-          className="absolute right-4 top-1/2 z-10 hidden rotate-180 transform opacity-60 hover:opacity-100 lg:block"
+          className="absolute right-[0.6rem] top-[45%] z-10 block rotate-180 rounded-[0.63rem] opacity-60 hover:opacity-100"
         >
           <Image
             src={ICON.leftArrow.variant1.src}
@@ -127,10 +127,7 @@ const Banner = () => {
             width={24}
           />
         </button>
-        <ul
-          className="flex w-full transition-transform duration-500 ease-in-out"
-          ref={bannerRef}
-        >
+        <ul className="flex w-full" ref={bannerRef}>
           {bannerList.map((banner, index) => (
             <li
               className="transition-border relative h-[34.38rem] w-full flex-none overflow-hidden px-8 duration-300"
@@ -157,7 +154,7 @@ const Banner = () => {
           ))}
         </ul>
       </div>
-      <div className="h-[34.38rem] lg:h-[15rem]" />
+      <div className="lg:h-[15rem] h-[34.38rem]" />
     </div>
   );
 };
