@@ -23,7 +23,7 @@ const Reservations = () => {
       const status = viewStatus === "all" ? null : viewStatus;
       return await getMyReservations({ size: 6, status, cursorId: pageParam });
     },
-    getNextPageParam: (lastPage) => lastPage.data.cursorId ?? false,
+    getNextPageParam: (lastPage) => lastPage.data.cursorId,
     initialPageParam: 0,
     select: (data) => ({
       pages: data?.pages.flatMap((page) => page.data.reservations),
