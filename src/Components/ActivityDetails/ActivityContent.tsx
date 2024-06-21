@@ -5,10 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import { getDatas } from "@/apis/activityDetails/activityDetails";
 import { DataType } from "@/apis/activityDetails/activityDetails.type";
 
-const ActivityContent = () => {
+interface ActivityContentProps {
+  activityId: number;
+}
+
+const ActivityContent = ({ activityId }: ActivityContentProps) => {
   const { data } = useQuery<DataType>({
-    queryKey: ["datas"],
-    queryFn: getDatas,
+    queryKey: ["datas", activityId],
+    queryFn: () => getDatas(activityId),
   });
 
   return (
@@ -16,6 +20,7 @@ const ActivityContent = () => {
       {data && (
         <>
           <ActivityOverview
+            activityId={activityId}
             title={data.title}
             category={data.category}
             address={data.address}
@@ -29,7 +34,11 @@ const ActivityContent = () => {
               description={data.description}
               address={data.address}
             />
-            <ReservationBox price={data.price} schedule={data.schedules} />
+            <ReservationBox
+              activityId={activityId}
+              price={data.price}
+              schedule={data.schedules}
+            />
           </div>
         </>
       )}

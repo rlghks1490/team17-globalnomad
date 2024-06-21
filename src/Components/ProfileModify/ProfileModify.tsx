@@ -7,6 +7,7 @@ import {
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface UsersEditImageUploaderProps {
   profileImageUrl: string;
@@ -19,6 +20,7 @@ const ProfileModify = ({
 }: UsersEditImageUploaderProps) => {
   const [profileImage, setProfileImage] = useState<string>(profileImageUrl);
   const [pickedImage, setPickedImage] = useState<string | null>(null);
+  const queryClient = useQueryClient();
   const { mutate: uploadImage } = useUsersProfileImageUrl();
   const { mutate: editImage } = useUsersEditMyInformation();
   const { user, setUser } = useUser();
@@ -52,6 +54,9 @@ const ProfileModify = ({
               };
               editImage(payload, {
                 onSuccess: (response) => {
+                  queryClient.invalidateQueries({
+                    queryKey: ["usersCheckMyInformation"],
+                  });
                   alert("프로필 이미지가 성공적으로 수정되었습니다.");
                 },
                 onError: (error) => {
@@ -70,7 +75,11 @@ const ProfileModify = ({
     }
   };
 
-  const { data: response, isLoading, isError } = useUsersCheckMyInformation();
+  const {
+    data: response,
+    isLoading,
+    isError,
+  } = useUsersCheckMyInformation(profileImageUrl);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -147,7 +156,7 @@ const ProfileModify = ({
               </div>
             </Link>
             <Link
-              href="#"
+              href="/my-page/reservation-status"
               className="block rounded-xl px-3 py-2 text-left font-bold text-gnGray600 hover:bg-gnSoftGreen  hover:text-black"
             >
               <div className="flex gap-3 tracking-tighter">

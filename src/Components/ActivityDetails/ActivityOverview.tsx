@@ -7,6 +7,7 @@ interface SubImage {
 }
 
 interface ActivityOverviewProps {
+  activityId: number;
   title: string;
   category: string;
   address: string;
@@ -17,6 +18,7 @@ interface ActivityOverviewProps {
 }
 
 const ActivityOverview = ({
+  activityId,
   title,
   category,
   address,
@@ -28,6 +30,7 @@ const ActivityOverview = ({
   return (
     <div className="my-20 flex w-[1200px] flex-col">
       <ActivityOverviewHeader
+        activityId={activityId}
         title={title}
         category={category}
         address={address}

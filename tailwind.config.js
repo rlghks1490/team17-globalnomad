@@ -61,6 +61,7 @@ module.exports = {
         width344px: "21.5rem", //344px
         width142px: "8.875rem", //142px
         width190px: "11.875rem", //190px
+        width194px: "12.125rem", //194px
       },
       height: {
         sidebar: "432px",
@@ -85,6 +86,7 @@ module.exports = {
       },
       gap: {
         activitiesContentGap: "4.5rem",
+        gap30px: "1.875rem", //30px
       },
       translate: {
         translate394px: "24.625rem", //394px

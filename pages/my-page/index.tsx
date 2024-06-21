@@ -2,13 +2,12 @@ import LoginInput from "@/Components/Input/LoginInput";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/apis/auth/auth.type";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   useUsersCheckMyInformation,
   useUsersEditMyInformation,
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
-import { useUser } from "@/context/UserContext";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
@@ -48,37 +47,34 @@ const rules = {
   },
 };
 
-const myPage = () => {
+const MyPage = () => {
   const {
     register,
     handleSubmit,
     getValues,
     formState: { isValid, errors },
+    setValue,
   } = useForm<FormValues>({ mode: "onChange" });
 
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { mutate: editUserInformation } = useUsersEditMyInformation();
-  const { user, setUser } = useUser();
 
   useEffect(() => {
     if (response && response.data) {
-      setUser(response.data);
+      setValue("email", response.data.email);
+      setValue("nickname", response.data.nickname);
     }
-  }, [response, setUser]);
+  }, [response, setValue]);
 
   const onSubmit = (formData: FormValues) => {
-    const payload: {
-      nickname: string;
-      newPassword?: string;
-      profileImageUrl?: string;
-    } = {
+    const payload: UsersEditMyInformation = {
       nickname: formData.nickname || "",
       newPassword: formData.password,
+      profileImageUrl: response?.data.profileImageUrl || "",
     };
 
-    editUserInformation(payload as UsersEditMyInformation, {
-      onSuccess: (updateData) => {
-        setUser(updateData.data);
+    editUserInformation(payload, {
+      onSuccess: () => {
         alert("정보가 성공적으로 수정되었습니다.");
       },
       onError: (error) => {
@@ -105,17 +101,19 @@ const myPage = () => {
   return (
     <>
       <div className="flex w-myInfoBoxWidth gap-10">
-        <div className="flex h-screen w-full flex-col gap-10  tablet:pb-10">
-          <form className="flex justify-between">
+        <div className="flex h-screen w-full flex-col gap-10 tablet:pb-10">
+          <form
+            className="flex justify-between"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex">
-              <div className=" text-3xl font-bold ">내 정보</div>
+              <div className="text-3xl font-bold">내 정보</div>
               <MobileDropDown />
             </div>
             <button
               type="submit"
-              onClick={handleSubmit(onSubmit)}
               disabled={!isValid}
-              className="flex cursor-pointer flex-col items-end gap-6 rounded-md bg-gnDarkGreen px-4 py-2 font-bold leading-6 text-white active:bg-green-950 "
+              className="flex cursor-pointer flex-col items-end gap-6 rounded-md bg-gnDarkGreen px-4 py-2 font-bold leading-6 text-white active:bg-green-950"
             >
               저장하기
             </button>
@@ -136,7 +134,7 @@ const myPage = () => {
               isError={!!errors.email}
               errorMessage={errors.email?.message}
               {...register("email", rules.emailRules)}
-              // disabled={true}
+              disabled={true}
             />
             <LoginInput
               label="비밀번호"
@@ -171,4 +169,4 @@ const myPage = () => {
   );
 };
 
-export default myPage;
+export default MyPage;

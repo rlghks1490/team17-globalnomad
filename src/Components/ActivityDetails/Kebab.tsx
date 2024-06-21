@@ -3,7 +3,11 @@ import kebab from "../../../public/icons/kebab.svg";
 import { useState } from "react";
 import KebabOptions from "./KebabOptions";
 
-const Kebab = () => {
+interface KebabProps {
+  activityId: number;
+}
+
+const Kebab = ({ activityId }: KebabProps) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   return (
@@ -11,7 +15,7 @@ const Kebab = () => {
       <button onClick={() => setIsClicked(!isClicked)}>
         <Image src={kebab} alt="kebab" width={40} height={40} />
       </button>
-      <>{isClicked && <KebabOptions />}</>
+      <>{isClicked && <KebabOptions activityId={activityId} />}</>
     </div>
   );
 };

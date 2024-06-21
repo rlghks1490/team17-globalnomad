@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroller";
 import { getMyActivities } from "@/apis/myActivities/myActivites";
 import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
+import Link from "next/link";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 function Activities() {
@@ -21,31 +22,29 @@ function Activities() {
 
   const activityData = data?.pages || [];
   return (
-    <div>
-      <div>
-        <div className="flex justify-between">
-          <div className="flex">
-            <h2 className="mb-6 text-3xl font-bold leading-normal">
-              내 체험 관리
-            </h2>
-            <MobileDropDown />
-          </div>
+    <div className="flex flex-col gap-6 mobile:gap-3">
+      <div className="flex justify-between">
+        <div className="flex">
+          <h2 className="text-3xl font-bold">내 체험 관리</h2>
+          <MobileDropDown />
+        </div>
+        <Link href="activities/register">
           <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
             체험 등록하기
           </button>
-        </div>
-        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-          <div className=" bg-gnGray100">
-            {activityData.length > 0 ? (
-              activityData?.map((activity) => (
-                <MyActivitiesList key={activity.id} data={activity} />
-              ))
-            ) : (
-              <NoReservationList />
-            )}
-          </div>
-        </InfiniteScroll>
+        </Link>
       </div>
+      <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
+        <div className=" bg-gnGray100">
+          {activityData.length > 0 ? (
+            activityData?.map((activity) => (
+              <MyActivitiesList key={activity.id} data={activity} />
+            ))
+          ) : (
+            <NoReservationList />
+          )}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 }

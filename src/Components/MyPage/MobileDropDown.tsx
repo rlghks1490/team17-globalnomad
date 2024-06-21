@@ -7,7 +7,7 @@ const linkList = [
   { href: "/my-page", label: "내 정보" },
   { href: "/my-page/reservations", label: "예약 내역" },
   { href: "/my-page/activities", label: "내 체험 관리" },
-  { href: "/my-page/activities", label: "예약 현황" },
+  { href: "/my-page/reservation-status", label: "예약 현황" },
 ];
 
 const MobileDropDown = () => {
@@ -40,7 +40,7 @@ const MobileDropDown = () => {
         onClick={handleClose}
       >
         <div
-          className={`fixed bottom-0 left-0 z-20 flex w-full flex-col items-center justify-start rounded  border-gnGray300 bg-white font-medium shadow-reservationBox transition-transform duration-300 ease-in-out ${
+          className={`fixed bottom-0 left-0 z-20 flex w-full flex-col items-center justify-start rounded-t-md  border-gnGray300 bg-white font-medium shadow-reservationBox transition-transform duration-300 ease-in-out ${
             isOpen
               ? "translate-y-0 opacity-100"
               : "pointer-events-none translate-y-full opacity-0"
@@ -51,7 +51,7 @@ const MobileDropDown = () => {
             <Link
               key={index}
               href={link.href}
-              className="block px-4 py-2 text-xs font-medium"
+              className="block h-full w-full px-4 py-2 text-center text-xs font-medium"
             >
               {link.label}
             </Link>

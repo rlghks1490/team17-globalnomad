@@ -10,11 +10,21 @@ interface InputProps {
   type: "email" | "password" | "text";
   isError?: boolean;
   errorMessage?: string;
+  disabled?: boolean;
 }
 
 const LoginInput = forwardRef<HTMLInputElement, InputProps>(
   (
-    { label, placeholder, name, type, isError, errorMessage, ...props },
+    {
+      label,
+      placeholder,
+      name,
+      type,
+      isError,
+      errorMessage,
+      disabled,
+      ...props
+    },
     ref,
   ) => {
     return (
@@ -23,12 +33,13 @@ const LoginInput = forwardRef<HTMLInputElement, InputProps>(
           {label}
         </label>
         <input
-          className={`mt-2 block h-14 w-full border px-3 py-2 ${isError ? "border-red-500" : "border-gray-300"} rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500`}
+          className={`mt-2 block h-14 w-full border px-3 py-2 ${isError ? "border-red-500" : "border-gray-300"} rounded-md shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 disabled:text-gnGray500`}
           placeholder={placeholder}
           type={type}
           name={name}
           ref={ref}
           {...props}
+          disabled={disabled}
         />
         {isError && (
           <div className="mt-1 text-sm text-red-500">{errorMessage}</div>
