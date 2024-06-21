@@ -1,5 +1,4 @@
 import ActivityContent from "@/Components/ActivityDetails/ActivityContent";
-import Pagenation from "@/Components/ActivityDetails/Pagenation";
 import Review from "@/Components/ActivityDetails/Review";
 import { useRouter } from "next/router";
 import { useEffect } from "react";

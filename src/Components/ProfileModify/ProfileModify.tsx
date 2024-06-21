@@ -96,7 +96,7 @@ const ProfileModify = ({
   const data = response.data;
 
   return (
-    <div className="flex justify-center gap-10">
+    <div className="flex justify-center gap-10 mobile:hidden">
       <div className="flex h-[400px] max-w-4xl tablet:w-[250px]">
         <div className="flex w-[380px] flex-col rounded-lg border bg-white p-6">
           <div className="relative flex items-center justify-center space-x-3">
