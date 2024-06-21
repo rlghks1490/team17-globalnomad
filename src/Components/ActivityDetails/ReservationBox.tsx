@@ -66,7 +66,8 @@ const ReservationBox = ({
   };
 
   const resevationMutation = useMutation({
-    mutationFn: (data: ResevationRequestData) => ReservationRequest(data),
+    mutationFn: (data: ResevationRequestData) =>
+      ReservationRequest(data, activityId),
     mutationKey: ["reservation"],
     onSuccess: () => {
       alert("예약이 완료되었습니다.");

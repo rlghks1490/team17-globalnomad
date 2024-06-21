@@ -11,10 +11,10 @@ const GuestHeader = () => {
         </div>
         <div className=" flex items-center justify-center gap-6 text-gnDarkBlack">
           <button>
-            <Link href="auth/sign-in">로그인</Link>
+            <Link href="/auth/sign-in">로그인</Link>
           </button>
           <button>
-            <Link href="auth/sign-up">회원가입</Link>
+            <Link href="/auth/sign-up">회원가입</Link>
           </button>
         </div>
       </div>
