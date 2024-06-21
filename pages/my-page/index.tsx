@@ -10,6 +10,7 @@ import {
 import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
 import Toast from "@/Components/Toast/Toast";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -113,7 +114,10 @@ const MyPage = () => {
             className="flex justify-between"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="text-3xl font-bold">내 정보</div>
+            <div className="flex">
+              <div className="text-3xl font-bold">내 정보</div>
+              <MobileDropDown />
+            </div>
             <button
               type="submit"
               disabled={!isValid}

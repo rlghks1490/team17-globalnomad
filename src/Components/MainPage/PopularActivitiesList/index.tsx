@@ -75,7 +75,7 @@ const PopularActivitiesList = ({
         <ul className="flex gap-4" ref={ref}>
           {popularActivities?.map((popularActivity) => (
             <li key={popularActivity.id} className="flex">
-              <CardResource activitiesData={popularActivity} banner />
+              <CardResource activitiesData={popularActivity} banner={true} />
             </li>
           ))}
         </ul>

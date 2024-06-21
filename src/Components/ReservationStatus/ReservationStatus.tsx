@@ -3,6 +3,7 @@ import StatusCalendar from "./StatusCalendar";
 import Image from "next/image";
 import NoReservation from "../../../public/icons/noReservation.svg";
 import { useEffect, useState } from "react";
+import MobileDropDown from "../MyPage/MobileDropDown";
 
 const ReservationStatus = () => {
   const { data: list } = useMyActivitiesCheck();
@@ -23,7 +24,10 @@ const ReservationStatus = () => {
       {list && list.data.activities.length > 0 ? (
         <div>
           <div className="flex w-full flex-col gap-[42px]">
-            <h1 className="text-[32px] font-bold">예약 현황</h1>
+            <div className="flex">
+              <h1 className="text-[32px] font-bold">예약 현황</h1>
+              <MobileDropDown />
+            </div>
             <div className="relative">
               <label
                 htmlFor="activity-select"

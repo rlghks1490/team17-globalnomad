@@ -16,14 +16,14 @@ const ActivitiesList = ({
   searchTotalCount,
 }: ActivitiesListProps) => {
   return (
-    <div className="flex w-full flex-col items-center gap-8">
+    <div className="flex w-full flex-col items-start justify-center gap-[2rem]">
       {search && searchTotalCount ? (
         <>
           <SearchActivitiesHeader
             search={search}
             searchTotalCount={searchTotalCount}
           />
-          <ul className="grid grid-cols-4 gap-x-5 gap-y-12 sm:grid-cols-2 md:grid-cols-4 md:gap-y-8">
+          <ul className="grid-cols-custom-4 tablet:grid-cols-custom-3 mobile:grid-cols-custom-2 grid gap-x-[1.5rem] gap-y-[3rem] tablet:w-full tablet:gap-y-[2rem]">
             {activities?.map((activity, index) => (
               <li key={`${activity.id}-${activity.userId}-${index}`}>
                 <CardResource activitiesData={activity} banner={false} />
@@ -33,10 +33,10 @@ const ActivitiesList = ({
         </>
       ) : (
         <>
-          <h2 className="flex w-full items-center justify-between text-3xl font-bold text-black">
+          <h2 className="flex w-full items-center justify-between text-[2.3rem] font-bold leading-normal text-black">
             {category ? category : "🚀 전체 체험"}
           </h2>
-          <ul className="grid grid-cols-4 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-4 md:gap-y-8">
+          <ul className="grid-cols-custom-4 tablet:grid-cols-custom-3 mobile:grid-cols-custom-2 grid gap-x-[1.5rem] gap-y-[3rem] tablet:w-full tablet:gap-y-[2rem]">
             {activities?.map((activity, index) => (
               <li key={`${activity.id}-${activity.userId}-${index}`}>
                 <CardResource activitiesData={activity} banner={false} />
