@@ -8,7 +8,7 @@ import {
 } from "@/service/activities/useActivitiesService";
 import { ActivitiesDetailCheck } from "@/service/activities/activities.type";
 import { useModal } from "@/hooks/useModal";
-import { usePatchMyActivities } from "@/service/myActivities/useMyActiviesService";
+import { usePatchMyActivities } from "@/service/myActivities/useMyActivitiesService";
 import ModalAlert from "../Modal/ModalAlert";
 
 interface ActivityEditFormProps {
