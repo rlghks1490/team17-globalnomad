@@ -2,10 +2,22 @@ import { useMyActivitiesCheck } from "@/service/myActivities/useMyActivitiesServ
 import StatusCalendar from "./StatusCalendar";
 import Image from "next/image";
 import NoReservation from "../../../public/icons/noReservation.svg";
+import { useEffect, useState } from "react";
 import MobileDropDown from "../MyPage/MobileDropDown";
 
 const ReservationStatus = () => {
   const { data: list } = useMyActivitiesCheck();
+  const [selectedActivityId, setSelectedActivityId] = useState<number>();
+
+  useEffect(() => {
+    if (list && list.data.activities.length > 0) {
+      setSelectedActivityId(list.data.activities[0].id);
+    }
+  }, [list]);
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedActivityId(Number(event.target.value));
+  };
 
   return (
     <div className="flex w-[792px] flex-col gap-[30px] ">
@@ -26,6 +38,7 @@ const ReservationStatus = () => {
               <select
                 id="activity-select"
                 className="h-14 w-full rounded border border-gnGray700"
+                onChange={handleSelectChange}
               >
                 {list.data.activities.map((activity) => (
                   <option key={activity.id} value={activity.id}>
@@ -35,7 +48,9 @@ const ReservationStatus = () => {
               </select>
             </div>
           </div>
-          <StatusCalendar />
+          {selectedActivityId && (
+            <StatusCalendar activityId={selectedActivityId} />
+          )}
         </div>
       ) : (
         <div className="flex flex-col gap-20">
