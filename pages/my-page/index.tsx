@@ -2,12 +2,14 @@ import LoginInput from "@/Components/Input/LoginInput";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/apis/auth/auth.type";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   useUsersCheckMyInformation,
   useUsersEditMyInformation,
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
+import { useUser } from "@/context/UserContext";
+import Toast from "@/Components/Toast/Toast";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
@@ -58,6 +60,9 @@ const MyPage = () => {
 
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { mutate: editUserInformation } = useUsersEditMyInformation();
+  const { user, setUser } = useUser();
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
 
   useEffect(() => {
     if (response && response.data) {
@@ -73,13 +78,16 @@ const MyPage = () => {
       profileImageUrl: response?.data.profileImageUrl || "",
     };
 
-    editUserInformation(payload, {
-      onSuccess: () => {
-        alert("정보가 성공적으로 수정되었습니다.");
+    editUserInformation(payload as UsersEditMyInformation, {
+      onSuccess: (updateData) => {
+        setUser(updateData.data);
+        setToastMessage("정보가 성공적으로 수정되었습니다.");
+        setShowToast(true);
       },
       onError: (error) => {
         console.error("에러 발생:", error);
-        alert("정보 수정에 실패했습니다.");
+        setToastMessage("정보 수정에 실패했습니다.");
+        setShowToast(true);
       },
     });
   };
@@ -164,6 +172,9 @@ const MyPage = () => {
             />
           </div>
         </div>
+        {showToast && (
+          <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+        )}
       </div>
     </>
   );

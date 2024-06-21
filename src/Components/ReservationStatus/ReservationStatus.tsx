@@ -1,4 +1,4 @@
-import { useMyActivitiesCheck } from "@/service/myActivities/useMyActiviesService";
+import { useMyActivitiesCheck } from "@/service/myActivities/useMyActivitiesService";
 import StatusCalendar from "./StatusCalendar";
 import Image from "next/image";
 import NoReservation from "../../../public/icons/noReservation.svg";

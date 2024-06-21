@@ -48,6 +48,7 @@ const Pagenation = ({
             alt="backwardButton_disabled"
             width={22}
             height={22}
+            priority
           />
         ) : (
           <Image
@@ -55,6 +56,7 @@ const Pagenation = ({
             alt="backwardButton"
             width={22}
             height={22}
+            priority
           />
         )}
       </button>
@@ -84,6 +86,7 @@ const Pagenation = ({
             alt="forwardButton_disabled"
             width={22}
             height={22}
+            priority
           />
         ) : (
           <Image
@@ -91,6 +94,7 @@ const Pagenation = ({
             alt="forwardButton"
             width={22}
             height={22}
+            priority
           />
         )}
       </button>

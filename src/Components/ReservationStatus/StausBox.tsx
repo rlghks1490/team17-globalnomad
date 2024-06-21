@@ -1,7 +1,7 @@
 import {
   useMyActivitiesRegistrationSchedule,
   useMyActivitiesReservationCheck,
-} from "@/service/myActivities/useMyActiviesService";
+} from "@/service/myActivities/useMyActivitiesService";
 import CloseBtn from "../../../public/icons/x_button.svg";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

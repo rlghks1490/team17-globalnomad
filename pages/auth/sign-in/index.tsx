@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginInput from "@/Components/Input/LoginInput";
 import Link from "next/link";
 import { FormValues } from "@/apis/auth/auth.type";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useAuth } from "@/context/Authcontext";
 import EmptyLayout from "@/layouts/EmptyLayout";
+import Toast from "@/Components/Toast/Toast";
 
 const { email, password } = USER_INPUT_VALIDATION;
 
@@ -32,7 +33,6 @@ const rules = {
 
 const SignIn = () => {
   const { signIn } = useAuth();
-
   const { formState, register, handleSubmit } = useForm<FormValues>({
     defaultValues: { email: "", password: "" },
     mode: "onBlur",
@@ -41,11 +41,7 @@ const SignIn = () => {
   const { isValid, errors } = formState;
 
   const onSubmit = async (data: FormValues) => {
-    try {
-      await signIn(data);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
+    await signIn(data);
   };
 
   return (
@@ -83,7 +79,9 @@ const SignIn = () => {
           <button
             type="submit"
             disabled={!isValid}
-            className={`h-12 rounded-md text-base font-bold text-white ${isValid ? "bg-gnDarkGreen" : "bg-gray-400"}`}
+            className={`h-12 rounded-md text-base font-bold text-white ${
+              isValid ? "bg-gnDarkGreen" : "bg-gray-400"
+            }`}
           >
             로그인 하기
           </button>

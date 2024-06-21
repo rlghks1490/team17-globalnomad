@@ -1,4 +1,4 @@
-import { useDeleteMyActivities } from "@/service/myActivities/useMyActiviesService";
+import { useDeleteMyActivities } from "@/service/myActivities/useMyActivitiesService";
 import Link from "next/link";
 
 interface KebabOptionsProps {

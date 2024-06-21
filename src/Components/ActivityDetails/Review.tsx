@@ -13,9 +13,12 @@ interface ReviewProps {
 }
 
 const Review = ({ activityId }: ReviewProps) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const contentsPerPage = 3;
+
   const { data } = useQuery<ReviewData>({
-    queryKey: ["reviews"],
-    queryFn: getReviews,
+    queryKey: ["reviews", activityId, currentPage],
+    queryFn: () => getReviews(activityId, currentPage, contentsPerPage),
   });
 
   function calculateSatisfaction(averageRating: number): string {
@@ -38,15 +41,17 @@ const Review = ({ activityId }: ReviewProps) => {
     ? calculateSatisfaction(data.averageRating)
     : "아직 후기가 없습니다.";
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const contentsPerPage = 3;
-
-  // const totalPages = data ? Math.ceil(data.totalCount / contentsPerPage) : 1;
-  const totalPages = Math.ceil(46 / contentsPerPage);
+  const totalPages = data ? Math.ceil(data!.totalCount / contentsPerPage) : 1;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  const startIndex = (currentPage - 1) * contentsPerPage;
+  const endIndex = startIndex + contentsPerPage;
+  const reviewsToShow = data?.reviews.slice(startIndex, endIndex) ?? [];
+
+  if (!data) return null;
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -66,13 +71,14 @@ const Review = ({ activityId }: ReviewProps) => {
         </div>
       </div>
       {data?.reviews.map((review) => (
-        <Comment
-          key={review.id}
-          profileImageUrl={review.user.profileImageUrl}
-          nickname={review.user.nickname}
-          content={review.content}
-          createdAt={review.createdAt}
-        />
+        <div key={review.id}>
+          <Comment
+            profileImageUrl={review.user.profileImageUrl}
+            nickname={review.user.nickname}
+            content={review.content}
+            createdAt={review.createdAt}
+          />
+        </div>
       ))}
       {/* <TempComment /> */}
       <Pagenation
