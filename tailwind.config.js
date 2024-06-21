@@ -92,10 +92,26 @@ module.exports = {
         translate394px: "24.625rem", //394px
       },
       gridTemplateColumns: {
-        'custom-4': 'repeat(4, minmax(auto, 28.2rem))',
-        'custom-3': 'repeat(3, minmax(23rem, 38rem))',
-        'custom-2': 'repeat(2, minmax(16rem, 38rem))'
-      }
+        "custom-4": "repeat(4, minmax(auto, 28.2rem))",
+        "custom-3": "repeat(3, minmax(23rem, 38rem))",
+        "custom-2": "repeat(2, minmax(16rem, 38rem))",
+      },
+      animation: {
+        shimmer: "shimmer 1.5s infinite linear",
+      },
+      keyframes: {
+        shimmer: {
+          "0%": { backgroundPosition: "200%" },
+          "100%": { backgroundPosition: "-200%" },
+        },
+      },
+      backgroundImage: {
+        "gradient-custom":
+          "linear-gradient(to right, #D9D9D9 0%, #EDEEF1 50%, #D9D9D9 100%)",
+      },
+      backgroundSize: {
+        custom: "300% 100%",
+      },
     },
   },
   plugins: [],
