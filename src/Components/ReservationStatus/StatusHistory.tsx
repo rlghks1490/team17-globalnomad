@@ -1,7 +1,7 @@
 import {
   useMyActivitiesReservationCheck,
   useMyActivitiesUpdateReservationStatus,
-} from "@/service/myActivities/useMyActiviesService";
+} from "@/service/myActivities/useMyActivitiesService";
 import { useEffect, useState } from "react";
 
 interface Reservations {

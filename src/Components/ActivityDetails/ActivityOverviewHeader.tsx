@@ -3,6 +3,7 @@ import KebabOptions from "./KebabOptions";
 import Kebab from "./Kebab";
 
 interface ActivityOverviewHeaderProops {
+  activityId: number;
   title: string;
   category: string;
   address: string;
@@ -11,6 +12,7 @@ interface ActivityOverviewHeaderProops {
 }
 
 const ActivityOverviewHeader = ({
+  activityId,
   title,
   category,
   address,
@@ -26,7 +28,7 @@ const ActivityOverviewHeader = ({
         rating={rating}
         reviewCount={reviewCount}
       />
-      <Kebab />
+      <Kebab activityId={activityId} />
     </div>
   );
 };

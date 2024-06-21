@@ -5,8 +5,8 @@ export const useUsersSignup = () => {
   return useQuery(queryOptions.usersSignup);
 };
 
-export const useUsersCheckMyInformation = () => {
-  return useQuery(queryOptions.usersCheckMyInformation);
+export const useUsersCheckMyInformation = (profileImageUrl: string = "") => {
+  return useQuery(queryOptions.usersCheckMyInformation(profileImageUrl));
 };
 
 export const useUsersEditMyInformation = () => {

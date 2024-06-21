@@ -8,6 +8,7 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { getMyActivities } from "@/apis/myActivities/myActivites";
 import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
+import Link from "next/link";
 
 function Activities() {
   const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -31,9 +32,11 @@ function Activities() {
           <h2 className="mb-6 text-3xl font-bold leading-normal">
             내 체험 관리
           </h2>
-          <button className="w-activityButton h-12 rounded border bg-gnLightBlack text-white">
-            체험 등록하기
-          </button>
+          <Link href="activities/register">
+            <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
+              체험 등록하기
+            </button>
+          </Link>
         </div>
         <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
           <div className=" bg-gnGray100">
@@ -42,7 +45,7 @@ function Activities() {
                 <MyActivitiesList key={activity.id} data={activity} />
               ))
             ) : (
-              <NoReservationList />
+              <NoReservationList/>
             )}
           </div>
         </InfiniteScroll>

@@ -12,7 +12,7 @@ const CardResource = ({ activitiesData, banner }: CardResourceProps) => {
   const router = useRouter();
 
   const handleClick = (id: number) => {
-    router.push(`/activityDetail/${id}`);
+    router.push(`/activity-details/${id}`);
   };
 
   return (
