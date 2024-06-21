@@ -137,8 +137,8 @@ const Banner = () => {
                 <Image
                   src={banner.imageSrc}
                   alt="배너 이미지"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   priority
                 />
               </div>

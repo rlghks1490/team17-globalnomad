@@ -14,6 +14,10 @@ export interface FormValues {
   passwordConfirm?: string;
 }
 
+export interface profileImageUrlValue {
+  profileImageUrl?: string;
+}
+
 /**
  * @param PostAuthLoginRes /{
   user: {

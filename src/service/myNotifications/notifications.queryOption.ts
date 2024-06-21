@@ -5,9 +5,9 @@ const queryOptions = {
     queryKey: ["myNotificationsCheck"],
     queryFn: () => MyNotificationsService.getMyNotificationsCheck(),
   },
-  deleteMyNotifications: (notificationsId: number) => ({
+  deleteMyNotifications: () => ({
     mutationKey: ["deleteMyNotifications", "notificationsId"],
-    mutationFn: () =>
+    mutationFn: (notificationsId: number) =>
       MyNotificationsService.deleteMyNotifications(notificationsId),
   }),
 };

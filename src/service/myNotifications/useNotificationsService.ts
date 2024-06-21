@@ -5,6 +5,6 @@ export const useMyNotificationsCheck = () => {
   return useQuery(queryOptions.myNotificationsCheck);
 };
 
-export const useDeleteMyNotifications = (notificationsId: number) => {
-  return useMutation(queryOptions.deleteMyNotifications(notificationsId));
+export const useDeleteMyNotifications = () => {
+  return useMutation(queryOptions.deleteMyNotifications());
 };
