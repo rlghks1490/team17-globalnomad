@@ -38,9 +38,9 @@ const ReservationStatus = () => {
           <StatusCalendar />
         </div>
       ) : (
-        <div className="flex flex-col gap-20">
+        <div className="flex flex-col gap-5">
           <h1 className="text-[32px] font-bold">예약 현황</h1>
-          <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-col items-center gap-5 p-10">
             <Image
               src={NoReservation}
               alt="no-reservation"
