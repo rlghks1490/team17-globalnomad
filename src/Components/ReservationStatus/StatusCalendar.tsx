@@ -28,7 +28,11 @@ interface EventData {
   reservations: Reservation;
 }
 
-const StatusCalendar = () => {
+interface StatusCalendarProps {
+  activityId: number;
+}
+
+const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
   const [currentYear, setCurrentYear] = useState<string>(
     new Date().getFullYear().toString(),
   );
@@ -46,7 +50,7 @@ const StatusCalendar = () => {
   const { data: monthlyStatus, refetch } = useMyActivitiesRegistrationDashboard(
     currentYear,
     currentMonth,
-    1148,
+    activityId,
   );
 
   const transformEvents = (data: EventData[]) => {
@@ -186,7 +190,7 @@ const StatusCalendar = () => {
               eventInfo.event.classNames.includes("event-pending")
                 ? "w-full border-gnDarkBlue bg-gnDarkBlue text-white"
                 : eventInfo.event.classNames.includes("event-confirmed")
-                  ? "text-gnDarkOrange w-full border-gnLightOrange bg-gnLightOrange"
+                  ? "w-full border-gnLightOrange bg-gnLightOrange text-gnDarkOrange"
                   : "border-gnGray300 bg-gnGray300 text-gnGray800"
             } bottom-0 rounded px-1 py-[3px]`}
           >
