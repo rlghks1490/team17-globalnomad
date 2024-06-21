@@ -60,7 +60,7 @@ const SignUp = () => {
     mutationFn: (data: FormValues) => auth.signUp(data),
     mutationKey: ["signUp"],
     onSuccess: () => {
-      router.push("/login");
+      router.push("/auth/sign-up");
     },
     onError: (error: AxiosError<ErrorMessage>) => {
       console.error("error", error);
