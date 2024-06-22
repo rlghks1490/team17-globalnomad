@@ -24,7 +24,7 @@ const ActivityDetails = () => {
   return (
     <>
       <Head>
-        <title>체험상세 - {data?.title} - GlobalNomad </title>
+        <title>{`체험상세 - ${data?.title} - GlobalNomad`}</title>
       </Head>
       <ActivityContent activityId={activityId} />
       <Review activityId={activityId} />
