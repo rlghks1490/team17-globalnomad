@@ -34,3 +34,9 @@ body {
   padding-bottom: 0;
   cursor: pointer;
 }
+
+@layer components {
+  .skeleton {
+    @apply animate-shimmer bg-gradient-custom bg-custom;
+  }
+}
