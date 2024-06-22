@@ -13,6 +13,7 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { GetServerSideProps } from "next";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
+import Head from "next/head";
 
 const Reservations = () => {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
@@ -34,26 +35,31 @@ const Reservations = () => {
   const reservationData = data?.pages || [];
 
   return (
-    <div className="flex flex-col gap-6 mobile:gap-3">
-      <div className="flex justify-between">
-        <div className="relative flex">
-          <h2 className="text-3xl font-bold">예약 내역</h2>
-          <MobileDropDown />
+    <>
+      <Head>
+        <title>GlobalNomad - 예약 내역</title>
+      </Head>
+      <div className="flex flex-col gap-6 mobile:gap-3">
+        <div className="flex justify-between">
+          <div className="relative flex">
+            <h2 className="text-3xl font-bold">예약 내역</h2>
+            <MobileDropDown />
+          </div>
+          <ReservationFilter value={viewStatus} setValue={setViewStatus} />
         </div>
-        <ReservationFilter value={viewStatus} setValue={setViewStatus} />
+        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
+          <div className="bg-gnGray100">
+            {reservationData.length > 0 ? (
+              reservationData?.map((reservation) => (
+                <ReservationList key={reservation.id} data={reservation} />
+              ))
+            ) : (
+              <NoReservationList />
+            )}
+          </div>
+        </InfiniteScroll>
       </div>
-      <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-        <div className="bg-gnGray100">
-          {reservationData.length > 0 ? (
-            reservationData?.map((reservation) => (
-              <ReservationList key={reservation.id} data={reservation} />
-            ))
-          ) : (
-            <NoReservationList />
-          )}
-        </div>
-      </InfiniteScroll>
-    </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import ActivityRegistSchedule from "./ActivityRegistSchedule";
 import { useActivitiesRegistration } from "@/service/activities/useActivitiesService";
 import { useModal } from "@/hooks/useModal";
 import ModalAlert from "../Modal/ModalAlert";
+import Head from "next/head";
 
 interface Schedule {
   date: string;
@@ -90,33 +91,38 @@ const AcitivyRegistForm = () => {
   };
 
   return (
-    <div className="flex w-[792px] flex-col gap-6">
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">내 체험 등록</h1>
-        <button
-          className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
-          onClick={() => handleActivityRegist(formData)}
-        >
-          등록하기
-        </button>
-      </div>
-      <ActivityRegistInfo handleFormData={handleAddInfo} />
-      <ActivityRegistSchedule
-        handleAddSchedule={handleAddSchedule}
-        handleCancelAddedSchedules={handleCancelAddedSchedules}
-      />
-      <ActivityRegistImageUploader
-        handleChangeBannerImage={handleChangeBannerImage}
-        handleChangeSubImages={handleChangeSubImages}
-      />
-      {isOpenModal && (
-        <ModalAlert
-          isOpenModal={isOpenModal}
-          message={"등록에 성공했습니다."}
-          onClose={handleModalClose}
+    <>
+      <Head>
+        <title>GlobalNomad - 내 체험 등록</title>
+      </Head>
+      <div className="flex w-[792px] flex-col gap-6">
+        <div className="flex justify-between">
+          <h1 className="text-4xl font-bold">내 체험 등록</h1>
+          <button
+            className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
+            onClick={() => handleActivityRegist(formData)}
+          >
+            등록하기
+          </button>
+        </div>
+        <ActivityRegistInfo handleFormData={handleAddInfo} />
+        <ActivityRegistSchedule
+          handleAddSchedule={handleAddSchedule}
+          handleCancelAddedSchedules={handleCancelAddedSchedules}
         />
-      )}
-    </div>
+        <ActivityRegistImageUploader
+          handleChangeBannerImage={handleChangeBannerImage}
+          handleChangeSubImages={handleChangeSubImages}
+        />
+        {isOpenModal && (
+          <ModalAlert
+            isOpenModal={isOpenModal}
+            message={"등록에 성공했습니다."}
+            onClose={handleModalClose}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

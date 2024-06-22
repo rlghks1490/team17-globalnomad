@@ -11,6 +11,7 @@ import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
 import Toast from "@/Components/Toast/Toast";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
+import Head from "next/head";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -108,6 +109,9 @@ const MyPage = () => {
 
   return (
     <>
+    <Head>
+      <title>GlobalNomad - 내 정보</title>
+    </Head>
       <div className="flex w-myInfoBoxWidth gap-10">
         <div className="flex h-screen w-full flex-col gap-10 tablet:pb-10">
           <form

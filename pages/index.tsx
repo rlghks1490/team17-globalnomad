@@ -1,20 +1,22 @@
 import MainPage from "@/Components/MainPage";
 import { useAuth } from "@/context/Authcontext";
+import Head from "next/head";
 
 const IndexPage = () => {
   const { user } = useAuth();
 
-  if (user && user.accessToken) {
-    // 로그인되어 있는 상태
-    return <MainPage />;
-  } else {
-    // 로그인되어 있지 않은 상태
-    return (
-      <>
+  return(
+    <>
+      <Head>
+        <title>GlobalNomad</title>
+      </Head>
+      {user && user.accessToken? (
         <MainPage />
-      </>
-    );
-  }
+      ) : (
+        <MainPage />
+      )}
+    </>
+  )
 };
 
 export default IndexPage;
