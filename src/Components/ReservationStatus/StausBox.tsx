@@ -6,7 +6,6 @@ import CloseBtn from "../../../public/icons/x_button.svg";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import StatusHistory from "./StatusHistory";
-import CommonModal from "../Modal/CommonModal";
 import StatusBoxLayout from "./StatusBoxLayout";
 
 interface StatusBoxProps {
@@ -19,7 +18,6 @@ interface StatusBoxProps {
 
 const StatusBox = ({
   activityId,
-  selectedDay,
   selectedDate,
   isOpenModal,
   onClose,
@@ -34,7 +32,7 @@ const StatusBox = ({
     useMyActivitiesReservationCheck(
       selectedScheduleId,
       reservationStatus,
-      1148,
+      activityId,
     );
 
   const handleReservationStatus = (status: string) => {
@@ -146,6 +144,7 @@ const StatusBox = ({
             reservationStatus={reservationStatus}
             selectedScheduleId={selectedScheduleId}
             hourlyStatus={hourlyStatus?.data}
+            activityId={activityId}
           />
         </div>
       </StatusBoxLayout>

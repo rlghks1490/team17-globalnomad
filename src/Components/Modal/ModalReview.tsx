@@ -60,7 +60,7 @@ const ModalReview = ({
             <div className="flex gap-6">
               <div>
                 <Image
-                  src="/images/ActivityIntroductionImage_test2.png"
+                  src={data.activity.bannerImageUrl}
                   alt="BannerImage"
                   width={126}
                   height={126}

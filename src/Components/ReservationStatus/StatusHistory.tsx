@@ -1,8 +1,5 @@
-import {
-  useMyActivitiesReservationCheck,
-  useMyActivitiesUpdateReservationStatus,
-} from "@/service/myActivities/useMyActivitiesService";
-import { useEffect, useState } from "react";
+import { useMyActivitiesUpdateReservationStatus } from "@/service/myActivities/useMyActivitiesService";
+import { useState } from "react";
 
 interface Reservations {
   id: number;
@@ -32,19 +29,20 @@ interface Status {
   status: string;
 }
 
-interface StausHistoryProps {
+interface StatusHistoryProps {
   reservationStatus: string;
   selectedScheduleId: number;
   hourlyStatus: HourlyStatus;
+  activityId: number;
 }
 const StatusHistory = ({
   reservationStatus,
-  selectedScheduleId,
   hourlyStatus,
-}: StausHistoryProps) => {
+  activityId,
+}: StatusHistoryProps) => {
   const [reservationId, setReservationId] = useState<number>(0);
   const { mutate: statusUpdate } = useMyActivitiesUpdateReservationStatus(
-    1148,
+    activityId,
     reservationId,
   );
 
@@ -131,7 +129,7 @@ const StatusHistory = ({
                 </div>
               </div>
               <div className="flex justify-end gap-1.5">
-                <button className="text-gnDarkOrange rounded-[26.5px] bg-gnLightOrange px-4 py-2.5 text-sm font-bold">
+                <button className="rounded-[26.5px] bg-gnLightOrange px-4 py-2.5 text-sm font-bold text-gnDarkOrange">
                   예약 승인
                 </button>
               </div>
