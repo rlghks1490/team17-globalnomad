@@ -7,7 +7,7 @@ import {
   useDeleteMyNotifications,
   useMyNotificationsCheck,
 } from "@/service/myNotifications/useNotificationsService";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface NotificationId {
@@ -20,6 +20,7 @@ interface NotificationBoxProps {
 
 const NotificationBox = ({ onClose }: NotificationBoxProps) => {
   const [notificationId, setNotificationId] = useState<number>(0);
+  const notificationRef = useRef<HTMLDivElement>(null);
 
   const queryClient = useQueryClient();
   const { data: notifications } = useMyNotificationsCheck();
@@ -116,10 +117,29 @@ const NotificationBox = ({ onClose }: NotificationBoxProps) => {
     return content;
   };
 
+  useEffect(() => {
+    function handleMouseDown(event: MouseEvent) {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    }
+
+    document.addEventListener("mousedown", handleMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+    };
+  }, []);
+
   if (!notifications) return null;
 
   return (
-    <div className="absolute right-0 top-12 z-50 mt-3 flex w-80 flex-col gap-4 rounded-[10px] bg-gnSoftGreen px-5 py-6 shadow-[0_2px_8px_0_#787486]">
+    <div
+      className="absolute right-0 top-12 z-50 mt-3 flex w-80 flex-col gap-4 rounded-[10px] bg-gnSoftGreen px-5 py-6 shadow-[0_2px_8px_0_#787486]"
+      ref={notificationRef}
+    >
       <div className="flex items-center justify-between">
         <div className="text-xl font-bold">
           알림 {notifications.data.totalCount}개
