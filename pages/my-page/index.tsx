@@ -13,6 +13,7 @@ import Toast from "@/Components/Toast/Toast";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 import HeadMeta from "@/Components/Common/HeadMeta";
 import { META_TAG } from "@/constants/metaTag";
+import MobileImageChange from "@/Components/MyPage/MobileImageChange";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -129,6 +130,7 @@ const MyPage = () => {
               저장하기
             </button>
           </div>
+          <MobileImageChange profileImageUrl="" handleChangeImage={() => {}} />
           <div className="flex flex-col gap-4">
             <LoginInput
               label="닉네임"
