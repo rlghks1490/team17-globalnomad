@@ -14,6 +14,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { GetServerSideProps } from "next";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 import { ReservationSkeleton } from "@/Components/MyReservation/ReservationSkeleton";
+import Head from "next/head";
 
 const Reservations = () => {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
@@ -36,6 +37,9 @@ const Reservations = () => {
 
   return (
     <>
+      <Head>
+        <title>GlobalNomad - 예약 내역</title>
+      </Head>
       {isLoading ? (
         <ReservationSkeleton />
       ) : (

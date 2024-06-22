@@ -6,6 +6,7 @@ import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
 import Link from "next/link";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 import { ActivitiesSkeleton } from "@/Components/MyActivities/MYactivitiesSkeleton";
+import Head from "next/head";
 
 function Activities() {
   const { isLoading, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -24,6 +25,9 @@ function Activities() {
   const activityData = data?.pages || [];
   return (
     <>
+      <Head>
+        <title>GlobalNomad - 내 체험 관리</title>
+      </Head>
       {isLoading ? (
         <ActivitiesSkeleton />
       ) : (
