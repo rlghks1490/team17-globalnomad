@@ -111,14 +111,14 @@ const MyPage = () => {
   return (
     <>
       <HeadMeta title={META_TAG.myPage["title"]} />
-      <div className="flex w-myInfoBoxWidth gap-10">
-        <div className="flex h-screen w-full flex-col gap-10 tablet:pb-10">
-          <form
-            className="flex justify-between"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+      <div className="w-myInfoBoxWidth tablet:w-[30.75rem] mobile:w-[21.438rem]">
+        <form
+          className="flex flex-col gap-6 tablet:gap-4 mobile:gap-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex justify-between">
             <div className="flex">
-              <div className="text-3xl font-bold">내 정보</div>
+              <h1 className="text-3xl font-bold">내 정보</h1>
               <MobileDropDown />
             </div>
             <button
@@ -128,7 +128,7 @@ const MyPage = () => {
             >
               저장하기
             </button>
-          </form>
+          </div>
           <div className="flex flex-col gap-4">
             <LoginInput
               label="닉네임"
@@ -174,11 +174,11 @@ const MyPage = () => {
               })}
             />
           </div>
-        </div>
-        {showToast && (
-          <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
-        )}
+        </form>
       </div>
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </>
   );
 };
