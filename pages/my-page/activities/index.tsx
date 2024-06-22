@@ -5,9 +5,10 @@ import { getMyActivities } from "@/apis/myActivities/myActivites";
 import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
 import Link from "next/link";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
+import { ActivitiesSkeleton } from "@/Components/MyActivities/MYactivitiesSkeleton";
 
 function Activities() {
-  const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { isLoading, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["MyActivities"],
     queryFn: ({ pageParam }) => {
       return getMyActivities({ size: 6, cursorId: pageParam });
@@ -22,30 +23,39 @@ function Activities() {
 
   const activityData = data?.pages || [];
   return (
-    <div className="flex flex-col gap-6 mobile:gap-3">
-      <div className="flex justify-between">
-        <div className="flex">
-          <h2 className="text-3xl font-bold">내 체험 관리</h2>
-          <MobileDropDown />
+    <>
+      {isLoading ? (
+        <ActivitiesSkeleton />
+      ) : (
+        <div className="flex flex-col gap-6 mobile:gap-3">
+          <div className="flex justify-between">
+            <div className="flex">
+              <h2 className="text-3xl font-bold">내 체험 관리</h2>
+              <MobileDropDown />
+            </div>
+            <Link href="activities/register">
+              <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
+                체험 등록하기
+              </button>
+            </Link>
+          </div>
+          <InfiniteScroll
+            hasMore={hasNextPage}
+            loadMore={() => fetchNextPage()}
+          >
+            <div className=" bg-gnGray100">
+              {activityData.length > 0 ? (
+                activityData?.map((activity) => (
+                  <MyActivitiesList key={activity.id} data={activity} />
+                ))
+              ) : (
+                <NoReservationList />
+              )}
+            </div>
+          </InfiniteScroll>
         </div>
-        <Link href="activities/register">
-          <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
-            체험 등록하기
-          </button>
-        </Link>
-      </div>
-      <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-        <div className=" bg-gnGray100">
-          {activityData.length > 0 ? (
-            activityData?.map((activity) => (
-              <MyActivitiesList key={activity.id} data={activity} />
-            ))
-          ) : (
-            <NoReservationList />
-          )}
-        </div>
-      </InfiniteScroll>
-    </div>
+      )}
+    </>
   );
 }
 
