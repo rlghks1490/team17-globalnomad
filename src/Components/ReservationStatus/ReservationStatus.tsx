@@ -18,6 +18,8 @@ const ReservationStatus = () => {
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedActivityId(Number(event.target.value));
+    const activityId = selectedActivityId;
+    return activityId;
   };
 
   return (

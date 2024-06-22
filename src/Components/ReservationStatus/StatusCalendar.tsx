@@ -16,6 +16,7 @@ import {
   useMyActivitiesRegistrationSchedule,
 } from "@/service/myActivities/useMyActivitiesService";
 import StatusBox from "./StausBox";
+import { useModal } from "@/hooks/useModal";
 
 interface Reservation {
   completed: number;
@@ -42,16 +43,14 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [events, setEvents] = useState<{ title: string; start: string }[]>([]);
-  const [clickPosition, setClickPosition] = useState<{
-    x: number;
-    y: number;
-  } | null>(null); // 추가
 
   const { data: monthlyStatus, refetch } = useMyActivitiesRegistrationDashboard(
     currentYear,
     currentMonth,
     activityId,
   );
+
+  const { isOpenModal, handleModalClose, handleModalOpen } = useModal();
 
   const transformEvents = (data: EventData[]) => {
     const events: { title: string; start: string; className: string }[] = [];
@@ -134,11 +133,7 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
     const hasEvents = events.some((event) => event.start === cellDate);
 
     if (hasEvents) {
-      const rect = info.dayEl.getBoundingClientRect();
-      setClickPosition({
-        y: rect.top - 500,
-        x: rect.right + 10,
-      });
+      handleModalOpen();
     } else {
       setSelectedDay("");
       setSelectedDate("");
@@ -151,18 +146,20 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
     setSelectedDay(clickedDay);
     setSelectedDate(clickedDate);
 
-    const rect = info.el.getBoundingClientRect();
-    setClickPosition({
-      y: rect.top - 500,
-      x: rect.right + 10,
-    });
+    handleModalOpen();
   };
 
   const handleCloseStatusBox = () => {
-    setClickPosition(null);
     setSelectedDay("");
     setSelectedDate("");
+    handleModalClose();
   };
+
+  useEffect(() => {
+    if (activityId !== null) {
+      refetch();
+    }
+  }, [activityId, refetch]);
 
   useEffect(() => {
     if (monthlyStatus) {
@@ -210,12 +207,12 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
         dateClick={handleDateClick}
         eventClick={handleEventClick}
       />
-      {clickPosition && (
+      {isOpenModal && (
         <StatusBox
+          activityId={activityId}
           selectedDay={selectedDay}
           selectedDate={selectedDate}
-          x={clickPosition.x}
-          y={clickPosition.y}
+          isOpenModal={isOpenModal}
           onClose={handleCloseStatusBox}
         />
       )}

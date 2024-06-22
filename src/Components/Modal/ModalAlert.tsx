@@ -29,6 +29,3 @@ const ModalAlert = ({ isOpenModal, onClose, message }: ModalAlertProps) => {
 };
 
 export default ModalAlert;
-
-// margin: 10.8rem auto 4.5rem;
-// margin: 0 2.8rem 2.8rem 39.2rem;
