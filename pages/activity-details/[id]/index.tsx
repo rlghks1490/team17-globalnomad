@@ -17,17 +17,15 @@ const ActivityDetails = () => {
     }
   }, [id]);
 
-  const {
-    data: response,
-  } = useActivitiesDetailCheck(activityId);
+  const { data: response } = useActivitiesDetailCheck(activityId);
 
   const data = response?.data;
 
   return (
     <>
-    <Head>
-      <title>GlobalNomad - {data?.title} </title>
-    </Head>
+      <Head>
+        <title>GlobalNomad - {data?.title} </title>
+      </Head>
       <ActivityContent activityId={activityId} />
       <Review activityId={activityId} />
     </>

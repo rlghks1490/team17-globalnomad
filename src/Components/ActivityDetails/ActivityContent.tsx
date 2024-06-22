@@ -4,16 +4,21 @@ import ReservationBox from "./ReservationBox";
 import { useQuery } from "@tanstack/react-query";
 import { getDatas } from "@/apis/activityDetails/activityDetails";
 import { DataType } from "@/apis/activityDetails/activityDetails.type";
+import ActivityContentSkeleton from "./ActivityContentSkeleton";
 
 interface ActivityContentProps {
   activityId: number;
 }
 
 const ActivityContent = ({ activityId }: ActivityContentProps) => {
-  const { data } = useQuery<DataType>({
+  const { data, isLoading } = useQuery<DataType>({
     queryKey: ["datas", activityId],
     queryFn: () => getDatas(activityId),
   });
+
+  if (isLoading) return <ActivityContentSkeleton />;
+
+  if (!data) return null;
 
   return (
     <div className="flex flex-col items-center">
