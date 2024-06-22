@@ -1,22 +1,18 @@
+import HeadMeta from "@/Components/Common/HeadMeta";
 import MainPage from "@/Components/MainPage";
+import { META_TAG } from "@/constants/metaTag";
 import { useAuth } from "@/context/Authcontext";
 import Head from "next/head";
 
 const IndexPage = () => {
   const { user } = useAuth();
 
-  return(
+  return (
     <>
-      <Head>
-        <title>GlobalNomad</title>
-      </Head>
-      {user && user.accessToken? (
-        <MainPage />
-      ) : (
-        <MainPage />
-      )}
+      <HeadMeta title={META_TAG.home["title"]} />
+      {user && user.accessToken ? <MainPage /> : <MainPage />}
     </>
-  )
+  );
 };
 
 export default IndexPage;
