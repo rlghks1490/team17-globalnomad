@@ -7,6 +7,7 @@ import {
 import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
+import Toast from "../Toast/Toast";
 
 interface UsersEditImageUploaderProps {
   profileImageUrl: string;
@@ -19,6 +20,9 @@ const MobileImageChange = ({
 }: UsersEditImageUploaderProps) => {
   const [pickedImage, setPickedImage] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string>(profileImageUrl);
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
+
   const { user } = useUser();
   const queryClient = useQueryClient();
 
@@ -53,14 +57,16 @@ const MobileImageChange = ({
                 profileImageUrl: newProfileImageUrl,
               };
               editImage(payload, {
-                onSuccess: (response) => {
+                onSuccess: () => {
                   queryClient.invalidateQueries({
                     queryKey: ["usersCheckMyInformation"],
                   });
-                  alert("프로필 이미지가 성공적으로 수정되었습니다.");
+                  setToastMessage("프로필 이미지가 성공적으로 수정되었습니다.");
+                  setShowToast(true);
                 },
-                onError: (error) => {
-                  alert("프로필 이미지 수정에 실패했습니다.");
+                onError: () => {
+                  setToastMessage("프로필 이미지 수정에 실패했습니다.");
+                  setShowToast(true);
                 },
               });
             }
@@ -108,6 +114,9 @@ const MobileImageChange = ({
           alt="modifyIcon"
         />
       </div>
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </div>
   );
 };
