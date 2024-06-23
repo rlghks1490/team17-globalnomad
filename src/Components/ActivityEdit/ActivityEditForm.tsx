@@ -22,7 +22,7 @@ interface newSchedule {
   endTime: string;
 }
 
-interface formDataType {
+interface FormDataType {
   title: string;
   category: string;
   description: string;
@@ -38,7 +38,7 @@ interface formDataType {
 const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   const { data: details, isLoading } = useActivitiesDetailCheck(activityId);
 
-  const [formData, setFormData] = useState<formDataType>({
+  const [formData, setFormData] = useState<FormDataType>({
     title: "",
     category: "",
     description: "",
@@ -71,7 +71,7 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
   const { mutate: modify } = usePatchMyActivities(activityId);
 
-  const handleActivityModify = (formData: formDataType) => {
+  const handleActivityModify = (formData: FormDataType) => {
     modify(formData, {
       onSuccess: () => {
         handleModalOpen();
