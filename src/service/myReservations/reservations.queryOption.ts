@@ -4,11 +4,13 @@ const queryOptions = {
   myReservationsCheck: {
     queryKey: ["myReservationsCheck"],
     queryFn: () => MyReservationsService.getMyReservationsCheck(),
+    staleTime: 3 * 60 * 1000,
   },
   myReservationsCancel: (reservationId: number) => ({
     mutationKey: ["myReservationsCancel", "reservationId"],
     mutationFn: () =>
       MyReservationsService.patchMyReservationsCancel(reservationId),
+    staleTime: 3 * 60 * 1000,
   }),
   myReservationsReviews: (
     reservationId: number,
@@ -22,6 +24,7 @@ const queryOptions = {
         rating,
         content,
       ),
+    staleTime: 3 * 60 * 1000,
   }),
 };
 
