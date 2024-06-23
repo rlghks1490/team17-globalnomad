@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       Cookies.remove("refreshToken");
       if (data.accessToken) {
         Cookies.set("accessToken", data.accessToken, {
-          expires: 7,
+          expires: 1,
         });
         Cookies.set("refreshToken", data.refreshToken, { expires: 7 }); // 7일 동안 유효
         setUser(data);

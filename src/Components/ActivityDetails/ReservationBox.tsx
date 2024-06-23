@@ -131,7 +131,10 @@ const ReservationBox = ({
               <div className="flex w-[120px] flex-col gap-2">
                 <p className="text-xl font-bold">참여 인원 수</p>
                 <div className="flex flex-row items-center justify-center gap-2 rounded-md border border-[#CDD0DC]">
-                  <button onClick={() => setCounter(counter - 1)}>
+                  <button
+                    disabled={counter <= 1}
+                    onClick={() => setCounter(counter - 1)}
+                  >
                     <Image
                       src={DecreaseButton}
                       alt="decreaseButton"

@@ -5,6 +5,8 @@ import NoReservation from "../../../public/icons/noReservation.svg";
 import { useEffect, useState } from "react";
 import MobileDropDown from "../MyPage/MobileDropDown";
 import Head from "next/head";
+import HeadMeta from "../Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 const ReservationStatus = () => {
   const { data: list } = useMyActivitiesCheck();
@@ -24,9 +26,10 @@ const ReservationStatus = () => {
 
   return (
     <>
-      <Head>
-        <title>GlobalNomad - 예약 현황</title>
-      </Head>
+      <HeadMeta
+        title={META_TAG.myReservationStatus["title"]}
+        description={META_TAG.myReservationStatus["description"]}
+      />
       <div className="flex w-[792px] flex-col gap-[30px] ">
         {list && list.data.activities.length > 0 ? (
           <div>
