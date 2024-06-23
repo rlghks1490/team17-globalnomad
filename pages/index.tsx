@@ -9,7 +9,10 @@ const IndexPage = () => {
 
   return (
     <>
-      <HeadMeta title={META_TAG.home["title"]} />
+      <HeadMeta
+        title={META_TAG.home["title"]}
+        description={META_TAG.myReservation["description"]}
+      />
       {user && user.accessToken ? <MainPage /> : <MainPage />}
     </>
   );

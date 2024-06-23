@@ -52,38 +52,37 @@ const ModalReview = ({
   return (
     <>
       <CommonModal isOpenModal={isOpenModal} onClose={onClose} size="Review">
-        <div className="flex flex-col items-center justify-center gap-10">
-          <div className="flex w-full justify-between">
+        <div className="flex h-[42.25rem] w-[27rem] flex-col items-center gap-10">
+          <div className="flex h-[2.625rem] w-full justify-between">
             <h2 className="text-[28px] font-bold">후기 작성</h2>
-            <button onClick={onClose}>
+            <button className="h-10 w-10" onClick={onClose}>
               <Image src={CloseIcon} alt="CloseButton" width={40} height={40} />
             </button>
           </div>
-          <div className="flex flex-col gap-6">
-            <div className="flex gap-6">
-              <div>
+          <div className="flex h-[37.188rem] w-full flex-col gap-6">
+            <div className="flex h-[7.938rem] w-full gap-6">
+              <div className="h-[7.875rem] w-[7.875rem] overflow-auto rounded-xl">
                 <Image
                   src={data.activity.bannerImageUrl}
                   alt="BannerImage"
                   width={126}
                   height={126}
-                  className="rounded-xl"
                 />
               </div>
-              <div className="flex flex-col gap-3">
-                <div className="text-xl font-bold">{data.activity.title}</div>
-                <div className="text-lg font-normal">
+              <div className="flex w-[16.938rem] flex-col gap-3">
+                <p className="text-xl font-bold">{data.activity.title}</p>
+                <p className="text-lg font-normal">
                   {data.date} · {data.startTime} ~ {data.endTime} ·
                   {data.headCount}명
-                </div>
+                </p>
                 <div className="h-px border border-gnDarkBlack border-opacity-10"></div>
-                <div className="text-[32px] font-bold">
+                <p className="text-[2rem] font-bold leading-normal">
                   ₩{data.totalPrice.toLocaleString("ko-KR")}
-                </div>
+                </p>
               </div>
             </div>
             <form onSubmit={handleReviewSubmit}>
-              <div className="gap- flex items-center justify-center">
+              <div className="mb-6 flex items-center justify-center">
                 {stars.map((_, index) => (
                   <Image
                     key={index}
