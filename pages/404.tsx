@@ -22,7 +22,7 @@ const Page404 = () => {
       </div>
       <div>
         <button
-          className="h-10 w-96 rounded-3xl border-4 bg-violet-500 text-white hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700"
+          className="h-10 w-96 rounded-3xl border-4 bg-gnDarkGreen text-white hover:bg-green-900 focus:outline-none focus:ring focus:ring-green-600 active:bg-green-800"
           type="button"
           onClick={handleBackPage}
         >
