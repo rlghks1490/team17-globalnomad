@@ -10,6 +10,7 @@ import { ActivitiesDetailCheck } from "@/service/activities/activities.type";
 import { useModal } from "@/hooks/useModal";
 import { usePatchMyActivities } from "@/service/myActivities/useMyActivitiesService";
 import ModalAlert from "../Modal/ModalAlert";
+import ActivityEditFormSkeleton from "./ActivityEditFormSkeleton";
 
 interface ActivityEditFormProps {
   activityId: number;
@@ -35,7 +36,7 @@ interface formDataType {
 }
 
 const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
-  const { data: details } = useActivitiesDetailCheck(activityId);
+  const { data: details, isLoading } = useActivitiesDetailCheck(activityId);
 
   const [formData, setFormData] = useState<formDataType>({
     title: "",
@@ -137,6 +138,8 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
       subImageIdsToRemove: ids,
     });
   };
+
+  if (isLoading) return <ActivityEditFormSkeleton />;
 
   if (!details) return null;
 

@@ -4,9 +4,10 @@ import Image from "next/image";
 import NoReservation from "../../../public/icons/noReservation.svg";
 import { useEffect, useState } from "react";
 import MobileDropDown from "../MyPage/MobileDropDown";
+import ReservationStatusSkeleton from "./ReservationStatusSkeleton";
 
 const ReservationStatus = () => {
-  const { data: list } = useMyActivitiesCheck();
+  const { data: list, isLoading } = useMyActivitiesCheck();
   const [selectedActivityId, setSelectedActivityId] = useState<number>();
 
   useEffect(() => {
@@ -21,10 +22,12 @@ const ReservationStatus = () => {
     return activityId;
   };
 
+  if (isLoading) return <ReservationStatusSkeleton />;
+
   return (
-    <div className="flex w-[792px] flex-col gap-[30px] ">
+    <div className="flex w-[792px] flex-col gap-[30px]">
       {list && list.data.activities.length > 0 ? (
-        <div>
+        <div className="flex flex-col gap-6">
           <div className="flex w-full flex-col gap-[42px]">
             <div className="flex">
               <h1 className="text-[32px] font-bold">예약 현황</h1>
