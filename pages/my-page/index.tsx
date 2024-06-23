@@ -14,6 +14,8 @@ import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 import HeadMeta from "@/Components/Common/HeadMeta";
 import { META_TAG } from "@/constants/metaTag";
 import MobileImageChange from "@/Components/MyPage/MobileImageChange";
+import { ProfileModifySkeleton } from "@/Components/ProfileModify/ProfileModifySkeleton";
+import MyPageSkeleton from "@/Components/MyPage/MyPageSkeleton";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -96,7 +98,7 @@ const MyPage = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <MyPageSkeleton />;
   }
 
   if (isError) {

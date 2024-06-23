@@ -9,6 +9,7 @@ import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
 import { useQueryClient } from "@tanstack/react-query";
 import Toast from "@/Components/Toast/Toast";
+import { ProfileModifySkeleton } from "./ProfileModifySkeleton";
 
 interface UsersEditImageUploaderProps {
   profileImageUrl: string;
@@ -91,7 +92,11 @@ const ProfileModify = ({
   } = useUsersCheckMyInformation(profileImageUrl);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <ProfileModifySkeleton />
+      </div>
+    );
   }
 
   if (isError) {
