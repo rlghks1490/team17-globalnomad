@@ -62,6 +62,7 @@ module.exports = {
         width142px: "8.875rem", //142px
         width190px: "11.875rem", //190px
         width194px: "12.125rem", //194px
+        width1920px: "120rem", //1920px
       },
       height: {
         sidebar: "432px",
@@ -71,6 +72,7 @@ module.exports = {
         TabletCardList: "9.75rem", //156px
         myActivitiesStar: "1.188rem", // 19pxv
         height142: "8.875rem", //142px
+        height1409px: "88.063rem", //1409px
       },
       boxShadow: {
         reservationBox: "0px 4px 16px 0px rgba(17, 34, 17, 0.05)",

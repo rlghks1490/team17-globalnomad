@@ -10,7 +10,8 @@ import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import EmptyLayout from "@/layouts/EmptyLayout";
 import Toast from "@/Components/Toast/Toast";
-import Head from "next/head";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 interface ErrorMessage {
   message: string;
@@ -78,9 +79,10 @@ const SignUp = () => {
 
   return (
     <>
-      <Head>
-        <title>회원가입</title>
-      </Head>
+      <HeadMeta
+        title={META_TAG.signUp["title"]}
+        description={META_TAG.signUp["description"]}
+      />
       <div className="flex items-center justify-center">
         <div className="flex w-loginForm flex-col items-center pt-24">
           <div>
@@ -131,7 +133,8 @@ const SignUp = () => {
                   notMatch: (value) => {
                     const { password } = getValues();
                     return (
-                      password === value || passwordConfirm?.errorMessage.confirm
+                      password === value ||
+                      passwordConfirm?.errorMessage.confirm
                     );
                   },
                 },

@@ -6,9 +6,8 @@ import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useAuth } from "@/context/Authcontext";
 import EmptyLayout from "@/layouts/EmptyLayout";
-import Toast from "@/Components/Toast/Toast";
-import Head from "next/head";
-
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 const { email, password } = USER_INPUT_VALIDATION;
 
@@ -48,9 +47,10 @@ const SignIn = () => {
 
   return (
     <>
-      <Head>
-        <title>로그인</title>
-      </Head>
+      <HeadMeta
+        title={META_TAG.signIn["title"]}
+        description={META_TAG.signIn["description"]}
+      />
       <div className="flex items-center justify-center">
         <div className="flex w-loginForm flex-col items-center pt-24">
           <div>
