@@ -77,9 +77,9 @@ module.exports = {
         activitiesContentGap: "4.5rem",
       },
       gridTemplateColumns: {
-        'custom-4': 'repeat(4, minmax(auto, 28.2rem))',
-        'custom-3': 'repeat(3, minmax(23rem, 38rem))',
-        'custom-2': 'repeat(2, minmax(16rem, 38rem))'
+        'custom-4': 'repeat(4, minmax(auto, 17.6rem))',
+        'custom-3': 'repeat(3, minmax(14.37rem, 23.75rem))',
+        'custom-2': 'repeat(2, minmax(10rem, 23.75rem))'
       }
     },
   },
