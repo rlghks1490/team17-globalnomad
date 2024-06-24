@@ -3,7 +3,7 @@ import { useUsersCheckMyInformation } from "@/service/users/useUsersService";
 import Link from "next/link";
 import { useAuth } from "@/context/Authcontext";
 import { useUser } from "@/context/UserContext";
-import LoginHeaderDropdownSkeleton from "@/Components/Common/LoginHeader/LoginHeaderDropDownSkeleton";
+import LoginHeaderDropdownSkeleton from "./LoginHeaderDropdownSkeleton";
 
 const LoginHeaderDropdown: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
