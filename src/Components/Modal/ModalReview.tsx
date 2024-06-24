@@ -31,6 +31,9 @@ const ModalReview = ({
   );
 
   const handleContentValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > 1000) {
+      return;
+    }
     setContent(e.target.value);
   };
 
@@ -60,7 +63,7 @@ const ModalReview = ({
             <div className="flex gap-6">
               <div>
                 <Image
-                  src="/images/ActivityIntroductionImage_test2.png"
+                  src={data.activity.bannerImageUrl}
                   alt="BannerImage"
                   width={126}
                   height={126}
@@ -95,6 +98,7 @@ const ModalReview = ({
               </div>
               <div className="flex flex-col gap-6">
                 <textarea
+                  maxLength={1000}
                   value={content}
                   onChange={handleContentValue}
                   placeholder="후기를 작성해주세요"

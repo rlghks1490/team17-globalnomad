@@ -20,6 +20,7 @@ const ActivityContent = ({ activityId }: ActivityContentProps) => {
       {data && (
         <>
           <ActivityOverview
+            userId={data.userId}
             activityId={activityId}
             title={data.title}
             category={data.category}

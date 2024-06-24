@@ -1,17 +1,16 @@
-import ReservationList from "@/Components/MyReservation/ReservationList";
 import NoReservationList from "@/Components/MyReservation/NoReservationList";
-import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
-import { getMyReservations } from "@/apis/myReservation/myReservation";
-import { ReservationStatus } from "@/apis/myReservation/myReservation.type";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { getMyActivities } from "@/apis/myActivities/myActivites";
 import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
 import Link from "next/link";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
+import { ActivitiesSkeleton } from "@/Components/MyActivities/MYactivitiesSkeleton";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 function Activities() {
-  const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { isLoading, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["MyActivities"],
     queryFn: ({ pageParam }) => {
       return getMyActivities({ size: 6, cursorId: pageParam });
@@ -26,31 +25,43 @@ function Activities() {
 
   const activityData = data?.pages || [];
   return (
-    <div>
-      <div>
-        <div className="flex justify-between">
-          <h2 className="mb-6 text-3xl font-bold leading-normal">
-            내 체험 관리
-          </h2>
-          <Link href="activities/register">
-            <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
-              체험 등록하기
-            </button>
-          </Link>
-        </div>
-        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-          <div className=" bg-gnGray100">
-            {activityData.length > 0 ? (
-              activityData?.map((activity) => (
-                <MyActivitiesList key={activity.id} data={activity} />
-              ))
-            ) : (
-              <NoReservationList/>
-            )}
+    <>
+      <HeadMeta
+        title={META_TAG.myActivity["title"]}
+        description={META_TAG.myActivity["description"]}
+      />
+      {isLoading ? (
+        <ActivitiesSkeleton />
+      ) : (
+        <div className="flex flex-col gap-6 mobile:gap-3">
+          <div className="flex justify-between">
+            <div className="flex">
+              <h2 className="text-3xl font-bold">내 체험 관리</h2>
+              <MobileDropDown />
+            </div>
+            <Link href="activities/register">
+              <button className="h-12 w-activityButton rounded border bg-gnLightBlack text-white">
+                체험 등록하기
+              </button>
+            </Link>
           </div>
-        </InfiniteScroll>
-      </div>
-    </div>
+          <InfiniteScroll
+            hasMore={hasNextPage}
+            loadMore={() => fetchNextPage()}
+          >
+            <div className=" bg-gnGray100">
+              {activityData.length > 0 ? (
+                activityData?.map((activity) => (
+                  <MyActivitiesList key={activity.id} data={activity} />
+                ))
+              ) : (
+                <NoReservationList />
+              )}
+            </div>
+          </InfiniteScroll>
+        </div>
+      )}
+    </>
   );
 }
 

@@ -5,6 +5,11 @@
 body {
   @apply font-sans;
   background-color: #fafafa;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .fc-evnet .fc-daygrid-event .fc-h-evnet {
@@ -33,4 +38,10 @@ body {
   height: 100%;
   padding-bottom: 0;
   cursor: pointer;
+}
+
+@layer components {
+  .skeleton {
+    @apply animate-shimmer bg-gradient-custom bg-custom;
+  }
 }
