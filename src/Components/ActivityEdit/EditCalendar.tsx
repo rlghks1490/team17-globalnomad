@@ -19,7 +19,7 @@ const EditCalendar = ({ selectedDate, setSelectedDate }: EditCalendarProps) => {
     { value: string; onClick: () => void }
   >(({ value, onClick }, ref) => (
     <button
-      className="flex h-14 w-[377px] cursor-pointer flex-row items-center gap-3 rounded-md border border-gnGray700 px-4 py-2 tablet:w-[149px] mobile:h-11 mobile:w-[130px] mobile:gap-0.5 mobile:gap-[7px] mobile:px-2.5 mobile:text-sm"
+      className="flex h-14 w-[377px] cursor-pointer flex-row items-center gap-3 rounded-md border border-gnGray700 px-4 py-2 tablet:w-[149px] mobile:h-11 mobile:w-[130px] mobile:gap-0.5 mobile:px-2.5 mobile:text-sm"
       onClick={onClick}
       ref={ref}
     >

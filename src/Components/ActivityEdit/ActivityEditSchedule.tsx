@@ -162,13 +162,13 @@ const ActivityEditSchedule = ({
       <div className="flex flex-col gap-[21px]">
         {defaultSchedules.map((defaultSchedule, id) => (
           <div key={id} className="flex gap-[21px] tablet:gap-1 mobile:gap-2">
-            <div className="text-gnDarkBalck w-[379px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[149px] mobile:h-10 mobile:w-[130px] mobile:px-2.5 mobile:py-[9px]">
+            <div className="w-[379px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal text-gnDarkBlack tablet:w-[149px] mobile:h-10 mobile:w-[130px] mobile:px-2.5 mobile:py-[9px]">
               {defaultSchedule.date}
             </div>
-            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
+            <div className="w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal text-gnDarkBlack tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {defaultSchedule.startTime}
             </div>
-            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
+            <div className="w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal text-gnDarkBlack tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {defaultSchedule.endTime}
             </div>
             <button
@@ -185,13 +185,13 @@ const ActivityEditSchedule = ({
       <div className="flex flex-col gap-[21px]">
         {addedSchedule.map((newSchedule, index) => (
           <div key={index} className="flex gap-5 tablet:gap-1 mobile:gap-1">
-            <div className="text-gnDarkBalck w-[379px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[149px] mobile:h-10 mobile:w-[130px] mobile:px-2.5 mobile:py-[9px]">
+            <div className="w-[379px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal text-gnDarkBlack tablet:w-[149px] mobile:h-10 mobile:w-[130px] mobile:px-2.5 mobile:py-[9px]">
               {newSchedule.date}
             </div>
-            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
+            <div className="w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal text-gnDarkBlack tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {newSchedule.startTime}
             </div>
-            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
+            <div className="w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal text-gnDarkBlack tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {newSchedule.endTime}
             </div>
             <button onClick={() => handleRemoveNewSchedule(index)}>
