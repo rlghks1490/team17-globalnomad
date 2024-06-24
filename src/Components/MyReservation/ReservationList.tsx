@@ -5,6 +5,7 @@ import ReservationStatue from "./ReservationStatus";
 import { useModal } from "@/hooks/useModal";
 import ModalReservationCancel from "../Modal/ModalReservationCancel";
 import ModalReview from "../Modal/ModalReview";
+import Link from "next/link";
 
 interface ReservationListProps {
   data: Reservation;
@@ -25,6 +26,7 @@ const ReservationList = ({ data }: ReservationListProps) => {
   } = useModal();
 
   const bannerImage = data.activity.bannerImageUrl;
+  const link = `/activity-details/${data.activity.id}`;
 
   return (
     <div className="mb-6 flex h-reservationBoxHeight w-reservationBoxWidth shrink-0 gap-6 rounded-3xl shadow-reservationBox tablet:h-TabletCardList tablet:w-reservationTablet mobile:h-32 mobile:w-width344px">
@@ -41,9 +43,14 @@ const ReservationList = ({ data }: ReservationListProps) => {
       <div className="my-6 flex flex-col tablet:my-3.5 tablet:w-60 mobile:my-margin9px mobile:w-48">
         <div>
           <ReservationStatue status={data.status} />
-          <h1 className="mb-3 truncate text-xl font-bold leading-6 tablet:mb-margin5px tablet:text-lg mobile:m-0 mobile:text-sm">
-            {data.activity.title}
-          </h1>
+          <Link
+            href={link}
+            className="mb-3 hover:text-indigo-500 active:text-violet-700 tablet:mb-margin5px mobile:m-0"
+          >
+            <p className="truncate text-xl font-bold leading-6 tablet:text-lg mobile:text-sm">
+              {data.activity.title}
+            </p>
+          </Link>
           <p className="mb-4 text-lg font-normal leading-6 tablet:text-sm mobile:text-xs">
             {data.date} · {data.startTime} ~ {data.endTime} · {data.headCount}명
           </p>

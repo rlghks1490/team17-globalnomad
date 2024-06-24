@@ -7,7 +7,7 @@ interface HeadMetaProps {
 }
 
 const HeadMeta = ({ title, description }: HeadMetaProps) => {
-  const message = `${title}-GlobalNomad`;
+  const message = `${title}GlobalNomad`;
   return (
     <>
       <Head>
