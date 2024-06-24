@@ -22,7 +22,9 @@ const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
   const openDaumPostcode = () => {
     new window.daum.Postcode({
       oncomplete: (data: any) => {
-        setAddress(data.address);
+        const selectedAddress = data.address;
+        setAddress(selectedAddress);
+        handleFormData("address", selectedAddress);
       },
     }).open();
   };
@@ -67,7 +69,6 @@ const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
           className="rounded border border-gnGray700 bg-white px-4 py-[15px] text-base font-normal"
           placeholder="주소"
           value={address}
-          onBlur={(e) => handleFormData("address", e.target.value)}
           onClick={openDaumPostcode}
           readOnly
         />

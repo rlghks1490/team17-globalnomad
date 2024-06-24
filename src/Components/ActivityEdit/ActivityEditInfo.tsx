@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+declare global {
+  interface Window {
+    daum: any;
+  }
+}
+
 interface ActivityEditInfoProps {
   title: string;
   category: string;
@@ -18,10 +24,21 @@ const ActivityEditInfo = ({
   handleFormData,
 }: ActivityEditInfoProps) => {
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
+  const [newAddress, setNewAddress] = useState<string>(address);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
     handleFormData("category", e.target.value);
+  };
+
+  const openDaumPostcode = () => {
+    new window.daum.Postcode({
+      oncomplete: (data: any) => {
+        const selectedAddress = data.address;
+        setNewAddress(selectedAddress);
+        handleFormData("address", selectedAddress);
+      },
+    }).open();
   };
 
   return (
@@ -65,9 +82,10 @@ const ActivityEditInfo = ({
         <label className="text-2xl font-bold text-gnDarkBlack">주소</label>
         <input
           className="rounded border border-gnGray700 bg-white px-4 py-[15px] text-base font-normal"
-          defaultValue={address}
+          value={newAddress}
           placeholder="주소"
-          onBlur={(e) => handleFormData("address", e.target.value)}
+          onClick={openDaumPostcode}
+          readOnly
         />
       </div>
     </div>
