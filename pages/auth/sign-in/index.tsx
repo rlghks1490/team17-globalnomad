@@ -29,6 +29,10 @@ const rules = {
       value: 8,
       message: password.errorMessage.minLength,
     },
+    maxLength: {
+      value: 16,
+      message: password.errorMessage.maxLength,
+    },
   },
 };
 
