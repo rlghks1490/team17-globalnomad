@@ -1,7 +1,5 @@
 import ActivityDescription from "./ActivityDescription";
-import ActivityMap from "./ActivityMap";
 import KakaoMap from "./KakaoMap";
-import KakaoMap2 from "./KakaoMap2";
 
 interface ActivityInfoProps {
   description: string;
@@ -15,9 +13,7 @@ const ActivityInfo = ({ description, address }: ActivityInfoProps) => {
         <ActivityDescription description={description} />
       </div>
       <div className="h-[400px] w-full tablet:h-[276px] mobile:h-[450px]">
-        {/* <ActivityMap /> */}
-        {/* <KakaoMap/> */}
-        <KakaoMap2 address={address} />
+        <KakaoMap address={address} />
       </div>
     </div>
   );

@@ -5,13 +5,13 @@ export default function Document() {
   return (
     <Html lang="ko">
       <Head>
-      <link
+        <link
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           rel="stylesheet"
         />
         <Script
           type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9cc2180d1a6fff2ed649d23c22fe9e83&autoload=false"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9cc2180d1a6fff2ed649d23c22fe9e83&libraries=services&autoload=false"
         />
       </Head>
       <body>
