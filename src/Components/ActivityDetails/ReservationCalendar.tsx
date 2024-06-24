@@ -30,7 +30,7 @@ const ReservationCalendar = ({
   return (
     <div>
       <DatePicker
-        className="flex cursor-pointer flex-row items-center rounded-md border border-black"
+        className="flex cursor-pointer flex-row items-center rounded-md border border-black tablet:w-[200px]"
         dateFormat="yyyy-MM-dd" // 날짜 형태
         showIcon
         toggleCalendarOnIconClick

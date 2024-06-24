@@ -86,7 +86,7 @@ const StatusBox = ({
   return (
     <>
       <StatusBoxLayout isOpenModal={isOpenModal} onClose={onClose}>
-        <div className="flex h-[697px] w-[429px] flex-col gap-7 rounded-3xl border border-gnGray300 bg-white p-6">
+        <div className="flex h-[697px] w-[429px] flex-col gap-7 rounded-3xl border border-gnGray300 bg-white p-6 mobile:w-[342px]">
           <div className="flex justify-between">
             <h1 className="text-2xl font-bold">예약 정보</h1>
             <button onClick={onClose}>

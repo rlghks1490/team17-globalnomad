@@ -182,7 +182,7 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
   if (isLoading) return <StatusCalendarSkeleton />;
 
   return (
-    <div className="relative">
+    <div className="relative tablet:h-[813px] mobile:h-[813px]">
       <FullCalendar
         locale={"kr"}
         plugins={[dayGridPlugin, interactionPlugin]}
@@ -208,6 +208,7 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
           center: "title",
           right: "next",
         }}
+        height={813}
         dayHeaderContent={renderDayHeaderContent}
         dayCellContent={renderDayCellContent}
         datesSet={handleDatesSet}

@@ -65,8 +65,8 @@ const ActivityRegistImageUploader = ({
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-6">
         <label className="text-2xl font-bold">배너 이미지</label>
-        <div className="flex gap-6">
-          <label className="width-[180px] height-[180px] flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gnGray800 px-[35px] py-[38px]">
+        <div className="flex gap-6 tablet:gap-4 mobile:gap-2">
+          <label className="width-[180px] height-[180px] flex w-[180px] cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gnGray800 px-[35px] py-[38px] mobile:h-[167px] mobile:w-[167px]">
             <input
               type="file"
               className="hidden"
@@ -86,7 +86,7 @@ const ActivityRegistImageUploader = ({
             </div>
           </label>
           {bannerImage && (
-            <div className="relative h-[180px] w-[180px]">
+            <div className="relative h-[180px] w-[180px] mobile:h-[167px] mobile:w-[167px]">
               <Image
                 src={bannerImage}
                 alt="bannerImageUrl"
@@ -94,14 +94,15 @@ const ActivityRegistImageUploader = ({
                 style={{ objectFit: "cover" }}
                 className="rounded-xl"
               />
-              <button>
+              <button
+                className="absolute -right-4 -top-4 mobile:h-4 mobile:w-6"
+                onClick={() => handleImageRemove(bannerImage, true)}
+              >
                 <Image
                   src={CloseBtn_Large}
                   alt="closeBtn"
                   width={40}
                   height={40}
-                  className="absolute -right-4 -top-4"
-                  onClick={() => handleImageRemove(bannerImage, true)}
                 />
               </button>
             </div>
@@ -115,8 +116,8 @@ const ActivityRegistImageUploader = ({
       </div>
       <div className="flex flex-col gap-6">
         <label className="text-2xl font-bold">소개 이미지</label>
-        <div className="flex flex-wrap gap-6">
-          <label className="width-[180px] height-[180px] flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gnGray800 px-[35px] py-[38px]">
+        <div className="flex flex-wrap gap-6 tablet:gap-4 mobile:gap-2">
+          <label className="width-[180px] height-[180px] flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gnGray800 px-[35px] py-[38px] mobile:h-[167px] mobile:w-[167px]">
             <input
               type="file"
               className="hidden"
@@ -136,7 +137,10 @@ const ActivityRegistImageUploader = ({
             </div>
           </label>
           {newSubImages.map((url, index) => (
-            <div key={index} className="relative h-[180px] w-[180px]">
+            <div
+              key={index}
+              className="relative h-[180px] w-[180px] mobile:h-[167px] mobile:w-[167px]"
+            >
               <Image
                 src={url}
                 alt="newSubImage"
@@ -146,7 +150,7 @@ const ActivityRegistImageUploader = ({
               />
               <button
                 onClick={() => handleImageRemove(url)}
-                className="absolute -right-4 -top-4"
+                className="absolute -right-4 -top-4 mobile:h-4 mobile:w-6"
               >
                 <Image
                   src={CloseBtn_Large}

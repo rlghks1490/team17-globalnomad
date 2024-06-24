@@ -15,7 +15,7 @@ const ActivityOverviewImages = ({
   subImages,
 }: ActivityOverviewImagesProps) => {
   return (
-    <div className="grid-row-4 grid h-[534px] w-[1200px] grid-cols-4 justify-items-center gap-2">
+    <div className="grid-row-4 grid h-[534px] w-[1200px] grid-cols-4 justify-items-center gap-2 tablet:h-[310px] tablet:w-[769px] mobile:flex mobile:h-[310px] mobile:w-[375px] ">
       <div
         className="relative col-span-2 row-span-2"
         style={{ width: "100%", height: "100%" }}
@@ -31,7 +31,7 @@ const ActivityOverviewImages = ({
       {subImages.map((subImage) => (
         <div
           key={subImage.id}
-          className="relative"
+          className="relative mobile:hidden"
           style={{ width: "100%", height: "100%" }}
         >
           <Image
