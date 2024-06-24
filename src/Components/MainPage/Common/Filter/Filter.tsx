@@ -59,9 +59,9 @@ const Filter = ({ type, filterState, setFilterState }: FilterProps) => {
   };
 
   return (
-    <div className="relative w-fit min-w-[13rem]">
+    <div className="relative w-fit min-w-[8.13rem]">
       <button
-        className={`border-darkgreen text-darkgreen flex h-[5.3rem] w-full items-end justify-between rounded-[1.5rem] border bg-white p-[1.6rem_2rem] text-[1.8rem] font-medium ${isOpen ? "bg-gray-200" : "hover:bg-gray-100"}`}
+        className={`flex w-full cursor-pointer items-end justify-between rounded-[1.5rem] border border-gnDarkGreen bg-white px-[1.88rem] py-[1rem] text-[1.8rem] text-lg font-medium text-gnDarkGreen mobile:px-[2rem] mobile:py-[1rem] mobile:text-[1rem] ${isOpen ? "bg-gray-200" : "hover:bg-gray-100"}`}
         onClick={isOpenToggle}
         ref={ref}
       >
