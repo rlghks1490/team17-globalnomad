@@ -121,9 +121,7 @@ const ProfileModify = ({
                   className="hidden"
                   onChange={(e) => handleImageUpload(e, true)}
                 />
-                {pickedImage ? (
-                  <img src={pickedImage} alt="profileImgUrl" />
-                ) : data.profileImageUrl ? (
+                {data.profileImageUrl ? (
                   <img src={data.profileImageUrl} alt="profileImgUrl" />
                 ) : (
                   <img

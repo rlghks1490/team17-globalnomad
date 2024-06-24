@@ -137,7 +137,7 @@ const NotificationBox = ({ onClose }: NotificationBoxProps) => {
 
   return (
     <div
-      className="absolute right-0 top-12 z-50 mt-3 flex w-80 flex-col gap-4 rounded-[10px] bg-gnSoftGreen px-5 py-6 shadow-[0_2px_8px_0_#787486]"
+      className="absolute right-0 top-11 z-50 mt-3 flex w-80 flex-col gap-4 rounded-[10px] bg-gnSoftGreen px-5 py-6 shadow-[0_2px_8px_0_#787486]"
       ref={notificationRef}
     >
       <div className="flex items-center justify-between">
@@ -173,6 +173,7 @@ const NotificationBox = ({ onClose }: NotificationBoxProps) => {
                 height={24}
                 priority
                 onClick={() => handleDeleteNotification(notification.id)}
+                className="cursor-pointer"
               />
             </div>
             <div className="text-sm font-normal">
