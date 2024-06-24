@@ -131,6 +131,11 @@ const ActivityRegistSchedule = ({
             </button>
           </div>
         </div>
+        {newSchedule.startTime === newSchedule.endTime && (
+          <p className="text-lg font-normal text-gnDarkRed">
+            * 시작 시간과 종료 시간은 다르게 선택해야합니다.
+          </p>
+        )}
       </div>
       <div className="border border-gnGray300"></div>
       <div className="flex flex-col gap-[21px]">
