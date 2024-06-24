@@ -18,7 +18,7 @@ const CardResource = ({ activitiesData, banner }: CardResourceProps) => {
   return (
     <div
       onClick={() => handleClick(activitiesData.id)}
-      className={`${banner ? "relative h-[24rem] w-[24rem] cursor-pointer flex-col-reverse overflow-hidden rounded-[1.25rem] bg-gradient-to-b from-transparent to-black mobile:h-[11.6rem] mobile:w-[11.6rem]" : "overflow-hiddena flex cursor-pointer flex-col gap-[1rem]"}`}
+      className={`${banner ? "relative h-[24rem] w-[24rem] cursor-pointer flex-col-reverse overflow-hidden rounded-[1.25rem] bg-gradient-to-b from-transparent to-black mobile:h-[11.6rem] mobile:w-[11.6rem]" : "flex cursor-pointer flex-col gap-[1rem] overflow-hidden"}`}
     >
       <div
         className={`${banner ? "absolute left-0 top-0 z-[-1] h-full w-full overflow-hidden rounded-[1.25rem]" : "pt-full  tablet:pt-full h-[17.7rem]  w-[17.7rem] overflow-hidden rounded-[1.25rem] tablet:relative tablet:w-full"}`}
@@ -51,7 +51,7 @@ const CardResource = ({ activitiesData, banner }: CardResourceProps) => {
           </span>
         </div>
         <div
-          className={`${banner ? "mt-[1.5rem] w-[18.75rem] overflow-hidden text-ellipsis whitespace-nowrap text-[1.88rem] font-bold leading-[3.58rem] mobile:w-[9.12rem] mobile:text-[1.12rem] mobile:font-bold mobile:leading-[1.34rem]" : "mb-[0.31rem] overflow-hidden text-ellipsis whitespace-nowrap text-[1.5rem] font-semibold leading-[1.79rem] mobile:text-[1.1rem] mobile:font-bold mobile:leading-[1.34rem]"}`}
+          className={`${banner ? "mt-[1.5rem] w-[18.75rem] overflow-hidden text-ellipsis whitespace-nowrap text-[1.88rem] font-bold leading-[3.58rem] mobile:w-[9.12rem] mobile:text-[1.12rem] mobile:font-bold mobile:leading-[1.34rem]" : "mb-[0.31rem] overflow-hidden text-ellipsis text-[1.5rem] font-semibold leading-[1.79rem] mobile:text-[1.1rem] mobile:font-bold mobile:leading-[1.34rem]"}`}
         >
           {activitiesData.title}
         </div>
