@@ -42,6 +42,10 @@ const CommonModal = ({
     };
   }, []);
 
+  const handleClickInsideModal = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation(); // 클릭 이벤트 버블링을 멈춥니다.
+  };
+
   const modalSize = {
     alert: "w-[540px] h-[250px]",
     Review: "w-[480px] h-[750px]",
@@ -56,6 +60,7 @@ const CommonModal = ({
           <div
             className={`flex items-center justify-center rounded-lg bg-white p-6 ${modalSize[size]}`}
             ref={wrapperRef}
+            onClick={handleClickInsideModal}
           >
             {children}
           </div>
