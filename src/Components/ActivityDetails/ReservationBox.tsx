@@ -1,7 +1,6 @@
 import Image from "next/image";
 import IncreaseButton from "../../../public/icons/IncreaseButton.svg";
 import DecreaseButton from "../../../public/icons/DecreaseButton.svg";
-import ReservationCalendar from "./ReservationCalendar";
 import ReservationCalendar2 from "./ResevationCalendar2";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -96,12 +95,11 @@ const ReservationBox = ({
 
       <div className="flex flex-col gap-4">
         <p className="text-xl font-bold">날짜</p>
-        <ReservationCalendar
+        <ReservationCalendar2
           schedule={schedule}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        {/* <ReservationCalendar2 /> */}
       </div>
 
       <div className="flex flex-col gap-6">
