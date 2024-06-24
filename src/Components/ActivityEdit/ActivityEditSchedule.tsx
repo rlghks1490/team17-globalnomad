@@ -57,6 +57,9 @@ const ActivityEditSchedule = ({
   });
   const [addedSchedule, setAddedSchedule] = useState<newSchedule[]>([]);
 
+  const startTimeIndex = timeTable.indexOf(newSchedule.startTime);
+  const availableTimeTable = timeTable.slice(startTimeIndex);
+
   //새로운 일정 추가를 위해 state를 조작하는 함수
   const handleNewScheduleChange = (name: string, value: string) => {
     setNewSchedule({
@@ -70,7 +73,8 @@ const ActivityEditSchedule = ({
     if (newSchedule.date && newSchedule.startTime && newSchedule.endTime) {
       handleAddSchedule([newSchedule]);
       setAddedSchedule([...addedSchedule, newSchedule]);
-      setNewSchedule({ date: "", startTime: "", endTime: "" });
+      setNewSchedule({ date: "", startTime: "09:00", endTime: "09:00" });
+      setSelectedDate(new Date());
     }
   };
 
@@ -116,7 +120,8 @@ const ActivityEditSchedule = ({
             </label>
             <select
               className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
-              onBlur={(e) => {
+              value={newSchedule.startTime}
+              onChange={(e) => {
                 handleNewScheduleChange("startTime", e.target.value);
               }}
             >
@@ -133,11 +138,12 @@ const ActivityEditSchedule = ({
             </label>
             <select
               className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
-              onBlur={(e) => {
+              value={newSchedule.endTime}
+              onChange={(e) => {
                 handleNewScheduleChange("endTime", e.target.value);
               }}
             >
-              {timeTable.map((time, index) => (
+              {availableTimeTable.map((time, index) => (
                 <option key={index} value={time}>
                   {time}
                 </option>

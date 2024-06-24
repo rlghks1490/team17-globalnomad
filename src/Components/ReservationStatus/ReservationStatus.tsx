@@ -7,9 +7,10 @@ import MobileDropDown from "../MyPage/MobileDropDown";
 import Head from "next/head";
 import HeadMeta from "../Common/HeadMeta";
 import { META_TAG } from "@/constants/metaTag";
+import ReservationStatusSkeleton from "./ReservationStatusSkeleton";
 
 const ReservationStatus = () => {
-  const { data: list } = useMyActivitiesCheck();
+  const { data: list, isLoading } = useMyActivitiesCheck();
   const [selectedActivityId, setSelectedActivityId] = useState<number>();
 
   useEffect(() => {
@@ -23,6 +24,8 @@ const ReservationStatus = () => {
     const activityId = selectedActivityId;
     return activityId;
   };
+
+  if (isLoading) return <ReservationStatusSkeleton />;
 
   return (
     <>

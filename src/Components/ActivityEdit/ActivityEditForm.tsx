@@ -12,6 +12,7 @@ import { usePatchMyActivities } from "@/service/myActivities/useMyActivitiesServ
 import ModalAlert from "../Modal/ModalAlert";
 import HeadMeta from "../Common/HeadMeta";
 import { META_TAG } from "@/constants/metaTag";
+import ActivityEditFormSkeleton from "./ActivityEditFormSkeleton";
 
 interface ActivityEditFormProps {
   activityId: number;
@@ -23,7 +24,7 @@ interface newSchedule {
   endTime: string;
 }
 
-interface formDataType {
+interface FormDataType {
   title: string;
   category: string;
   description: string;
@@ -37,9 +38,9 @@ interface formDataType {
 }
 
 const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
-  const { data: details } = useActivitiesDetailCheck(activityId);
+  const { data: details, isLoading } = useActivitiesDetailCheck(activityId);
 
-  const [formData, setFormData] = useState<formDataType>({
+  const [formData, setFormData] = useState<FormDataType>({
     title: "",
     category: "",
     description: "",
@@ -72,7 +73,7 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
   const { mutate: modify } = usePatchMyActivities(activityId);
 
-  const handleActivityModify = (formData: formDataType) => {
+  const handleActivityModify = (formData: FormDataType) => {
     modify(formData, {
       onSuccess: () => {
         handleModalOpen();
@@ -139,6 +140,8 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
       subImageIdsToRemove: ids,
     });
   };
+
+  if (isLoading) return <ActivityEditFormSkeleton />;
 
   if (!details) return null;
 
