@@ -17,6 +17,7 @@ import {
 } from "@/service/myActivities/useMyActivitiesService";
 import StatusBox from "./StausBox";
 import { useModal } from "@/hooks/useModal";
+import StatusCalendarSkeleton from "./StatusCalendarSkeleton";
 
 interface Reservation {
   completed: number;
@@ -44,7 +45,11 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [events, setEvents] = useState<{ title: string; start: string }[]>([]);
 
-  const { data: monthlyStatus, refetch } = useMyActivitiesRegistrationDashboard(
+  const {
+    data: monthlyStatus,
+    refetch,
+    isLoading,
+  } = useMyActivitiesRegistrationDashboard(
     currentYear,
     currentMonth,
     activityId,
@@ -173,6 +178,8 @@ const StatusCalendar = ({ activityId }: StatusCalendarProps) => {
       refetch();
     }
   }, [currentYear, currentMonth, refetch]);
+
+  if (isLoading) return <StatusCalendarSkeleton />;
 
   return (
     <div className="relative">
