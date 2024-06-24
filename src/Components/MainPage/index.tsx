@@ -94,7 +94,7 @@ const MainPage = () => {
     return (
       <MainLayout>
         <Banner />
-        <div className="relative bottom-24">
+        <div className="absolute bottom-[5rem]">
           <Search
             keyword={keyword}
             onSubmit={onSearchResult}
@@ -145,7 +145,7 @@ const MainPage = () => {
               <Image
                 src={IMAGE.noData.default.src}
                 alt={IMAGE.noData.default.alt}
-                className="h-96 w-96 sm:h-80 sm:w-80"
+                className="sm:h-80 sm:w-80 h-96 w-96"
               />
               <span className="text-2xl font-medium text-gray-600">
                 검색 결과가 없습니다.

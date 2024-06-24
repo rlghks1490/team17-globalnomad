@@ -44,6 +44,9 @@ const ActivityRegistSchedule = ({
   });
   const [addedSchedule, setAddedSchedule] = useState<Schedule[]>([]);
 
+  const startTimeIndex = timeTable.indexOf(newSchedule.startTime);
+  const availableTimeTable = timeTable.slice(startTimeIndex);
+
   const handleNewScheduleChange = (name: string, value: string) => {
     setNewSchedule({
       ...newSchedule,
@@ -55,7 +58,8 @@ const ActivityRegistSchedule = ({
     if (newSchedule.date && newSchedule.startTime && newSchedule.endTime) {
       handleAddSchedule([newSchedule]);
       setAddedSchedule([...addedSchedule, newSchedule]);
-      setNewSchedule({ date: "", startTime: "", endTime: "" });
+      setNewSchedule({ date: "", startTime: "09:00", endTime: "09:00" });
+      setSelectedDate(new Date());
     }
   };
 
@@ -91,7 +95,8 @@ const ActivityRegistSchedule = ({
             </label>
             <select
               className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
-              onBlur={(e) => {
+              value={newSchedule.startTime}
+              onChange={(e) => {
                 handleNewScheduleChange("startTime", e.target.value);
               }}
             >
@@ -108,11 +113,12 @@ const ActivityRegistSchedule = ({
             </label>
             <select
               className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
-              onBlur={(e) => {
+              value={newSchedule.endTime}
+              onChange={(e) => {
                 handleNewScheduleChange("endTime", e.target.value);
               }}
             >
-              {timeTable.map((time, i) => (
+              {availableTimeTable.map((time, i) => (
                 <option key={i} value={time}>
                   {time}
                 </option>

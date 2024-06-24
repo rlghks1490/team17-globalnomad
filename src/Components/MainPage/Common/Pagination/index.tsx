@@ -36,7 +36,7 @@ const Pagination = ({
     <div className="flex items-center justify-center gap-[0.63rem]">
       <button
         type="button"
-        className={`h-[3.44rem] w-[3.44rem] rounded-[0.94rem] border ${currentPage === 1 ? "border-gnGray300" : "border-gnDarkGreen"} 
+        className={`h-[3.44rem] w-[3.44rem] rounded-[0.94rem] border-gnDarkGreen ${currentPage === 1 ? "border-gnGray300" : "border-gnDarkGreen"} 
           ${currentPage === 1 ? 'rotate-0 bg-[url("/icons/paginationPrevIcon.svg")]' : 'rotate-180 bg-[url("/icons/paginationNextIcon.svg")]'} bg-white bg-center bg-no-repeat hover:bg-gnGray200`}
         onClick={handlePrevClick}
         disabled={currentPage === 1}
@@ -62,7 +62,7 @@ const Pagination = ({
       </div>
       <button
         type="button"
-        className={`h-[3.44rem] w-[3.44rem] rounded-[0.94rem] ${currentPage === totalPage ? "border-gnGray300" : "border-gnDarkGreen"} 
+        className={`h-[3.44rem] w-[3.44rem] rounded-[0.94rem] border-gnDarkGreen ${currentPage === totalPage ? "border-gnGray300" : "border-gnDarkGreen"} 
           ${currentPage === totalPage ? 'rotate-180 bg-[url("/icons/paginationPrevIcon.svg")]' : 'rotate-0 bg-[url("/icons/paginationNextIcon.svg")]'} bg-white bg-center bg-no-repeat hover:bg-gnGray200`}
         onClick={handleNextClick}
         disabled={currentPage === totalPage}

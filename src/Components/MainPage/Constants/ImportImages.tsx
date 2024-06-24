@@ -7,6 +7,8 @@ import IconStarOff from "/public/icons/starOffIcon.svg";
 import IconRightArrow from "/public/icons/rightArrowDefaultIcon.svg";
 import IconRightArrowActive from "/public/icons/rightArrowActiveIcon.svg";
 import IconRightArrowVariant1 from "/public/icons/rightArrowVariant1Icon.svg";
+import IconDownArrow from "/public/icons/downArrowDefaultIcon.svg";
+import IconCheck from "/public/icons/checkIcon.svg";
 
 import ImagePlanTravel from "/public/images/PlanTravelImage.png";
 import ImageWithTogether from "/public/images/WithTogetherImage.png";
@@ -57,6 +59,20 @@ export const ICON = {
       src: IconStarOn,
       alt: "별",
     },
+  },
+  downArrow: {
+    default: {
+      src: IconDownArrow,
+      alt: "목록 열기/닫기",
+    },
+    active: {},
+  },
+  check: {
+    default: {
+      src: IconCheck,
+      alt: "체크",
+    },
+    active: {},
   },
 };
 

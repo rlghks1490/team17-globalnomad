@@ -14,7 +14,9 @@ const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
         className="rounded border border-gnGray700 bg-white px-4 py-[15px] text-base font-normal"
         onBlur={(e) => handleFormData("category", e.target.value)}
       >
-        <option>카테고리</option>
+        <option selected disabled>
+          카테고리
+        </option>
         <option>문화·예술</option>
         <option>식음료</option>
         <option>스포츠</option>
