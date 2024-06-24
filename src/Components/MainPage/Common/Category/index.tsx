@@ -13,7 +13,7 @@ const Category = ({ category, isActive = false, onClick }: CategoryProps) => {
 
   return (
     <div
-      className={`${isActive ? "rounded-[0.93rem] bg-gnDarkGreen px-[1.88rem] py-[1rem] text-lg text-white hover:bg-gnLightBlack" : "flex w-fit shrink-0 cursor-pointer items-center justify-center gap-[0.62rem] rounded-[0.93rem] border border-gnDarkGreen bg-white px-[1.88rem] py-[1rem] text-lg font-medium text-gnDarkGreen hover:bg-gnGray200 mobile:px-[1rem] mobile:py-[0.5rem] mobile:text-[1rem]"}`}
+      className={`${isActive ? "rounded-[0.93rem] bg-gnDarkGreen px-[1.88rem] py-[1rem] text-lg text-white hover:bg-gnLightBlack" : "flex w-fit shrink-0 cursor-pointer items-center justify-center gap-[0.62rem] rounded-[0.93rem] border border-gnDarkGreen bg-white px-[1.88rem] py-[1rem] text-lg font-medium text-gnDarkGreen hover:bg-gnGray200 tablet:px-[1.2rem] tablet:py-[0.7rem] tablet:text-[1.2rem] mobile:px-[1rem] mobile:py-[0.5rem] mobile:text-[1rem]"}`}
       onClick={handleClick}
     >
       {category}
