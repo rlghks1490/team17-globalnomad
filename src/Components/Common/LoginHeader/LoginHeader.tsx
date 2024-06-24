@@ -4,7 +4,7 @@ import UserProfile from "./UserProfile";
 const LoginHeader = () => {
   return (
     <nav className="sticky z-10 flex h-20 border-b bg-white p-3">
-      <div className="flex w-full max-w-[1920px] items-center justify-between">
+      <div className="flex w-full  items-center justify-between">
         <div>
           <Link href="/">
             <img src="/icons/headerLogo.svg" alt="headerLogo.svg" />

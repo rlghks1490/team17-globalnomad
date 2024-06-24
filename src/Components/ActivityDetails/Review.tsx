@@ -7,6 +7,7 @@ import { ReviewData } from "@/apis/activityDetails/activityDetails.type";
 import { getReviews } from "@/apis/activityDetails/activityDetails";
 import TempComment from "./TempComment";
 import { useState } from "react";
+import ReviewSkeleton from "./ReviewSkeleton";
 
 interface ReviewProps {
   activityId: number;
@@ -16,7 +17,7 @@ const Review = ({ activityId }: ReviewProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const contentsPerPage = 3;
 
-  const { data } = useQuery<ReviewData>({
+  const { isLoading, data } = useQuery<ReviewData>({
     queryKey: ["reviews", activityId, currentPage],
     queryFn: () => getReviews(activityId, currentPage, contentsPerPage),
   });
@@ -46,6 +47,8 @@ const Review = ({ activityId }: ReviewProps) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  if (isLoading) return <ReviewSkeleton />;
 
   if (!data) return null;
 
@@ -79,13 +82,13 @@ const Review = ({ activityId }: ReviewProps) => {
               createdAt={review.createdAt}
             />
           ))}
+          <Pagenation
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       )}
-      <Pagenation
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
     </div>
   );
 };
