@@ -12,7 +12,7 @@ import IconCheck from "/public/icons/checkIcon.svg";
 
 import ImagePlanTravel from "/public/images/PlanTravelImage.png";
 import ImageWithTogether from "/public/images/WithTogetherImage.png";
-import ImageStreetDance from "/public/images/StreetDanceImage.png";
+import ImageMilkyWay from "/public/images/MilkyWayImage.png";
 import ImageNoData from "/public/images/noData.png";
 
 export const ICON = {
@@ -79,7 +79,7 @@ export const ICON = {
 export const IMAGE = {
   banner: {
     first: {
-      src: ImageStreetDance,
+      src: ImageMilkyWay,
       alt: "첫 번째 배너 이미지",
     },
     second: {
