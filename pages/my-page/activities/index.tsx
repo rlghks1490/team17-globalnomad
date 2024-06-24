@@ -6,6 +6,8 @@ import MyActivitiesList from "@/Components/MyActivities/MyActivitiesList";
 import Link from "next/link";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 import { ActivitiesSkeleton } from "@/Components/MyActivities/MYactivitiesSkeleton";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 function Activities() {
   const { isLoading, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
@@ -24,6 +26,10 @@ function Activities() {
   const activityData = data?.pages || [];
   return (
     <>
+      <HeadMeta
+        title={META_TAG.myActivity["title"]}
+        description={META_TAG.myActivity["description"]}
+      />
       {isLoading ? (
         <ActivitiesSkeleton />
       ) : (

@@ -1,7 +1,9 @@
 import ActivityContent from "@/Components/ActivityDetails/ActivityContent";
 import Review from "@/Components/ActivityDetails/Review";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useActivitiesDetailCheck } from "@/service/activities/useActivitiesService";
 
 const ActivityDetails = () => {
   const router = useRouter();
@@ -15,8 +17,15 @@ const ActivityDetails = () => {
     }
   }, [id]);
 
+  const { data: response } = useActivitiesDetailCheck(activityId);
+
+  const data = response?.data;
+
   return (
     <>
+      <Head>
+        <title>{`체험상세 - ${data?.title} - GlobalNomad`}</title>
+      </Head>
       <ActivityContent activityId={activityId} />
       <Review activityId={activityId} />
     </>

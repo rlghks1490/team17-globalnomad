@@ -10,6 +10,8 @@ import { ActivitiesDetailCheck } from "@/service/activities/activities.type";
 import { useModal } from "@/hooks/useModal";
 import { usePatchMyActivities } from "@/service/myActivities/useMyActivitiesService";
 import ModalAlert from "../Modal/ModalAlert";
+import HeadMeta from "../Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 import ActivityEditFormSkeleton from "./ActivityEditFormSkeleton";
 
 interface ActivityEditFormProps {
@@ -144,45 +146,48 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   if (!details) return null;
 
   return (
-    <div className="flex w-[792px] flex-col gap-6">
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">내 체험 수정</h1>
-        <button
-          className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
-          onClick={() => handleActivityModify(formData)}
-        >
-          수정하기
-        </button>
-      </div>
-      <ActivityEditInfo
-        title={details.data.title}
-        description={details.data.description}
-        category={details.data.category}
-        price={details.data.price}
-        address={details.data.address}
-        handleFormData={handleInfoChange}
-      />
-      <ActivityEditSchedule
-        schedules={details.data.schedules}
-        handleAddSchedule={handleAddSchedule}
-        handleRemoveSchedule={handleRemoveSchedule}
-        handleSchedulesToAdd={handleSchedulesToAdd}
-      />
-      <ActivityEditImageUploader
-        bannerImageUrl={details.data.bannerImageUrl}
-        subImagesUrl={details.data.subImages}
-        handleChangeBannerImage={handleChangeBannerImage}
-        handleChangeSubImages={handleChangeSubImages}
-        handleRemoveDefaultSubImages={handleRemoveDefaultSubImages}
-      />
-      {isOpenModal && (
-        <ModalAlert
-          isOpenModal={isOpenModal}
-          message={"등록에 성공했습니다."}
-          onClose={handleModalClose}
+    <>
+      <HeadMeta title={META_TAG.myActivityEdit["title"]} />
+      <div className="flex w-[792px] flex-col gap-6">
+        <div className="flex justify-between">
+          <h1 className="text-4xl font-bold">내 체험 수정</h1>
+          <button
+            className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
+            onClick={() => handleActivityModify(formData)}
+          >
+            수정하기
+          </button>
+        </div>
+        <ActivityEditInfo
+          title={details.data.title}
+          description={details.data.description}
+          category={details.data.category}
+          price={details.data.price}
+          address={details.data.address}
+          handleFormData={handleInfoChange}
         />
-      )}
-    </div>
+        <ActivityEditSchedule
+          schedules={details.data.schedules}
+          handleAddSchedule={handleAddSchedule}
+          handleRemoveSchedule={handleRemoveSchedule}
+          handleSchedulesToAdd={handleSchedulesToAdd}
+        />
+        <ActivityEditImageUploader
+          bannerImageUrl={details.data.bannerImageUrl}
+          subImagesUrl={details.data.subImages}
+          handleChangeBannerImage={handleChangeBannerImage}
+          handleChangeSubImages={handleChangeSubImages}
+          handleRemoveDefaultSubImages={handleRemoveDefaultSubImages}
+        />
+        {isOpenModal && (
+          <ModalAlert
+            isOpenModal={isOpenModal}
+            message={"등록에 성공했습니다."}
+            onClose={handleModalClose}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

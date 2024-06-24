@@ -1,4 +1,3 @@
-// pages/my-page/reservations.tsx
 import ReservationList from "@/Components/MyReservation/ReservationList";
 import NoReservationList from "@/Components/MyReservation/NoReservationList";
 import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
@@ -14,6 +13,8 @@ import InfiniteScroll from "react-infinite-scroller";
 import { GetServerSideProps } from "next";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
 import { ReservationSkeleton } from "@/Components/MyReservation/ReservationSkeleton";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 const Reservations = () => {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
@@ -36,6 +37,10 @@ const Reservations = () => {
 
   return (
     <>
+      <HeadMeta
+        title={META_TAG.myReservation["title"]}
+        description={META_TAG.myReservation["description"]}
+      />
       {isLoading ? (
         <ReservationSkeleton />
       ) : (

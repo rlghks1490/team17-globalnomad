@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useAuth } from "@/context/Authcontext";
 import EmptyLayout from "@/layouts/EmptyLayout";
-import Toast from "@/Components/Toast/Toast";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 const { email, password } = USER_INPUT_VALIDATION;
 
@@ -45,58 +46,64 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="flex w-loginForm flex-col items-center pt-24">
-        <div>
-          <Link href="/">
-            <img
-              src="/icons/logo.svg"
-              alt="글로벌노마드 로고 이미지"
-              className="mobile:w-loginLogo"
+    <>
+      <HeadMeta
+        title={META_TAG.signIn["title"]}
+        description={META_TAG.signIn["description"]}
+      />
+      <div className="flex items-center justify-center">
+        <div className="flex w-loginForm flex-col items-center pt-24">
+          <div>
+            <Link href="/">
+              <img
+                src="/icons/logo.svg"
+                alt="글로벌노마드 로고 이미지"
+                className="mobile:w-loginLogo"
+              />
+            </Link>
+          </div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-10 flex w-full flex-col gap-7 mobile:min-w-80 mobile:px-3"
+          >
+            <LoginInput
+              label="이메일"
+              type="email"
+              placeholder="이메일을 입력해 주세요"
+              isError={!!errors.email}
+              errorMessage={errors.email?.message}
+              {...register("email", rules.emailRules)}
             />
-          </Link>
-        </div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-10 flex w-full flex-col gap-7 mobile:min-w-80 mobile:px-3"
-        >
-          <LoginInput
-            label="이메일"
-            type="email"
-            placeholder="이메일을 입력해 주세요"
-            isError={!!errors.email}
-            errorMessage={errors.email?.message}
-            {...register("email", rules.emailRules)}
-          />
-          <LoginInput
-            label="비밀번호"
-            type="password"
-            placeholder="비밀번호를 입력해 주세요"
-            isError={!!errors.password}
-            errorMessage={errors.password?.message}
-            {...register("password", rules.passwordRules)}
-          />
-          <button
-            type="submit"
-            disabled={!isValid}
-            className={`h-12 rounded-md text-base font-bold text-white ${
-              isValid ? "bg-gnDarkGreen" : "bg-gray-400"
-            }`}
-          >
-            로그인 하기
-          </button>
-        </form>
-        <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
-          <p>회원이 아니신가요?</p>
-          <Link
-            href="/auth/sign-up"
-            className="text-base font-normal text-gnDarkGreen underline"
-          >
-            회원가입
-          </Link>
+            <LoginInput
+              label="비밀번호"
+              type="password"
+              placeholder="비밀번호를 입력해 주세요"
+              isError={!!errors.password}
+              errorMessage={errors.password?.message}
+              {...register("password", rules.passwordRules)}
+            />
+            <button
+              type="submit"
+              disabled={!isValid}
+              className={`h-12 rounded-md text-base font-bold text-white ${
+                isValid ? "bg-gnDarkGreen" : "bg-gray-400"
+              }`}
+            >
+              로그인 하기
+            </button>
+          </form>
+          <div className="mt-8 flex gap-2 text-base font-normal text-gnGray800">
+            <p>회원이 아니신가요?</p>
+            <Link
+              href="/auth/sign-up"
+              className="text-base font-normal text-gnDarkGreen underline"
+            >
+              회원가입
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
