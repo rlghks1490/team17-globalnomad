@@ -63,7 +63,7 @@ const Review = ({ activityId }: ReviewProps) => {
           </div>
           <div className="flex flex-row gap-4">
             <div className="text-[50px] font-semibold">
-              {data.averageRating}
+              {data.averageRating.toFixed(1)}
             </div>
             <div className="flex flex-col gap-2">
               <div className="text-lg font-normal">{satisfaction}</div>
