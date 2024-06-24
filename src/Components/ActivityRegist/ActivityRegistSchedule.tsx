@@ -94,7 +94,7 @@ const ActivityRegistSchedule = ({
               시작 시간
             </label>
             <select
-              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
+              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[104px] mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm"
               value={newSchedule.startTime}
               onChange={(e) => {
                 handleNewScheduleChange("startTime", e.target.value);
@@ -112,7 +112,7 @@ const ActivityRegistSchedule = ({
               종료 시간
             </label>
             <select
-              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
+              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[104px] mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm"
               value={newSchedule.endTime}
               onChange={(e) => {
                 handleNewScheduleChange("endTime", e.target.value);
@@ -136,13 +136,13 @@ const ActivityRegistSchedule = ({
       <div className="flex flex-col gap-[21px]">
         {addedSchedule.map((newSchedule, index) => (
           <div key={index} className="flex gap-5">
-            <div className="text-gnDarkBalck w-[379px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">
+            <div className="text-gnDarkBalck w-[379px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[149px] mobile:h-10 mobile:w-[130px] mobile:px-2.5 mobile:py-[9px]">
               {newSchedule.date}
             </div>
-            <div className="text-gnDarkBalck w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">
+            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {newSchedule.startTime}
             </div>
-            <div className="text-gnDarkBalck w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">
+            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {newSchedule.endTime}
             </div>
             <button onClick={() => handleRemoveNewSchedule(index)}>

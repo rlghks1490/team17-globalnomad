@@ -165,7 +165,7 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   return (
     <>
       <HeadMeta title={META_TAG.myActivityEdit["title"]} />
-      <div className="flex w-[792px] flex-col gap-6">
+      <div className="flex w-[792px] flex-col gap-6 tablet:w-[429px] mobile:w-[343px]">
         <div className="flex justify-between">
           <h1 className="text-4xl font-bold">내 체험 수정</h1>
           <button

@@ -116,7 +116,7 @@ const AcitivyRegistForm = () => {
         title={META_TAG.addMyActivity["title"]}
         description={META_TAG.addMyActivity["description"]}
       />
-      <div className="flex w-[792px] flex-col gap-6">
+      <div className="flex w-[792px] flex-col gap-6 tablet:w-[429px] mobile:w-[343px]">
         <div className="flex justify-between">
           <h1 className="text-4xl font-bold">내 체험 등록</h1>
           <button
