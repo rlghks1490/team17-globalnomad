@@ -53,11 +53,11 @@ const Review = ({ activityId }: ReviewProps) => {
   if (!data) return null;
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="mb-52 mt-6 flex flex-col items-center gap-6  tablet:items-center">
       {data.totalCount === 0 ? (
         <div>아직 후기가 없어요!</div>
       ) : (
-        <div className="flex w-[1200px] flex-col gap-6">
+        <div className="flex flex-col gap-6 tablet:w-[728px]">
           <div>
             <h1 className="text-xl font-bold">후기</h1>
           </div>

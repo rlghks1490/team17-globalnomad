@@ -89,7 +89,7 @@ const ReservationBox = ({
   };
 
   return (
-    <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6">
+    <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6 tablet:w-[251px]">
       <div className="border-b border-gnGray300 pb-4 text-[28px] font-bold">
         ￦ {price.toLocaleString()} / 인
       </div>

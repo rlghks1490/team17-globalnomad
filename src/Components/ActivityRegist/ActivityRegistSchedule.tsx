@@ -69,7 +69,6 @@ const ActivityRegistSchedule = ({
     handleCancelAddedSchedules(newSchedules);
   };
 
-  console.log(newSchedule);
   return (
     <div className="flex flex-col gap-6">
       <label className="text-2xl font-bold text-gnDarkBlack">
