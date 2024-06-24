@@ -38,9 +38,9 @@ const ActivityRegistSchedule = ({
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const [newSchedule, setNewSchedule] = useState<Schedule>({
-    date: "",
-    startTime: "",
-    endTime: "",
+    date: new Date().toISOString().split("T")[0],
+    startTime: "09:00",
+    endTime: "09:00",
   });
   const [addedSchedule, setAddedSchedule] = useState<Schedule[]>([]);
 
@@ -75,8 +75,8 @@ const ActivityRegistSchedule = ({
         예약 가능한 시간대
       </label>
       <div className="flex flex-col">
-        <div className="flex gap-5">
-          <div className="flex flex-col gap-2.5">
+        <div className="flex gap-5 tablet:gap-1 mobile:gap-1">
+          <div className="flex flex-col gap-3.5">
             <label className="text-xl font-medium text-gnGray800">날짜</label>
             <RegistCalendar
               selectedDate={selectedDate}
@@ -94,7 +94,7 @@ const ActivityRegistSchedule = ({
               시작 시간
             </label>
             <select
-              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
+              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[104px] mobile:h-11 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm"
               value={newSchedule.startTime}
               onChange={(e) => {
                 handleNewScheduleChange("startTime", e.target.value);
@@ -112,7 +112,7 @@ const ActivityRegistSchedule = ({
               종료 시간
             </label>
             <select
-              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px]"
+              className="w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal tablet:w-[104px] mobile:h-11 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm"
               value={newSchedule.endTime}
               onChange={(e) => {
                 handleNewScheduleChange("endTime", e.target.value);
@@ -131,22 +131,29 @@ const ActivityRegistSchedule = ({
             </button>
           </div>
         </div>
+        {newSchedule.startTime === newSchedule.endTime && (
+          <p className="text-lg font-normal text-gnDarkRed">
+            * 시작 시간과 종료 시간은 다르게 선택해야합니다.
+          </p>
+        )}
       </div>
       <div className="border border-gnGray300"></div>
       <div className="flex flex-col gap-[21px]">
         {addedSchedule.map((newSchedule, index) => (
-          <div key={index} className="flex gap-5">
-            <div className="text-gnDarkBalck w-[379px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">
+          <div key={index} className="flex gap-5 tablet:gap-1 mobile:gap-1">
+            <div className="text-gnDarkBalck w-[379px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[149px] mobile:h-10 mobile:w-[130px] mobile:px-2.5 mobile:py-[9px]">
               {newSchedule.date}
             </div>
-            <div className="text-gnDarkBalck w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">
+            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {newSchedule.startTime}
             </div>
-            <div className="text-gnDarkBalck w-[140px] rounded border border-gnGray700 px-4 py-[15px] text-base font-normal">
+            <div className="text-gnDarkBalck w-[140px] whitespace-nowrap rounded border border-gnGray700 px-4 py-[15px] text-center text-base font-normal tablet:w-[104px] mobile:h-10 mobile:w-[79px] mobile:px-3 mobile:py-[9px] mobile:text-sm">
               {newSchedule.endTime}
             </div>
             <button onClick={() => handleRemoveNewSchedule(index)}>
-              <Image src={MinusButton} alt="addTime" width={56} height={56} />
+              <div className="mobile:h-11 mobile:w-11">
+                <Image src={MinusButton} alt="addTime" width={56} height={56} />
+              </div>
             </button>
           </div>
         ))}

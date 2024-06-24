@@ -33,9 +33,9 @@ const ReservationStatus = () => {
         title={META_TAG.myReservationStatus["title"]}
         description={META_TAG.myReservationStatus["description"]}
       />
-      <div className="flex w-[792px] flex-col gap-[30px] ">
+      <div className="flex w-[792px] flex-col gap-[30px] tablet:w-[429px] mobile:w-[342px]">
         {list && list.data.activities.length > 0 ? (
-          <div>
+          <div className="flex flex-col gap-6">
             <div className="flex w-full flex-col gap-[42px]">
               <div className="flex">
                 <h1 className="text-[32px] font-bold">예약 현황</h1>

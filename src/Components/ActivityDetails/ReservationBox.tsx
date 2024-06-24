@@ -1,7 +1,6 @@
 import Image from "next/image";
 import IncreaseButton from "../../../public/icons/IncreaseButton.svg";
 import DecreaseButton from "../../../public/icons/DecreaseButton.svg";
-import ReservationCalendar from "./ReservationCalendar";
 import ReservationCalendar2 from "./ResevationCalendar2";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -89,19 +88,18 @@ const ReservationBox = ({
   };
 
   return (
-    <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6">
+    <div className="flex w-[384px] flex-col gap-4 rounded-md border border-gnGray300 bg-white p-6 tablet:w-[251px]">
       <div className="border-b border-gnGray300 pb-4 text-[28px] font-bold">
         ￦ {price.toLocaleString()} / 인
       </div>
 
       <div className="flex flex-col gap-4">
         <p className="text-xl font-bold">날짜</p>
-        <ReservationCalendar
+        <ReservationCalendar2
           schedule={schedule}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        {/* <ReservationCalendar2 /> */}
       </div>
 
       <div className="flex flex-col gap-6">

@@ -26,7 +26,7 @@ const ReservationStatue = ({ status }: ReservationStatusProps) => {
           {ReservationStatueList[status]}
         </p>
       ) : (
-        <p className="text-base font-bold text-gnGray700">
+        <p className="text-base font-bold text-gnDarkGreen">
           {ReservationStatueList[status]}
         </p>
       )}

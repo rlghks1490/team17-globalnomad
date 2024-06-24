@@ -130,7 +130,7 @@ const Banner = () => {
         <ul className="flex w-full " ref={bannerRef}>
           {bannerList.map((banner, index) => (
             <li
-              className="transition-border  relative h-[34.38rem] w-full flex-none overflow-hidden px-8 duration-300"
+              className="transition-border  relative h-[34.38rem] w-full flex-none overflow-hidden px-8 duration-100"
               key={`${banner.title}-${index}`}
             >
               <div className="absolute inset-0 min-h-full min-w-full ">

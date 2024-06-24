@@ -35,7 +35,7 @@ const ActivityContent = ({ activityId }: ActivityContentProps) => {
             bannerImageUrl={data.bannerImageUrl}
             subImages={data.subImages}
           />
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 mobile:flex-col">
             <ActivityInfo
               description={data.description}
               address={data.address}

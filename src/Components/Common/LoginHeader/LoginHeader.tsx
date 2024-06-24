@@ -3,7 +3,7 @@ import UserProfile from "./UserProfile";
 
 const LoginHeader = () => {
   return (
-    <nav className="sticky z-10 flex h-20 border-b bg-white p-3">
+    <nav className="sticky z-10 flex h-20 min-w-[400px] border-b bg-white p-3">
       <div className="flex w-full items-center justify-between">
         <div>
           <Link href="/">
