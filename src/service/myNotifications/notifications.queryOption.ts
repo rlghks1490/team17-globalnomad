@@ -4,11 +4,13 @@ const queryOptions = {
   myNotificationsCheck: {
     queryKey: ["myNotificationsCheck"],
     queryFn: () => MyNotificationsService.getMyNotificationsCheck(),
+    staleTime: 3 * 60 * 1000,
   },
-  deleteMyNotifications: (notificationsId: number) => ({
+  deleteMyNotifications: () => ({
     mutationKey: ["deleteMyNotifications", "notificationsId"],
-    mutationFn: () =>
+    mutationFn: (notificationsId: number) =>
       MyNotificationsService.deleteMyNotifications(notificationsId),
+    staleTime: 3 * 60 * 1000,
   }),
 };
 

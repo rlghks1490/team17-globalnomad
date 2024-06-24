@@ -1,25 +1,48 @@
 import myActivitiesService from "./myActivities.service";
-import { patchMyActivities } from "./myActivities.type";
+import {
+  MyActivitiesUpdateReservationStatus,
+  patchMyActivities,
+} from "./myActivities.type";
 
 const queryOptions = {
   myActivitiesCheck: {
     queryKey: ["myActivitiesCheck"],
     queryFn: () => myActivitiesService.getMyActivitiesCheck(),
+    staleTime: 3 * 60 * 1000,
   },
-  myActivitiesRegistrationDashboard: (activityId: number) => ({
+  myActivitiesRegistrationDashboard: (
+    year: string,
+    month: string,
+    activityId: number,
+  ) => ({
     queryKey: ["myActivitiesRegistrationDashboard", "activityId"],
     queryFn: () =>
-      myActivitiesService.getMyActivitiesRegistrationDashboard(activityId),
+      myActivitiesService.getMyActivitiesRegistrationDashboard(
+        year,
+        month,
+        activityId,
+      ),
+    staleTime: 3 * 60 * 1000,
   }),
-  myActivitiesRegistrationSchedule: (activityId: number) => ({
+  myActivitiesRegistrationSchedule: (date: string, activityId: number) => ({
     queryKey: ["myActivitiesRegistrationSchedule", "activityId"],
     queryFn: () =>
-      myActivitiesService.getMyActivitiesRegistrationSchedule(activityId),
+      myActivitiesService.getMyActivitiesRegistrationSchedule(date, activityId),
+    staleTime: 3 * 60 * 1000,
   }),
-  myActivitiesReservationCheck: (activityId: number) => ({
+  myActivitiesReservationCheck: (
+    scheduleId: number,
+    status: string,
+    activityId: number,
+  ) => ({
     queryKey: ["myActivitiesReservationCheck", "activityId"],
     queryFn: () =>
-      myActivitiesService.getMyActivitiesReservationCheck(activityId),
+      myActivitiesService.getMyActivitiesReservationCheck(
+        scheduleId,
+        status,
+        activityId,
+      ),
+    staleTime: 3 * 60 * 1000,
   }),
   myActivitiesUpdateReservationStatus: (
     activityId: number,
@@ -30,20 +53,25 @@ const queryOptions = {
       "activityId",
       "reservationId",
     ],
-    mutationFn: () =>
+    mutationFn: (status: MyActivitiesUpdateReservationStatus) =>
       myActivitiesService.patchMyActivitiesUpdateReservationStatus(
         activityId,
         reservationId,
+        status,
       ),
+    staleTime: 3 * 60 * 1000,
   }),
-  deleteMyActivities: (activityId: number) => ({
+  deleteMyActivities: () => ({
     mutationKey: ["deleteMyActivities", "activityId"],
-    mutationFn: () => myActivitiesService.deleteMyActivities(activityId),
+    mutationFn: (activityId: number) =>
+      myActivitiesService.deleteMyActivities(activityId),
+    staleTime: 3 * 60 * 1000,
   }),
   patchMyActivities: (activityId: number) => ({
     mutationKey: ["patchMyActivities", "activityId"],
     mutationFn: (formData: patchMyActivities) =>
       myActivitiesService.patchMyActivities(activityId, formData),
+    staleTime: 3 * 60 * 1000,
   }),
 };
 

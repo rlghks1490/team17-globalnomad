@@ -77,8 +77,8 @@ const Search = ({ keyword, onSubmit, onChange }: Props) => {
   if (isLoading) return <Skeleton type="search" />;
 
   return (
-    <div className="rounded-lg bg-white p-8 shadow-lg">
-      <p className="text-primary mb-8 text-xl font-bold">
+    <div className="rounded-[1rem] bg-white px-[1.5rem] py-[1.5rem] shadow-lg">
+      <p className="text-#333236 mb-[2rem] text-[1.25rem] font-bold leading-[1.5rem]">
         무엇을 체험하고 싶으신가요?
       </p>
       <div

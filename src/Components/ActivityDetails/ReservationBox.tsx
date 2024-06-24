@@ -26,11 +26,16 @@ interface Schedule {
 }
 
 interface ReservationBoxProps {
+  activityId: number;
   price: number;
   schedule: Schedule[];
 }
 
-const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
+const ReservationBox = ({
+  activityId,
+  price,
+  schedule,
+}: ReservationBoxProps) => {
   const [counter, setCounter] = useState<number>(1);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
@@ -40,7 +45,7 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
 
   const { data, isError } = useQuery<AvailableSchedule[]>({
     queryKey: ["availableSchedules", selectedDate],
-    queryFn: () => getSchedule(stringYear, stringMonth, 915),
+    queryFn: () => getSchedule(stringYear, stringMonth, activityId),
     enabled: !!selectedDate,
   });
 
@@ -60,10 +65,9 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
     );
   };
 
-  console.log(schedule);
-
   const resevationMutation = useMutation({
-    mutationFn: (data: ResevationRequestData) => ReservationRequest(data),
+    mutationFn: (data: ResevationRequestData) =>
+      ReservationRequest(data, activityId),
     mutationKey: ["reservation"],
     onSuccess: () => {
       alert("예약이 완료되었습니다.");
@@ -127,7 +131,10 @@ const ReservationBox = ({ price, schedule }: ReservationBoxProps) => {
               <div className="flex w-[120px] flex-col gap-2">
                 <p className="text-xl font-bold">참여 인원 수</p>
                 <div className="flex flex-row items-center justify-center gap-2 rounded-md border border-[#CDD0DC]">
-                  <button onClick={() => setCounter(counter - 1)}>
+                  <button
+                    disabled={counter <= 1}
+                    onClick={() => setCounter(counter - 1)}
+                  >
                     <Image
                       src={DecreaseButton}
                       alt="decreaseButton"

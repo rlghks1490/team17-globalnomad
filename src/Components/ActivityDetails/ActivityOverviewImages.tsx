@@ -10,26 +10,41 @@ interface ActivityOverviewImagesProps {
   subImages: SubImage[];
 }
 
-const ActivityOverviewImages = ({ bannerImageUrl, subImages} : ActivityOverviewImagesProps) => {
+const ActivityOverviewImages = ({
+  bannerImageUrl,
+  subImages,
+}: ActivityOverviewImagesProps) => {
   return (
-    <div className="grid grid-cols-4 grid-row-4 gap-2 justify-items-center w-[1200px] h-[534px]">
-      <div className="col-span-2 row-span-2 relative" style={{width:'100%', height: '100%'}}>
-          <Image src={`${bannerImageUrl}`} alt="bannerImage" fill style={{objectFit: 'cover'}}/>
+    <div className="grid-row-4 grid h-[534px] w-[1200px] grid-cols-4 justify-items-center gap-2">
+      <div
+        className="relative col-span-2 row-span-2"
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Image
+          src={bannerImageUrl}
+          alt="bannerImage"
+          fill
+          style={{ objectFit: "cover" }}
+          priority
+        />
       </div>
-      <div className="relative" style={{width:'100%', height: '100%'}}>
-          <Image src="/images/ActivityIntroductionImage_test1.png" alt="introductionImage" fill style={{objectFit: 'cover'}} />
-      </div>
-      <div className="relative" style={{width:'100%', height: '100%'}}>
-          <Image src="/images/ActivityIntroductionImage_test2.png" alt="introductionImage" fill style={{objectFit: 'cover'}}/>
-      </div>
-      <div className="relative" style={{width:'100%', height: '100%'}}>
-          <Image src="/images/ActivityIntroductionImage_test3.png" alt="introductionImage" fill style={{objectFit: 'cover'}}/>
-      </div>
-      <div className="relative" style={{width:'100%', height: '100%'}}>
-          <Image src="/images/ActivityIntroductionImage_test4.png" alt="introductionImage" fill style={{objectFit: 'cover'}}/>
-      </div>
+      {subImages.map((subImage) => (
+        <div
+          key={subImage.id}
+          className="relative"
+          style={{ width: "100%", height: "100%" }}
+        >
+          <Image
+            src={subImage.imageUrl}
+            alt="introductionImage"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+          />
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default ActivityOverviewImages;

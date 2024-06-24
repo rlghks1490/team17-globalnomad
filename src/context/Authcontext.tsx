@@ -1,4 +1,3 @@
-// context/AuthContext.tsx
 import React, {
   createContext,
   useContext,
@@ -12,6 +11,7 @@ import { FormValues, PostAuthLoginRes, UserInfo } from "@/apis/auth/auth.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import Cookies from "js-cookie";
+import Toast from "@/Components/Toast/Toast";
 
 interface ErrorMessage {
   message: string;
@@ -27,6 +27,8 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<PostAuthLoginRes | null>(null);
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       Cookies.remove("refreshToken");
       if (data.accessToken) {
         Cookies.set("accessToken", data.accessToken, {
-          expires: 7,
+          expires: 1,
         });
         Cookies.set("refreshToken", data.refreshToken, { expires: 7 }); // 7일 동안 유효
         setUser(data);
@@ -65,7 +67,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     },
     onError: (error: AxiosError<ErrorMessage>) => {
-      console.error(error);
+      console.error("error", error);
+      setToastMessage(error.response?.data.message || "");
+      setShowToast(true);
     },
   });
 
@@ -82,6 +86,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </AuthContext.Provider>
   );
 };
@@ -89,7 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error();
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

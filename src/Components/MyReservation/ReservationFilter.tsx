@@ -34,11 +34,12 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
     <div className="relative">
       <button
         onClick={handleDropdown}
-        className="radius flex h-14 w-40 items-center justify-between rounded-2xl border border-gnDarkGreen px-5 py-4 text-lg font-medium leading-normal text-gnDarkGreen"
+        className="radius flex h-14 w-40 items-center justify-between whitespace-nowrap rounded-2xl border border-gnDarkGreen px-5 py-4 text-lg font-medium leading-normal text-gnDarkGreen tablet:h-10 tablet:w-28 tablet:text-sm mobile:h-8 mobile:w-[5.313rem] mobile:text-xs"
       >
-        {ReservationStatueList[value]}
+        <div>{ReservationStatueList[value]}</div>
         {
           <Image
+            className="mobile:h-3.5"
             alt="필터 화살표 이미지"
             src={ArrowDown}
             width={22}
@@ -47,11 +48,12 @@ const ReservationFilter = ({ value, setValue }: ReservationFilterProps) => {
         }
       </button>
       {isOpen && (
-        <div className="absolute left-0 top-16 z-10 flex flex-col items-center justify-center shadow-reservationBox">
-          {filterList.map((item) => (
+        <div className="absolute left-0 top-16 z-10 flex flex-col items-center justify-center shadow-reservationBox tablet:top-12 mobile:top-10">
+          {filterList.map((item, idx) => (
             <button
+              key={idx}
               onClick={() => handleDropdownClick(item)}
-              className="h-14 w-40 border border-gnGray300 bg-white text-lg font-medium leading-5 "
+              className="h-14 w-40 border border-gnGray300 bg-white text-lg font-medium leading-5 tablet:h-10 tablet:w-28 mobile:h-8 mobile:w-20 mobile:text-xs"
             >
               {ReservationStatueList[item]}
             </button>

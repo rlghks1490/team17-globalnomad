@@ -3,21 +3,30 @@ import NoReservationList from "@/Components/MyReservation/NoReservationList";
 import ReservationFilter from "@/Components/MyReservation/ReservationFilter";
 import { getMyReservations } from "@/apis/myReservation/myReservation";
 import { ReservationStatus } from "@/apis/myReservation/myReservation.type";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  dehydrate,
+  QueryClient,
+} from "@tanstack/react-query";
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
+import { GetServerSideProps } from "next";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
+import { ReservationSkeleton } from "@/Components/MyReservation/ReservationSkeleton";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
-function Reservations() {
+const Reservations = () => {
   const [viewStatus, setViewStatus] = useState<ReservationStatus>("all");
 
-  const { isFetching, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["MyReservations", viewStatus],
-    queryFn: ({ pageParam }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       const status = viewStatus === "all" ? null : viewStatus;
-      return getMyReservations({ size: 6, status, cursorId: pageParam });
+      return await getMyReservations({ size: 6, status, cursorId: pageParam });
     },
-    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.data.cursorId,
+    initialPageParam: 0,
     select: (data) => ({
       pages: data?.pages.flatMap((page) => page.data.reservations),
       pageParams: data?.pageParams,
@@ -27,26 +36,57 @@ function Reservations() {
   const reservationData = data?.pages || [];
 
   return (
-    <div>
-      <div>
-        <div className="flex justify-between">
-          <h2 className="mb-6 text-3xl font-bold leading-normal">예약 내역</h2>
-          <ReservationFilter value={viewStatus} setValue={setViewStatus} />
-        </div>
-        <InfiniteScroll hasMore={hasNextPage} loadMore={() => fetchNextPage()}>
-          <div className=" bg-gnGray100">
-            {reservationData.length > 0 ? (
-              reservationData?.map((reservation) => (
-                <ReservationList key={reservation.id} data={reservation} />
-              ))
-            ) : (
-              <NoReservationList />
-            )}
+    <>
+      <HeadMeta
+        title={META_TAG.myReservation["title"]}
+        description={META_TAG.myReservation["description"]}
+      />
+      {isLoading ? (
+        <ReservationSkeleton />
+      ) : (
+        <div className="flex flex-col gap-6 mobile:gap-3">
+          <div className="flex justify-between">
+            <div className="relative flex">
+              <h2 className="text-3xl font-bold">예약 내역</h2>
+              <MobileDropDown />
+            </div>
+            <ReservationFilter value={viewStatus} setValue={setViewStatus} />
           </div>
-        </InfiniteScroll>
-      </div>
-    </div>
+          <InfiniteScroll
+            hasMore={hasNextPage}
+            loadMore={() => fetchNextPage()}
+          >
+            <div className="bg-gnGray100">
+              {reservationData.length > 0 ? (
+                reservationData?.map((reservation) => (
+                  <ReservationList key={reservation.id} data={reservation} />
+                ))
+              ) : (
+                <NoReservationList />
+              )}
+            </div>
+          </InfiniteScroll>
+        </div>
+      )}
+    </>
   );
-}
+};
 
 export default Reservations;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["MyReservations", null],
+    queryFn: async ({ pageParam = 0 }) =>
+      await getMyReservations({ size: 6, status: null, cursorId: pageParam }),
+    initialPageParam: 0,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};

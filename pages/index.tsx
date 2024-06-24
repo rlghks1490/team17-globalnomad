@@ -1,20 +1,21 @@
+import HeadMeta from "@/Components/Common/HeadMeta";
 import MainPage from "@/Components/MainPage";
+import { META_TAG } from "@/constants/metaTag";
 import { useAuth } from "@/context/Authcontext";
+import Head from "next/head";
 
 const IndexPage = () => {
   const { user } = useAuth();
 
-  if (user && user.accessToken) {
-    // 로그인되어 있는 상태
-    return <MainPage />;
-  } else {
-    // 로그인되어 있지 않은 상태
-    return (
-      <>
-        <MainPage />
-      </>
-    );
-  }
+  return (
+    <>
+      <HeadMeta
+        title={META_TAG.home["title"]}
+        description={META_TAG.myReservation["description"]}
+      />
+      {user && user.accessToken ? <MainPage /> : <MainPage />}
+    </>
+  );
 };
 
 export default IndexPage;

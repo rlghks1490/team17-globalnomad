@@ -1,13 +1,20 @@
-import ProfileModify from "@/Components/ProfileModify/ProfileModify";
 import LoginInput from "@/Components/Input/LoginInput";
 import { USER_INPUT_VALIDATION } from "@/constants/user";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/apis/auth/auth.type";
+import { useEffect, useState } from "react";
 import {
   useUsersCheckMyInformation,
   useUsersEditMyInformation,
 } from "@/service/users/useUsersService";
 import { UsersEditMyInformation } from "@/service/users/users.type";
+import { useUser } from "@/context/UserContext";
+import Toast from "@/Components/Toast/Toast";
+import MobileDropDown from "@/Components/MyPage/MobileDropDown";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
+import MobileImageChange from "@/Components/MyPage/MobileImageChange";
+import MyPageSkeleton from "@/Components/MyPage/MyPageSkeleton";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -29,6 +36,10 @@ const rules = {
       value: 8,
       message: password.errorMessage.minLength,
     },
+    maxLength: {
+      value: 16,
+      message: password.errorMessage.maxLength,
+    },
   },
   nicknameRules: {
     required: nickname.errorMessage.empty,
@@ -42,40 +53,51 @@ const rules = {
   },
 };
 
-const index = () => {
+const MyPage = () => {
   const {
     register,
     handleSubmit,
     getValues,
     formState: { isValid, errors },
+    setValue,
   } = useForm<FormValues>({ mode: "onChange" });
 
   const { data: response, isLoading, isError } = useUsersCheckMyInformation();
   const { mutate: editUserInformation } = useUsersEditMyInformation();
+  const { user, setUser } = useUser();
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (response && response.data) {
+      setValue("email", response.data.email);
+      setValue("nickname", response.data.nickname);
+    }
+  }, [response, setValue]);
 
   const onSubmit = (formData: FormValues) => {
-    const payload: {
-      nickname: string;
-      newPassword: string;
-      profileImageUrl?: string;
-    } = {
+    const payload: UsersEditMyInformation = {
       nickname: formData.nickname || "",
       newPassword: formData.password,
+      profileImageUrl: response?.data.profileImageUrl || "",
     };
 
     editUserInformation(payload as UsersEditMyInformation, {
-      onSuccess: () => {
-        alert("정보가 성공적으로 수정되었습니다.");
+      onSuccess: (updateData) => {
+        setUser(updateData.data);
+        setToastMessage("정보가 성공적으로 수정되었습니다.");
+        setShowToast(true);
       },
       onError: (error) => {
         console.error("에러 발생:", error);
-        alert("정보 수정에 실패했습니다.");
+        setToastMessage("정보 수정에 실패했습니다.");
+        setShowToast(true);
       },
     });
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <MyPageSkeleton />;
   }
 
   if (isError) {
@@ -90,20 +112,27 @@ const index = () => {
 
   return (
     <>
-      <div className="w-myInfoBoxWidth flex gap-10">
-        <div className="flex h-screen w-full flex-col gap-10  tablet:pb-10">
+      <HeadMeta title={META_TAG.myPage["title"]} />
+      <div className="w-myInfoBoxWidth tablet:w-[30.75rem] mobile:w-[21.438rem]">
+        <form
+          className="flex flex-col gap-6 tablet:gap-4 mobile:gap-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="flex justify-between">
-            <div className=" text-3xl font-bold ">내 정보</div>
+            <div className="flex">
+              <h1 className="text-3xl font-bold">내 정보</h1>
+              <MobileDropDown />
+            </div>
             <button
               type="submit"
-              onClick={handleSubmit(onSubmit)}
               disabled={!isValid}
-              className="flex cursor-pointer flex-col items-end gap-6 rounded-md bg-gnDarkGreen px-4 py-2 font-bold leading-6 text-white active:bg-green-950 "
+              className="flex cursor-pointer flex-col items-end gap-6 rounded-md bg-gnDarkGreen px-4 py-2 font-bold leading-6 text-white active:bg-green-950"
             >
               저장하기
             </button>
           </div>
-          <form className="flex flex-col gap-4">
+          <MobileImageChange profileImageUrl="" handleChangeImage={() => {}} />
+          <div className="flex flex-col gap-4">
             <LoginInput
               label="닉네임"
               type="text"
@@ -119,6 +148,7 @@ const index = () => {
               isError={!!errors.email}
               errorMessage={errors.email?.message}
               {...register("email", rules.emailRules)}
+              disabled={true}
             />
             <LoginInput
               label="비밀번호"
@@ -146,11 +176,14 @@ const index = () => {
                 },
               })}
             />
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </>
   );
 };
 
-export default index;
+export default MyPage;

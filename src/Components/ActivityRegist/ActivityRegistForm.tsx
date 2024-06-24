@@ -5,6 +5,9 @@ import ActivityRegistSchedule from "./ActivityRegistSchedule";
 import { useActivitiesRegistration } from "@/service/activities/useActivitiesService";
 import { useModal } from "@/hooks/useModal";
 import ModalAlert from "../Modal/ModalAlert";
+import Head from "next/head";
+import HeadMeta from "../Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 interface Schedule {
   date: string;
@@ -90,33 +93,39 @@ const AcitivyRegistForm = () => {
   };
 
   return (
-    <div className="flex w-[792px] flex-col gap-6">
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">내 체험 등록</h1>
-        <button
-          className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
-          onClick={() => handleActivityRegist(formData)}
-        >
-          등록하기
-        </button>
-      </div>
-      <ActivityRegistInfo handleFormData={handleAddInfo} />
-      <ActivityRegistSchedule
-        handleAddSchedule={handleAddSchedule}
-        handleCancelAddedSchedules={handleCancelAddedSchedules}
+    <>
+      <HeadMeta
+        title={META_TAG.addMyActivity["title"]}
+        description={META_TAG.addMyActivity["description"]}
       />
-      <ActivityRegistImageUploader
-        handleChangeBannerImage={handleChangeBannerImage}
-        handleChangeSubImages={handleChangeSubImages}
-      />
-      {isOpenModal && (
-        <ModalAlert
-          isOpenModal={isOpenModal}
-          message={"등록에 성공했습니다."}
-          onClose={handleModalClose}
+      <div className="flex w-[792px] flex-col gap-6">
+        <div className="flex justify-between">
+          <h1 className="text-4xl font-bold">내 체험 등록</h1>
+          <button
+            className="rounded bg-gnLightBlack px-4 py-2 text-base font-bold text-white"
+            onClick={() => handleActivityRegist(formData)}
+          >
+            등록하기
+          </button>
+        </div>
+        <ActivityRegistInfo handleFormData={handleAddInfo} />
+        <ActivityRegistSchedule
+          handleAddSchedule={handleAddSchedule}
+          handleCancelAddedSchedules={handleCancelAddedSchedules}
         />
-      )}
-    </div>
+        <ActivityRegistImageUploader
+          handleChangeBannerImage={handleChangeBannerImage}
+          handleChangeSubImages={handleChangeSubImages}
+        />
+        {isOpenModal && (
+          <ModalAlert
+            isOpenModal={isOpenModal}
+            message={"등록에 성공했습니다."}
+            onClose={handleModalClose}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

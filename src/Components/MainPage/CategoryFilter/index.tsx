@@ -59,7 +59,7 @@ const CategoryFilter = () => {
       <div className="relative flex min-w-0 items-center justify-start">
         <div className="overflow-hidden">
           <ul
-            className="flex items-center justify-start gap-6 md:gap-2 lg:gap-4"
+            className="flex items-center justify-start gap-[1.5rem] tablet:gap-[1rem] mobile:gap-[0.5rem]"
             ref={categoryRef}
           >
             {categoryList.map((category, index) => (
