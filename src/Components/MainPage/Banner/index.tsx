@@ -100,11 +100,11 @@ const Banner = () => {
 
   return (
     <div
-      className="absolute left-0 right-0 flex items-center justify-center"
+      className="absolute left-0 right-0 flex items-center justify-center "
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden ">
         <button
           onClick={() => handleSwipeClick(-1)}
           className="absolute left-[0.6rem] top-[45%] z-10 block rounded-[0.63rem] opacity-60 hover:opacity-100"
@@ -127,13 +127,13 @@ const Banner = () => {
             width={24}
           />
         </button>
-        <ul className="flex w-full" ref={bannerRef}>
+        <ul className="flex w-full " ref={bannerRef}>
           {bannerList.map((banner, index) => (
             <li
-              className="transition-border relative h-[34.38rem] w-full flex-none overflow-hidden px-8 duration-300"
+              className="transition-border  relative h-[34.38rem] w-full flex-none overflow-hidden px-8 duration-300"
               key={`${banner.title}-${index}`}
             >
-              <div className="absolute inset-0 min-h-full min-w-full">
+              <div className="absolute inset-0 min-h-full min-w-full ">
                 <Image
                   src={banner.imageSrc}
                   alt="배너 이미지"

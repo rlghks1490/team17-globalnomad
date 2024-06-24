@@ -10,7 +10,9 @@ import { ActivitiesDetailCheck } from "@/service/activities/activities.type";
 import { useModal } from "@/hooks/useModal";
 import { usePatchMyActivities } from "@/service/myActivities/useMyActivitiesService";
 import ModalAlert from "../Modal/ModalAlert";
-import Head from "next/head";
+import HeadMeta from "../Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
+import ActivityEditFormSkeleton from "./ActivityEditFormSkeleton";
 
 interface ActivityEditFormProps {
   activityId: number;
@@ -22,7 +24,7 @@ interface newSchedule {
   endTime: string;
 }
 
-interface formDataType {
+interface FormDataType {
   title: string;
   category: string;
   description: string;
@@ -36,9 +38,9 @@ interface formDataType {
 }
 
 const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
-  const { data: details } = useActivitiesDetailCheck(activityId);
+  const { data: details, isLoading } = useActivitiesDetailCheck(activityId);
 
-  const [formData, setFormData] = useState<formDataType>({
+  const [formData, setFormData] = useState<FormDataType>({
     title: "",
     category: "",
     description: "",
@@ -71,7 +73,7 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
   const { mutate: modify } = usePatchMyActivities(activityId);
 
-  const handleActivityModify = (formData: formDataType) => {
+  const handleActivityModify = (formData: FormDataType) => {
     modify(formData, {
       onSuccess: () => {
         handleModalOpen();
@@ -139,13 +141,13 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
     });
   };
 
+  if (isLoading) return <ActivityEditFormSkeleton />;
+
   if (!details) return null;
 
   return (
     <>
-      <Head>
-        <title>GlobalNomad - 내 체험 수정</title>
-      </Head>
+      <HeadMeta title={META_TAG.myActivityEdit["title"]} />
       <div className="flex w-[792px] flex-col gap-6">
         <div className="flex justify-between">
           <h1 className="text-4xl font-bold">내 체험 수정</h1>

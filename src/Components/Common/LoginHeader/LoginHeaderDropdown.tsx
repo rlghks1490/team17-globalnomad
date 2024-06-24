@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUsersCheckMyInformation } from "@/service/users/useUsersService";
 import Link from "next/link";
 import { useAuth } from "@/context/Authcontext";
@@ -15,11 +15,34 @@ const LoginHeaderDropdown: React.FC = () => {
     isError,
   } = useUsersCheckMyInformation(profileImageUrl);
 
+  const dropdownRef = useRef<HTMLLIElement>(null);
+
   useEffect(() => {
     if (response && response.data) {
       setUser(response.data);
     }
   }, [response, setUser]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -46,8 +69,16 @@ const LoginHeaderDropdown: React.FC = () => {
   return (
     <div>
       <li
+        ref={dropdownRef}
         className="dropdown group relative flex cursor-pointer px-4 tracking-wide"
         onClick={toggleDropdown}
+        tabIndex={0} // Added to make it focusable
+        onBlur={(e) => {
+          // Close dropdown when it loses focus
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            setIsDropdownOpen(false);
+          }
+        }}
       >
         <div className="flex items-center justify-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gnDarkGreen text-center text-sm font-semibold text-gnGray200">

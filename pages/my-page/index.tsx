@@ -11,7 +11,10 @@ import { UsersEditMyInformation } from "@/service/users/users.type";
 import { useUser } from "@/context/UserContext";
 import Toast from "@/Components/Toast/Toast";
 import MobileDropDown from "@/Components/MyPage/MobileDropDown";
-import Head from "next/head";
+import HeadMeta from "@/Components/Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
+import MobileImageChange from "@/Components/MyPage/MobileImageChange";
+import MyPageSkeleton from "@/Components/MyPage/MyPageSkeleton";
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -94,7 +97,7 @@ const MyPage = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <MyPageSkeleton />;
   }
 
   if (isError) {
@@ -109,17 +112,15 @@ const MyPage = () => {
 
   return (
     <>
-    <Head>
-      <title>GlobalNomad - 내 정보</title>
-    </Head>
-      <div className="flex w-myInfoBoxWidth gap-10">
-        <div className="flex h-screen w-full flex-col gap-10 tablet:pb-10">
-          <form
-            className="flex justify-between"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+      <HeadMeta title={META_TAG.myPage["title"]} />
+      <div className="w-myInfoBoxWidth tablet:w-[30.75rem] mobile:w-[21.438rem]">
+        <form
+          className="flex flex-col gap-6 tablet:gap-4 mobile:gap-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex justify-between">
             <div className="flex">
-              <div className="text-3xl font-bold">내 정보</div>
+              <h1 className="text-3xl font-bold">내 정보</h1>
               <MobileDropDown />
             </div>
             <button
@@ -129,7 +130,8 @@ const MyPage = () => {
             >
               저장하기
             </button>
-          </form>
+          </div>
+          <MobileImageChange profileImageUrl="" handleChangeImage={() => {}} />
           <div className="flex flex-col gap-4">
             <LoginInput
               label="닉네임"
@@ -175,11 +177,11 @@ const MyPage = () => {
               })}
             />
           </div>
-        </div>
-        {showToast && (
-          <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
-        )}
+        </form>
       </div>
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
+      )}
     </>
   );
 };

@@ -6,6 +6,8 @@ import { useActivitiesRegistration } from "@/service/activities/useActivitiesSer
 import { useModal } from "@/hooks/useModal";
 import ModalAlert from "../Modal/ModalAlert";
 import Head from "next/head";
+import HeadMeta from "../Common/HeadMeta";
+import { META_TAG } from "@/constants/metaTag";
 
 interface Schedule {
   date: string;
@@ -92,9 +94,10 @@ const AcitivyRegistForm = () => {
 
   return (
     <>
-      <Head>
-        <title>GlobalNomad - 내 체험 등록</title>
-      </Head>
+      <HeadMeta
+        title={META_TAG.addMyActivity["title"]}
+        description={META_TAG.addMyActivity["description"]}
+      />
       <div className="flex w-[792px] flex-col gap-6">
         <div className="flex justify-between">
           <h1 className="text-4xl font-bold">내 체험 등록</h1>
