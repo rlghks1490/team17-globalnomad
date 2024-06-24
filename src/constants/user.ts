@@ -59,7 +59,7 @@ export const USER_INPUT_VALIDATION: USER_INPUT_VALIDATION_TYPE = {
       invalid: "영문과 숫자, 특수문자를 조합하여 입력해 주세요.",
       minLength: "8자 이상 입력해주세요",
       check: "이메일 또는 비밀번호를 확인해 주세요",
-      maxLength: "16자 이하 입력해주세요",
+      maxLength: "16자 이하로 입력해주세요",
     },
   },
   passwordConfirm: {
