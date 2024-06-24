@@ -1,7 +1,7 @@
 import ActivityEditInfo from "./ActivityEditInfo";
 import ActivityEditSchedule from "./ActivityEditSchedule";
 import ActivityEditImageUploader from "./ActivityEditImageUploader";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   useActivitiesDetailCheck,
   useActivitiesRegistration,
@@ -13,6 +13,12 @@ import ModalAlert from "../Modal/ModalAlert";
 import HeadMeta from "../Common/HeadMeta";
 import { META_TAG } from "@/constants/metaTag";
 import ActivityEditFormSkeleton from "./ActivityEditFormSkeleton";
+import ModalEditAlert from "../Modal/ModalEditAlert";
+import axios, { AxiosError } from "axios";
+
+interface ErrorMessage {
+  message: string;
+}
 
 interface ActivityEditFormProps {
   activityId: number;
@@ -38,8 +44,6 @@ interface FormDataType {
 }
 
 const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
-  const { data: details, isLoading } = useActivitiesDetailCheck(activityId);
-
   const [formData, setFormData] = useState<FormDataType>({
     title: "",
     category: "",
@@ -52,6 +56,10 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
     scheduleIdsToRemove: [],
     schedulesToAdd: [],
   });
+  const [modalMessage, setModalMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const { data: details, isLoading } = useActivitiesDetailCheck(activityId);
 
   useEffect(() => {
     if (details) {
@@ -76,11 +84,20 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
   const handleActivityModify = (formData: FormDataType) => {
     modify(formData, {
       onSuccess: () => {
+        setModalMessage("수정되었습니다.");
+        setIsSuccess(true);
         handleModalOpen();
         console.log("등록 성공!");
       },
       onError: (error) => {
-        console.error("등록에 실패했습니다.", error);
+        if (axios.isAxiosError(error)) {
+          const axiosError = error as AxiosError<ErrorMessage>;
+          setModalMessage(axiosError.response?.data.message!);
+          handleModalOpen();
+          console.error("삭제 실패", axiosError);
+        } else {
+          console.error("삭제 실패 - 일반 에러", error);
+        }
       },
     });
   };
@@ -180,10 +197,11 @@ const ActivityEditForm = ({ activityId }: ActivityEditFormProps) => {
           handleRemoveDefaultSubImages={handleRemoveDefaultSubImages}
         />
         {isOpenModal && (
-          <ModalAlert
+          <ModalEditAlert
             isOpenModal={isOpenModal}
-            message={"등록에 성공했습니다."}
+            message={modalMessage}
             onClose={handleModalClose}
+            isSuccess={isSuccess}
           />
         )}
       </div>

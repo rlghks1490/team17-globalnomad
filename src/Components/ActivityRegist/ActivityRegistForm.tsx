@@ -8,6 +8,12 @@ import ModalAlert from "../Modal/ModalAlert";
 import Head from "next/head";
 import HeadMeta from "../Common/HeadMeta";
 import { META_TAG } from "@/constants/metaTag";
+import ModalRegisterAlert from "../Modal/ModalRegisterAlert";
+import axios, { AxiosError } from "axios";
+
+interface ErrorMessage {
+  message: string;
+}
 
 interface Schedule {
   date: string;
@@ -37,17 +43,29 @@ const AcitivyRegistForm = () => {
     bannerImageUrl: "",
     subImageUrls: [],
   });
+  const [modalMessage, setModalMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
   const { mutate: regist } = useActivitiesRegistration();
 
   const handleActivityRegist = (formData: formDataType) => {
     regist(formData, {
       onSuccess: () => {
+        setModalMessage("등록되었습니다.");
+        setIsSuccess(true);
         handleModalOpen();
         console.log("등록 성공!");
       },
       onError: (error) => {
-        console.error("등록에 실패했습니다.", error);
+        if (axios.isAxiosError(error)) {
+          const axiosError = error as AxiosError<ErrorMessage>;
+          setModalMessage(axiosError.response?.data.message!);
+          handleModalOpen();
+          console.error("삭제 실패", axiosError);
+        } else {
+          console.error("삭제 실패 - 일반 에러", error);
+        }
       },
     });
   };
@@ -118,10 +136,11 @@ const AcitivyRegistForm = () => {
           handleChangeSubImages={handleChangeSubImages}
         />
         {isOpenModal && (
-          <ModalAlert
+          <ModalRegisterAlert
             isOpenModal={isOpenModal}
-            message={"등록에 성공했습니다."}
+            message={modalMessage}
             onClose={handleModalClose}
+            isSuccess={isSuccess}
           />
         )}
       </div>

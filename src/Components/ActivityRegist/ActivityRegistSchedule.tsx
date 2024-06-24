@@ -38,9 +38,9 @@ const ActivityRegistSchedule = ({
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const [newSchedule, setNewSchedule] = useState<Schedule>({
-    date: "",
-    startTime: "",
-    endTime: "",
+    date: new Date().toISOString().split("T")[0],
+    startTime: "09:00",
+    endTime: "09:00",
   });
   const [addedSchedule, setAddedSchedule] = useState<Schedule[]>([]);
 
@@ -69,6 +69,7 @@ const ActivityRegistSchedule = ({
     handleCancelAddedSchedules(newSchedules);
   };
 
+  console.log(newSchedule);
   return (
     <div className="flex flex-col gap-6">
       <label className="text-2xl font-bold text-gnDarkBlack">

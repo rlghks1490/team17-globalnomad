@@ -51,9 +51,9 @@ const ActivityEditSchedule = ({
   const [defaultSchedules, setDefaultSchedules] =
     useState<Schedules[]>(schedules);
   const [newSchedule, setNewSchedule] = useState<newSchedule>({
-    date: "",
-    startTime: "",
-    endTime: "",
+    date: new Date().toISOString().split("T")[0],
+    startTime: "09:00",
+    endTime: "09:00",
   });
   const [addedSchedule, setAddedSchedule] = useState<newSchedule[]>([]);
 

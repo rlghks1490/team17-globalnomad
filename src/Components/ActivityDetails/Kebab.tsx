@@ -2,6 +2,8 @@ import Image from "next/image";
 import kebab from "../../../public/icons/kebab.svg";
 import { useEffect, useRef, useState } from "react";
 import KebabOptions from "./KebabOptions";
+import { useModal } from "@/hooks/useModal";
+import ModalDeleteActivity from "../Modal/ModalDeleteActivity";
 
 interface KebabProps {
   activityId: number;
@@ -10,6 +12,7 @@ interface KebabProps {
 const Kebab = ({ activityId }: KebabProps) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const kebabRef = useRef<HTMLDivElement>(null);
+  const { isOpenModal, handleModalOpen, handleModalClose } = useModal();
 
   useEffect(() => {
     function handleMouseDown(event: MouseEvent) {
@@ -32,7 +35,19 @@ const Kebab = ({ activityId }: KebabProps) => {
       <button onClick={() => setIsClicked(!isClicked)}>
         <Image src={kebab} alt="kebab" width={40} height={40} />
       </button>
-      <>{isClicked && <KebabOptions activityId={activityId} />}</>
+      {isClicked && (
+        <KebabOptions
+          activityId={activityId}
+          handleModalOpen={handleModalOpen}
+        />
+      )}
+      {isOpenModal && (
+        <ModalDeleteActivity
+          isOpenModal={isOpenModal}
+          onClose={handleModalClose}
+          activityId={activityId}
+        />
+      )}
     </div>
   );
 };
