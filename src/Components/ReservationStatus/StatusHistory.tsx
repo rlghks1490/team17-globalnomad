@@ -1,5 +1,6 @@
 import { useMyActivitiesUpdateReservationStatus } from "@/service/myActivities/useMyActivitiesService";
 import { useState } from "react";
+import Toast from "../Toast/Toast";
 
 interface Reservations {
   id: number;
@@ -41,19 +42,33 @@ const StatusHistory = ({
   activityId,
 }: StatusHistoryProps) => {
   const [reservationId, setReservationId] = useState<number>(0);
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string>("");
   const { mutate: statusUpdate } = useMyActivitiesUpdateReservationStatus(
     activityId,
     reservationId,
   );
+
+  const getToastMessage = (status: Status) => {
+    if (status.status === "confirmed") {
+      return "예약을 승인했습니다.";
+    } else {
+      return "예약을 거절했습니다.";
+    }
+  };
 
   const handleStatusConfirm = (reservationId: number, status: Status) => {
     setReservationId(reservationId);
     statusUpdate(status, {
       onSuccess: () => {
         console.log("승인 완료");
+        setToastMessage(getToastMessage(status));
+        setShowToast(true);
       },
       onError: (error) => {
         console.error("승인 실패", error);
+        setToastMessage("정보 수정에 실패했습니다.");
+        setShowToast(true);
       },
     });
   };
@@ -167,6 +182,9 @@ const StatusHistory = ({
             </div>
           ))}
         </div>
+      )}
+      {showToast && (
+        <Toast onShow={() => setShowToast(false)}>{toastMessage}</Toast>
       )}
     </div>
   );

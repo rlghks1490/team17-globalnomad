@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 interface ModalDeleteActivityProps {
   isOpenModal: boolean;
   onClose: () => void;
-  errorMessage: string | null;
 }
 
 const ModalDeleteActivity2 = ({
@@ -19,16 +18,15 @@ const ModalDeleteActivity2 = ({
   const router = useRouter();
 
   const handlePageNavigate = () => {
-    // onClose();
-    router.push("/");
+    onClose();
 
-    // if (router.pathname.includes("activity-details")) {
-    //   router.push("/");
-    //   console.log("페이지 이동");
-    // } else if (router.pathname.includes("my-page/activities")) {
-    //   router.reload();
-    //   console.log("페이지 이동");
-    // }
+    if (router.pathname.includes("activity-details")) {
+      router.push("/my-page/activities");
+      console.log("페이지 이동");
+    } else if (router.pathname.includes("my-page/activities")) {
+      router.reload();
+      console.log("페이지 이동");
+    }
   };
 
   return (

@@ -15,7 +15,7 @@ const Comment = ({
   createdAt,
 }: CommnetProps) => {
   return (
-    <div className="flex w-[1200px] flex-row gap-4">
+    <div className="table:w-[700px] flex w-[1200px] flex-row justify-start gap-4 mobile:w-[328px]">
       {profileImageUrl ? (
         <div className="h-[45px] w-[45px]">
           <Image
@@ -48,7 +48,9 @@ const Comment = ({
             {createdAt.slice(0, 10)}
           </div>
         </div>
-        <div className="w-[729px] text-base font-normal">{content}</div>
+        <div className="w-[729px] text-base font-normal tablet:w-[368px] mobile:w-[266px]">
+          {content}
+        </div>
       </div>
     </div>
   );
