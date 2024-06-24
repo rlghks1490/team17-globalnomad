@@ -23,7 +23,7 @@ const ActivitiesList = ({
             search={search}
             searchTotalCount={searchTotalCount}
           />
-          <ul className="grid-cols-custom-4 tablet:grid-cols-custom-3 mobile:grid-cols-custom-2 grid gap-x-[1.5rem] gap-y-[3rem] tablet:w-full tablet:gap-y-[2rem]">
+          <ul className="grid grid-cols-custom-4 gap-x-[1.5rem] gap-y-[3rem] tablet:w-full tablet:grid-cols-custom-3 tablet:gap-y-[2rem] mobile:grid-cols-custom-2">
             {activities?.map((activity, index) => (
               <li key={`${activity.id}-${activity.userId}-${index}`}>
                 <CardResource activitiesData={activity} banner={false} />
@@ -36,7 +36,7 @@ const ActivitiesList = ({
           <h2 className="flex w-full items-center justify-between text-[2.3rem] font-bold leading-normal text-black">
             {category ? category : "🚀 전체 체험"}
           </h2>
-          <ul className="grid-cols-custom-4 tablet:grid-cols-custom-3 mobile:grid-cols-custom-2 grid gap-x-[1.5rem] gap-y-[3rem] tablet:w-full tablet:gap-y-[2rem]">
+          <ul className="grid grid-cols-custom-4 gap-x-[1.5rem] gap-y-[3rem] tablet:w-full tablet:grid-cols-custom-2 tablet:gap-y-[2rem] mobile:grid-cols-custom-2">
             {activities?.map((activity, index) => (
               <li key={`${activity.id}-${activity.userId}-${index}`}>
                 <CardResource activitiesData={activity} banner={false} />
