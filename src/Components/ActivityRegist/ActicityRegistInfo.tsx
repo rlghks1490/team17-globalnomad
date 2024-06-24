@@ -1,15 +1,30 @@
 import { useState } from "react";
 
+declare global {
+  interface Window {
+    daum: any;
+  }
+}
+
 interface ActivityRegistInfoProps {
   handleFormData: (name: string, value: string | number) => void;
 }
 
 const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
+  const [address, setAddress] = useState("");
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
     handleFormData("category", e.target.value);
+  };
+
+  const openDaumPostcode = () => {
+    new window.daum.Postcode({
+      oncomplete: (data: any) => {
+        setAddress(data.address);
+      },
+    }).open();
   };
 
   return (
@@ -51,7 +66,10 @@ const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
         <input
           className="rounded border border-gnGray700 bg-white px-4 py-[15px] text-base font-normal"
           placeholder="주소"
+          value={address}
           onBlur={(e) => handleFormData("address", e.target.value)}
+          onClick={openDaumPostcode}
+          readOnly
         />
       </div>
     </div>
