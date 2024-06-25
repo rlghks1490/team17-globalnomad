@@ -30,7 +30,7 @@ const ActivityOverview = ({
   subImages,
 }: ActivityOverviewProps) => {
   return (
-    <div className="my-20 flex flex-col">
+    <div className="my-20 flex flex-col mobile:w-[375px]">
       <ActivityOverviewHeader
         userId={userId}
         activityId={activityId}

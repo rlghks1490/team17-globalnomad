@@ -24,7 +24,9 @@ const ActivityEditInfo = ({
   handleFormData,
 }: ActivityEditInfoProps) => {
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
+  const [newDescription, setNewDescription] = useState(description);
   const [newAddress, setNewAddress] = useState<string>(address);
+  const maxLength = 500;
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
@@ -66,8 +68,15 @@ const ActivityEditInfo = ({
         className="h-[346px] resize-none rounded border border-gnGray700 bg-white p-4 text-base font-normal"
         defaultValue={description}
         placeholder="설명"
+        onChange={(e) => setNewDescription(e.target.value)}
         onBlur={(e) => handleFormData("description", e.target.value)}
+        maxLength={500}
       />
+      {newDescription.length >= maxLength && (
+        <p className="text-lg font-normal text-gnDarkRed">
+          * 500자 이내로 작성해주세요.
+        </p>
+      )}
       <div className="flex flex-col gap-4">
         <label className="text-2xl font-bold text-gnDarkBlack">가격</label>
         <input

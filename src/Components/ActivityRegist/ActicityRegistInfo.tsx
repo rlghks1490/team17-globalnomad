@@ -12,7 +12,9 @@ interface ActivityRegistInfoProps {
 
 const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
+  const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
+  const maxLength = 500;
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
@@ -52,8 +54,16 @@ const ActivityRegistInfo = ({ handleFormData }: ActivityRegistInfoProps) => {
       <textarea
         className="h-[346px] resize-none rounded border border-gnGray700 bg-white p-4 text-base font-normal"
         placeholder="설명"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
         onBlur={(e) => handleFormData("description", e.target.value)}
+        maxLength={500}
       />
+      {description.length >= maxLength && (
+        <p className="text-lg font-normal text-gnDarkRed">
+          * 500자 이내로 작성해주세요.
+        </p>
+      )}
       <div className="flex flex-col gap-4">
         <label className="text-2xl font-bold text-gnDarkBlack">가격</label>
         <input

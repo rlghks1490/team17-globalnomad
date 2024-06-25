@@ -32,9 +32,9 @@ const ModalRegisterAlert = ({
           <div className="flex w-full grow items-center justify-center text-lg font-medium">
             {message}
           </div>
-          <div className="flex w-full justify-end">
+          <div className="flex w-full justify-end mobile:justify-center">
             <button
-              className="whitesapce-nowrap h-12 w-[120px] rounded-lg bg-gnDarkBlack text-base font-medium text-white"
+              className="whitesapce-nowrap h-12 w-[120px] rounded-lg bg-gnDarkBlack text-base font-medium text-white mobile:h-[42px] mobile:w-[138px]"
               onClick={isSuccess ? handlePageNavigate : onClose}
             >
               확인
