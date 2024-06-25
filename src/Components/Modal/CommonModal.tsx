@@ -43,7 +43,7 @@ const CommonModal = ({
   }, [onClose]);
 
   const modalSize = {
-    alert: "w-[540px] h-[250px]",
+    alert: "w-[540px] h-[250px] mobile:w-[327px] mobile:h-[220px]",
     Review: "w-[480px] h-[750px]",
     ReservationCancel: "w-[300px] h-[185px]",
   };
